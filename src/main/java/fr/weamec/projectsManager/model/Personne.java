@@ -31,5 +31,92 @@ public abstract class Personne {
         this.telephone = telephone;
     }
     
+    /**
+     * id Getter
+     * @author simon
+     * @return Identifiant
+     */
+    public int getId() {
+        return id;
+    }
     
+    /**
+     * id Setter
+     * @param id Identifiant 
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    /**
+     * nom Getter
+     * @author simon
+     * @return Nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * nom Setter
+     * @author
+     * @param nom Nom 
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    
+    /**
+     * prenom Getter
+     * @author simon
+     * @return Prenom
+     */
+    public String getPrenom() {
+        return prenom;
+    }
+    
+    /**
+     * prenom Setter
+     * @author simon
+     * @param prenom Prenom 
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+    
+    /**
+     * mail Getter
+     * @author simon
+     * @return Adresse mail
+     */
+    public String getMail() {
+        return mail;
+    }
+
+    /**
+     * mail Setter
+     * @author simon
+     * @param mail Adresse mail
+     */
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+    
+    /**
+     * telephone Getter
+     * @author simon
+     * @return Numero de telephone
+     */
+    public String getTelephone() {
+        return telephone;
+    }
+
+    /**
+     * telephone Setter
+     * @author simon
+     * @param telephone Numero de telephone 
+     */
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 }
