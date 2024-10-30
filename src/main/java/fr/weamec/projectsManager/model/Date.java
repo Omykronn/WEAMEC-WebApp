@@ -15,7 +15,6 @@ public class Date {
     
     /**
      * Constructeur de Date
-     * @author simon
      * @param jour  Jour
      * @param mois  Mois
      * @param annee Annee
@@ -37,7 +36,6 @@ public class Date {
     
     /**
      * Conversion de la date en chaîne de caractères selon la norme ISO 8601 (compatible avec PostgreSQL)
-     * @author simon
      * @return Date sous forme de chaîne de caractères
      */
     public String toString() {

@@ -13,7 +13,6 @@ public class Partenaire extends Personne{
     
     /**
      * Constructeur de Partenaire
-     * @author simon
      * @param structureRattachement Structure de Rattachement
      * @param id                    Identifiant
      * @param nom                   Nom 
@@ -28,7 +27,6 @@ public class Partenaire extends Personne{
     
     /**
      * structureRattachement Getter
-     * @author simon
      * @return Structure de Rattachement
      */
     public StructureRattachement getStructureRattachement() {

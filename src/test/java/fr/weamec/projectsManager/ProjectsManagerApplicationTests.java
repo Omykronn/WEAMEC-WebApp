@@ -12,7 +12,6 @@ class ProjectsManagerApplicationTests {
     
     /**
      * Test si la conversion de date fonctionne
-     * @author simon
      * @throws Exception Test echoue
      */
     @Test

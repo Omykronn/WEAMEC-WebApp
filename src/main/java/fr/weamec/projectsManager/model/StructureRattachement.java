@@ -20,7 +20,6 @@ public class StructureRattachement {
    
     /**
      * Constructeur de StructureRattachement
-     * @author simon
      * @param id            Identifiant
      * @param dir           Chemin d'accès aux fichiers
      * @param etablissement Nom de l'etablissement
@@ -43,7 +42,6 @@ public class StructureRattachement {
     
     /**
      * id Getter
-     * @author simon
      * @return Identifiant de la Structure de Rattachement
      */
     public int getId() {
@@ -52,7 +50,6 @@ public class StructureRattachement {
     
     /**
      * id Setter
-     * @author simon
      * @param id Identifiant de la Structure de Rattachement
      */
     public void setId(int id) {
@@ -61,7 +58,6 @@ public class StructureRattachement {
     
     /**
      * directory Getter
-     * @author simon
      * @return Chemin d'accès aux fichiers relatifs à la Structure de Rattachement
      */
     public String getDir() {
@@ -70,7 +66,6 @@ public class StructureRattachement {
     
     /**
      * directory Setter
-     * @author simon
      * @param dir Chemin d'accès aux fichiers relatifs à la Structure de Rattachement
      */
     public void setDir(String dir) {
@@ -79,7 +74,6 @@ public class StructureRattachement {
     
     /**
      * etablissement Getter
-     * @author simon
      * @return Nom de l'etablissement
      */
     public String getEtablissement() {
@@ -88,7 +82,6 @@ public class StructureRattachement {
     
     /**
      * etablissement Setter
-     * @author simon
      * @param etablissement Nom de l'etablissement 
      */
     public void setEtablissement(String etablissement) {
@@ -97,7 +90,6 @@ public class StructureRattachement {
     
     /**
      * laboratoire Getter
-     * @author simon
      * @return Nom du Laboratoire
      */
     public String getLaboratoire() {
@@ -106,7 +98,6 @@ public class StructureRattachement {
     
     /**
      * laboratoire Setter
-     * @author simon
      * @param laboratoire Nom du Laboratoire 
      */
     public void setLaboratoire(String laboratoire) {
@@ -115,7 +106,6 @@ public class StructureRattachement {
     
     /**
      * equipe Getter
-     * @author simon
      * @return Nom de l'equipe
      */
     public String getEquipe() {
@@ -124,7 +114,6 @@ public class StructureRattachement {
     
     /**
      * equipe Setter
-     * @author simon
      * @param equipe Nom de l'equipe    
      */
     public void setEquipe(String equipe) {
@@ -133,7 +122,6 @@ public class StructureRattachement {
     
     /**
      * adresse Getter
-     * @author simon
      * @return Adresse de la Structure de Rattachement
      */
     public String getAdresse() {
@@ -142,7 +130,6 @@ public class StructureRattachement {
     
     /**
      * adresse Setter
-     * @author simon
      * @param adresse Adresse de la Structure de Rattachement 
      */
     public void setAdresse(String adresse) {
@@ -151,7 +138,6 @@ public class StructureRattachement {
     
     /**
      * telephoneRef Getter
-     * @author simon
      * @return Numero de Telephone du referent
      */
     public String getTelephoneRef() {
@@ -160,7 +146,6 @@ public class StructureRattachement {
 
     /**
      * telephoneRef Setter
-     * @author simon
      * @param telephoneRef Numero de Telephone du referent 
      */
     public void setTelephoneRef(String telephoneRef) {
@@ -169,7 +154,6 @@ public class StructureRattachement {
     
     /**
      * mailRef Getter
-     * @author simon
      * @return Adresse mail du referent
      */
     public String getMailRef() {
@@ -178,7 +162,6 @@ public class StructureRattachement {
     
     /**
      * mailRef Setter
-     * @author simon
      * @param mailRef Adresse mail du referent
      */
     public void setMailRef(String mailRef) {

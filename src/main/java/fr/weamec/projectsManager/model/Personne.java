@@ -33,7 +33,6 @@ public abstract class Personne {
     
     /**
      * id Getter
-     * @author simon
      * @return Identifiant
      */
     public int getId() {
@@ -50,7 +49,6 @@ public abstract class Personne {
     
     /**
      * nom Getter
-     * @author simon
      * @return Nom
      */
     public String getNom() {
@@ -59,7 +57,6 @@ public abstract class Personne {
 
     /**
      * nom Setter
-     * @author
      * @param nom Nom 
      */
     public void setNom(String nom) {
@@ -68,7 +65,6 @@ public abstract class Personne {
     
     /**
      * prenom Getter
-     * @author simon
      * @return Prenom
      */
     public String getPrenom() {
@@ -77,7 +73,6 @@ public abstract class Personne {
     
     /**
      * prenom Setter
-     * @author simon
      * @param prenom Prenom 
      */
     public void setPrenom(String prenom) {
@@ -86,7 +81,6 @@ public abstract class Personne {
     
     /**
      * mail Getter
-     * @author simon
      * @return Adresse mail
      */
     public String getMail() {
@@ -95,7 +89,6 @@ public abstract class Personne {
 
     /**
      * mail Setter
-     * @author simon
      * @param mail Adresse mail
      */
     public void setMail(String mail) {
@@ -104,7 +97,6 @@ public abstract class Personne {
     
     /**
      * telephone Getter
-     * @author simon
      * @return Numero de telephone
      */
     public String getTelephone() {
@@ -113,7 +105,6 @@ public abstract class Personne {
 
     /**
      * telephone Setter
-     * @author simon
      * @param telephone Numero de telephone 
      */
     public void setTelephone(String telephone) {

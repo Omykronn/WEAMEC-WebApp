@@ -15,7 +15,6 @@ public class Expert extends Personne {
     
     /**
      * Constructeur de Expert
-     * @author simon
      * @param entiteRattachement        Nom de l'entite de rattachement
      * @param laboratoireRattachement   Nom du laboratoire de rattachement
      * @param specialite                Specialite de l'expert
@@ -34,7 +33,6 @@ public class Expert extends Personne {
     
     /**
      * entiteRattachement Getter
-     * @author simon
      * @return Nom de l'entite de rattachement
      */
     public String getEntiteRattachement() {
@@ -43,7 +41,6 @@ public class Expert extends Personne {
     
     /**
      * entiteRattachement Setter
-     * @author simon
      * @param entiteRattachement Nom de l'entite de rattachement
      */
     public void setEntiteRattachement(String entiteRattachement) {
@@ -52,7 +49,6 @@ public class Expert extends Personne {
     
     /**
      * laboratoireRattachement Getter
-     * @author simon
      * @return Nom du laboratoire de rattachement
      */
     public String getLaboratoireRattachement() {
@@ -61,7 +57,6 @@ public class Expert extends Personne {
     
     /**
      * laboratoireRattachement Setter
-     * @author simon
      * @param laboratoireRattachement Nom du laboratoire de rattachement
      */
     public void setLaboratoireRattachement(String laboratoireRattachement) {
@@ -70,7 +65,6 @@ public class Expert extends Personne {
     
     /**
      * specialite Getter
-     * @author simon
      * @return Specialite de l'expert
      */
     public String getSpecialite() {
@@ -79,7 +73,6 @@ public class Expert extends Personne {
     
     /**
      * specialite Setter
-     * @author simon
      * @param specialite Specialite de l'expert 
      */
     public void setSpecialite(String specialite) {

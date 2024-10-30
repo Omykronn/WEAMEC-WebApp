@@ -13,7 +13,6 @@ public class CoordinateurScientifique extends Personne {
     
     /**
      * Constructeur de CoordinateurScientifique
-     * @author simon
      * @param structureRattachement Structure de Rattachement
      * @param id                    Identifiant
      * @param nom                   Nom 
@@ -28,7 +27,6 @@ public class CoordinateurScientifique extends Personne {
     
     /**
      * structureRattachement Getter
-     * @author simon
      * @return Structure de Rattachement
      */
     public StructureRattachement getStructureRattachement() {
