@@ -17,6 +17,29 @@ public class StructureRattachement {
     private String adresse;
     private String telephoneRef;
     private String mailRef;
+   
+    /**
+     * Constructeur de StructureRattachement
+     * @author simon
+     * @param id            Identifiant
+     * @param dir           Chemin d'accès aux fichiers
+     * @param etablissement Nom de l'etablissement
+     * @param laboratoire   Nom du laboratoire
+     * @param equipe        Nom de l'equipe
+     * @param adresse       Adresse postale
+     * @param telephoneRef  Numero de Telephone
+     * @param mailRef       Adresse mail
+     */
+    public StructureRattachement(int id, String dir, String etablissement, String laboratoire, String equipe, String adresse, String telephoneRef, String mailRef) {
+        this.id = id;
+        this.dir = dir;
+        this.etablissement = etablissement;
+        this.laboratoire = laboratoire;
+        this.equipe = equipe;
+        this.adresse = adresse;
+        this.telephoneRef = telephoneRef;
+        this.mailRef = mailRef;
+    }
     
     /**
      * id Getter
