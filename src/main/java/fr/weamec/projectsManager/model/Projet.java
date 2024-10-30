@@ -1,0 +1,666 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package fr.weamec.projectsManager.model;
+
+import java.util.ArrayList;
+
+/**
+ * Classe représentant un projet 
+ * @author simon
+ */
+public class Projet {
+    private int id;
+    private CoordinateurScientifique coordinateurScientifique;
+    private String statut;
+    private String nomAccro;
+    private String nomComplet;
+    private String categorie;
+    private String type;
+    private String objectifSynth;
+    private String siteWeb;
+    private String duree;
+    private Date dateDebut;
+    private Date dateFin;
+    private String description;
+    private String objectif;
+    private String verrousScientif;
+    private String programmeExp;
+    private String moyensEssai;
+    private String demonstrateur;
+    private String ruptureScient;
+    private String impactTech;
+    private String impactEco;
+    private String impactEnv;
+    private String impactSoc;
+    private ArrayList<String> technologies;
+    private int trlDebut;
+    private int trlFin;
+    private boolean brevet;
+    private int prioriteWeamec;
+    private int objectifWeamec;
+    private int defiWeamec;
+    private String valeur;
+    private String theme;
+    private ArrayList<Partenaire> listePartenaires;
+    private ArrayList<Expert> listeExperts;
+    
+    /**
+     * Constructeur de Projet
+     * @param id                        Identifiant
+     * @param coordinateurScientifique  Coordinateur Scientifique du projet
+     * @param statut                    Statut du projet
+     * @param nomAccro                  Accronyme du nom du projet
+     * @param nomComplet                Nom Complet du Projet
+     * @param categorie                 Categorie WEAMEC
+     * @param type                      Type de projet
+     * @param objectifSynth             Objectif synthetise
+     * @param siteWeb                   URL du site web
+     * @param duree                     Duree en mois
+     * @param dateDebut                 Date de debut
+     * @param dateFin                   Date de fin
+     * @param description               Description du projet
+     * @param objectif                  Objectifs du projet
+     * @param verrousScientif           Verrous Scientifiques
+     * @param programmeExp              Programme Experimental
+     * @param moyensEssai               Moyens d'essais
+     * @param demonstrateur             Demonstrateur
+     * @param ruptureScient             Ruptures Scientifiques
+     * @param impactTech                Impacts Technologiques
+     * @param impactEco                 Impacts Economiques
+     * @param impactEnv                 Impacts Environnementaux
+     * @param impactSoc                 Impacts Sociétaux
+     * @param technologies              Liste des technologies du projet
+     * @param trlDebut                  TRL au début
+     * @param trlFin                    TRL à la fin
+     * @param brevet                    Brevet vise
+     * @param prioriteWeamec            Priorite WEAMEC
+     * @param objectifWeamec            Objectifs WEAMEC
+     * @param defiWeamec                Defis WEAMEC
+     * @param valeur                    Valeur du projet
+     * @param theme                     Theme du projet
+     * @param listePartenaires          Liste des partenaires du projet
+     * @param listeExperts              Liste des experts du projet
+     */
+    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String statut, String nomAccro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, ArrayList<String> technologies, int trlDebut, int trlFin, boolean brevet, int prioriteWeamec, int objectifWeamec, int defiWeamec, String valeur, String theme, ArrayList<Partenaire> listePartenaires, ArrayList<Expert> listeExperts) {
+        this.id = id;
+        this.coordinateurScientifique = coordinateurScientifique;
+        this.statut = statut;
+        this.nomAccro = nomAccro;
+        this.nomComplet = nomComplet;
+        this.categorie = categorie;
+        this.type = type;
+        this.objectifSynth = objectifSynth;
+        this.siteWeb = siteWeb;
+        this.duree = duree;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.description = description;
+        this.objectif = objectif;
+        this.verrousScientif = verrousScientif;
+        this.programmeExp = programmeExp;
+        this.moyensEssai = moyensEssai;
+        this.demonstrateur = demonstrateur;
+        this.ruptureScient = ruptureScient;
+        this.impactTech = impactTech;
+        this.impactEco = impactEco;
+        this.impactEnv = impactEnv;
+        this.impactSoc = impactSoc;
+        this.technologies = technologies;
+        this.trlDebut = trlDebut;
+        this.trlFin = trlFin;
+        this.brevet = brevet;
+        this.prioriteWeamec = prioriteWeamec;
+        this.objectifWeamec = objectifWeamec;
+        this.defiWeamec = defiWeamec;
+        this.valeur = valeur;
+        this.theme = theme;
+        this.listePartenaires = listePartenaires;
+        this.listeExperts = listeExperts;
+    }
+    
+    /**
+     * id Getter
+     * @return Identifiant
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * id Setter
+     * @param id Identifiant
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * coordinateurScientifique Getter
+     * @return Coordinateur Scientifique du projet
+     */
+    public CoordinateurScientifique getCoordinateurScientifique() {
+        return coordinateurScientifique;
+    }
+
+    /**
+     * coordinateurScientifique Setter
+     * @param coordinateurScientifique Coordinateur Scientifique du projet
+     */
+    public void setCoordinateurScientifique(CoordinateurScientifique coordinateurScientifique) {
+        this.coordinateurScientifique = coordinateurScientifique;
+    }
+
+    /**
+     * statut Getter
+     * @return Statut du projet
+     */
+    public String getStatut() {
+        return statut;
+    }
+
+    /**
+     * statut Setter
+     * @param statut Statut du projet
+     */
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    /**
+     * nomAccro Getter
+     * @return Accronyme du nom du projet
+     */
+    public String getNomAccro() {
+        return nomAccro;
+    }
+
+    /**
+     * nomAccro Setter
+     * @param nomAccro Accronyme du nom du projet
+     */
+    public void setNomAccro(String nomAccro) {
+        this.nomAccro = nomAccro;
+    }
+
+    /**
+     * nomComplet Getter
+     * @return Nom complet du projet
+     */
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    /**
+     * nomComplet Setter
+     * @param nomComplet Nom complet du projet
+     */
+    public void setNomComplet(String nomComplet) {
+        this.nomComplet = nomComplet;
+    }
+
+    /**
+     * categorie Getter
+     * @return Categorie WEAMEC
+     */
+    public String getCategorie() {
+        return categorie;
+    }
+
+    /**
+     * categorie Setter
+     * @param categorie Categorie WEAMEC
+     */
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
+    /**
+     * type Getter
+     * @return Type de projet
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * type Setter
+     * @param type Type de projet
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * objectifSynth Getter
+     * @return Objectif synthetise
+     */
+    public String getObjectifSynth() {
+        return objectifSynth;
+    }
+
+    /**
+     * objectifSynth Setter
+     * @param objectifSynth Objectif synthetise
+     */
+    public void setObjectifSynth(String objectifSynth) {
+        this.objectifSynth = objectifSynth;
+    }
+
+    /**
+     * siteWeb Getter
+     * @return URL du site web
+     */
+    public String getSiteWeb() {
+        return siteWeb;
+    }
+
+    /**
+     * siteWeb Setter
+     * @param siteWeb URL du site web
+     */
+    public void setSiteWeb(String siteWeb) {
+        this.siteWeb = siteWeb;
+    }
+
+    /**
+     * duree Getter
+     * @return Duree en mois
+     */
+    public String getDuree() {
+        return duree;
+    }
+
+    /**
+     * duree Setter
+     * @param duree Duree en mois
+     */
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
+
+    /**
+     * dateDebut Getter
+     * @return Date de debut
+     */
+    public Date getDateDebut() {
+        return dateDebut;
+    }
+
+    /**
+     * dateDebut Setter
+     * @param dateDebut Date de debut
+     */
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    /**
+     * dateFin Getter
+     * @return Date de fin
+     */
+    public Date getDateFin() {
+        return dateFin;
+    }
+
+    /**
+     * dateFin Setter
+     * @param dateFin Date de fin
+     */
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    /**
+     * description Getter
+     * @return Description du projet
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * description Setter
+     * @param description Description du projet
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * objectif Getter
+     * @return Objectifs du projet
+     */
+    public String getObjectif() {
+        return objectif;
+    }
+
+    /**
+     * objectif Setter
+     * @param objectif Objectifs du projet
+     */
+    public void setObjectif(String objectif) {
+        this.objectif = objectif;
+    }
+
+    /**
+     * verrousScientif Getter
+     * @return Verrous Scientifiques
+     */
+    public String getVerrousScientif() {
+        return verrousScientif;
+    }
+
+    /**
+     * verrousScientif Setter
+     * @param verrousScientif Verrous Scientifiques
+     */
+    public void setVerrousScientif(String verrousScientif) {
+        this.verrousScientif = verrousScientif;
+    }
+
+    /**
+     * programmeExp Getter
+     * @return Programme experimental
+     */
+    public String getProgrammeExp() {
+        return programmeExp;
+    }
+
+    /**
+     * programmeExp Setter
+     * @param programmeExp Programme experimental
+     */
+    public void setProgrammeExp(String programmeExp) {
+        this.programmeExp = programmeExp;
+    }
+
+    /**
+     * moyensEssai Getter
+     * @return Moyens d'essais
+     */
+    public String getMoyensEssai() {
+        return moyensEssai;
+    }
+
+    /**
+     * moyensEssai Setter
+     * @param moyensEssai Moyens d'essais
+     */
+    public void setMoyensEssai(String moyensEssai) {
+        this.moyensEssai = moyensEssai;
+    }
+
+    /**
+     * demonstrateur Getter
+     * @return Demonstrateur
+     */
+    public String getDemonstrateur() {
+        return demonstrateur;
+    }
+
+    /**
+     * demonstrateur Setter
+     * @param demonstrateur Demonstrateur
+     */
+    public void setDemonstrateur(String demonstrateur) {
+        this.demonstrateur = demonstrateur;
+    }
+
+    /**
+     * ruptureScient Getter
+     * @return Ruptures Scientifiques
+     */
+    public String getRuptureScient() {
+        return ruptureScient;
+    }
+
+    /**
+     * ruptureScient Setter
+     * @param ruptureScient Ruptures Scientifiques
+     */
+    public void setRuptureScient(String ruptureScient) {
+        this.ruptureScient = ruptureScient;
+    }
+
+    /**
+     * impactTech Getter
+     * @return Impacts Technologiques
+     */
+    public String getImpactTech() {
+        return impactTech;
+    }
+
+    /**
+     * impactTech Setter
+     * @param impactTech Impacts Technologiques
+     */
+    public void setImpactTech(String impactTech) {
+        this.impactTech = impactTech;
+    }
+
+    /**
+     * impactEco Getter
+     * @return Impacts Economiques
+     */
+    public String getImpactEco() {
+        return impactEco;
+    }
+
+    /**
+     * impactEco Setter
+     * @param impactEco Impacts Economiques
+     */
+    public void setImpactEco(String impactEco) {
+        this.impactEco = impactEco;
+    }
+
+    /**
+     * impactEnv Getter
+     * @return Impacts Environnementaux
+     */
+    public String getImpactEnv() {
+        return impactEnv;
+    }
+
+    /**
+     * impactEnv Setter
+     * @param impactEnv Impacts Environnementaux
+     */
+    public void setImpactEnv(String impactEnv) {
+        this.impactEnv = impactEnv;
+    }
+
+    /**
+     * impactSoc Getter
+     * @return Impacts Sociétaux
+     */
+    public String getImpactSoc() {
+        return impactSoc;
+    }
+
+    /**
+     * impactSoc Setter
+     * @param impactSoc Impacts Sociétaux
+     */
+    public void setImpactSoc(String impactSoc) {
+        this.impactSoc = impactSoc;
+    }
+
+    /**
+     * technologies Getter
+     * @return Liste des technologies du projet
+     */
+    public ArrayList<String> getTechnologies() {
+        return technologies;
+    }
+
+    /**
+     * technologies Setter
+     * @param technologies Liste des technologies du projet
+     */
+    public void setTechnologies(ArrayList<String> technologies) {
+        this.technologies = technologies;
+    }
+
+    /**
+     * trlDebut Getter
+     * @return TRL au début
+     */
+    public int getTrlDebut() {
+        return trlDebut;
+    }
+
+    /**
+     * trlDebut Setter
+     * @param trlDebut TRL au début
+     */
+    public void setTrlDebut(int trlDebut) {
+        this.trlDebut = trlDebut;
+    }
+
+    /**
+     * trlFin Getter
+     * @return TRL à la fin
+     */
+    public int getTrlFin() {
+        return trlFin;
+    }
+
+    /**
+     * trlFin Setter
+     * @param trlFin TRL à la fin
+     */
+    public void setTrlFin(int trlFin) {
+        this.trlFin = trlFin;
+    }
+
+    /**
+     * brevet Getter
+     * @return Brevet vise
+     */
+    public boolean getBrevet() {
+        return brevet;
+    }
+
+    /**
+     * brevet Setter
+     * @param brevet Brevet vise
+     */
+    public void setBrevet(boolean brevet) {
+        this.brevet = brevet;
+    }
+
+    /**
+     * prioriteWeamec Getter
+     * @return Priorite WEAMEC
+     */
+    public int getPrioriteWeamec() {
+        return prioriteWeamec;
+    }
+
+    /**
+     * prioriteWeamec Setter
+     * @param prioriteWeamec Priorite WEAMEC
+     */
+    public void setPrioriteWeamec(int prioriteWeamec) {
+        this.prioriteWeamec = prioriteWeamec;
+    }
+
+    /**
+     * objectifWeamec Getter
+     * @return Objectifs WEAMEC
+     */
+    public int getObjectifWeamec() {
+        return objectifWeamec;
+    }
+
+    /**
+     * objectifWeamec Setter
+     * @param objectifWeamec Objectifs WEAMEC
+     */
+    public void setObjectifWeamec(int objectifWeamec) {
+        this.objectifWeamec = objectifWeamec;
+    }
+
+    /**
+     * defiWeamec Getter
+     * @return Defis WEAMEC
+     */
+    public int getDefiWeamec() {
+        return defiWeamec;
+    }
+
+    /**
+     * defiWeamec Setter
+     * @param defiWeamec Defis WEAMEC
+     */
+    public void setDefiWeamec(int defiWeamec) {
+        this.defiWeamec = defiWeamec;
+    }
+
+    /**
+     * valeur Getter
+     * @return Valeur du projet
+     */
+    public String getValeur() {
+        return valeur;
+    }
+
+    /**
+     * valeur Setter
+     * @param valeur Valeur du projet
+     */
+    public void setValeur(String valeur) {
+        this.valeur = valeur;
+    }
+
+    /**
+     * theme Getter
+     * @return Theme du projet
+     */
+    public String getTheme() {
+        return theme;
+    }
+
+    /**
+     * theme Setter
+     * @param theme Theme du projet
+     */
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    /**
+     * listePartenaires Getter
+     * @return Liste des partenaires du projet
+     */
+    public ArrayList<Partenaire> getListePartenaires() {
+        return listePartenaires;
+    }
+
+    /**
+     * listePartenaires Setter
+     * @param listePartenaires Liste des partenaires du projet
+     */
+    public void setListePartenaires(ArrayList<Partenaire> listePartenaires) {
+        this.listePartenaires = listePartenaires;
+    }
+
+    /**
+     * listeExperts Getter
+     * @return Liste des experts du projet
+     */
+    public ArrayList<Expert> getListeExperts() {
+        return listeExperts;
+    }
+
+    /**
+     * listeExperts Setter
+     * @param listeExperts Liste des experts du projet
+     */
+    public void setListeExperts(ArrayList<Expert> listeExperts) {
+        this.listeExperts = listeExperts;
+    }
+}
