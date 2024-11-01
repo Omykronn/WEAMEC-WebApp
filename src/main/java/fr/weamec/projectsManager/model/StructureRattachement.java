@@ -4,20 +4,41 @@
  */
 package fr.weamec.projectsManager.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  * Classe représentant une structure de rattachement : organisme de recherche ou entreprise
  * @author simon
  */
-public class StructureRattachement {    
+@Entity
+@Table(name = "structurerattachement")
+public class StructureRattachement { 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     private String dir;
     private String etablissement;
     private String laboratoire;
     private String equipe;
     private String adresse;
+    
+    @Column(name = "telephone_ref")
     private String telephoneRef;
+    
+    @Column(name = "mail_ref")
     private String mailRef;
    
+    /**
+     * Constructeur par defaut
+     */
+    public StructureRattachement() {}
+    
     /**
      * Constructeur de StructureRattachement
      * @param id            Identifiant

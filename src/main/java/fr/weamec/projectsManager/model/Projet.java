@@ -4,54 +4,135 @@
  */
 package fr.weamec.projectsManager.model;
 
-import java.util.ArrayList;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import java.sql.Date;
+import java.util.List;
 
 /**
  * Classe représentant un projet 
  * @author simon
  */
+@Entity
+@Table(name = "projet")
 public class Projet {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @OneToOne
+    @JoinColumn(name = "id_coordinateur", referencedColumnName = "id")
     private CoordinateurScientifique coordinateurScientifique;
+    
+    private String dir;
     private String statut;
-    private String nomAccro;
+    
+    @Column(name = "nom_acro")
+    private String nomAcro;
+    
+    @Column(name = "nom_complet")
     private String nomComplet;
+    
     private String categorie;
     private String type;
+    
+    @Column(name = "objetif_synth")
     private String objectifSynth;
+    
+    @Column(name = "site_web")
     private String siteWeb;
+    
     private String duree;
+    
+    @Column(name = "date_debut")
     private Date dateDebut;
+    
+    @Column(name = "date_fin")
     private Date dateFin;
+    
     private String description;
     private String objectif;
+    
+    @Column(name = "verrous_scientif")
     private String verrousScientif;
+    
+    @Column(name = "programme_exp")
     private String programmeExp;
+    
+    @Column(name = "moyens_essai")
     private String moyensEssai;
+    
     private String demonstrateur;
+    
+    @Column(name = "rupture_scient")
     private String ruptureScient;
+    
+    @Column(name = "impact_tech")
     private String impactTech;
+    
+    @Column(name = "impact_eco")
     private String impactEco;
+    
+    @Column(name = "impact_enc")
     private String impactEnv;
+    
+    @Column(name = "impact_soc")
     private String impactSoc;
-    private ArrayList<String> technologies;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "technoduprojet",
+               joinColumns = @JoinColumn(name = "id_projet"),
+               inverseJoinColumns = @JoinColumn(name = "nom_techno"))
+    private List<Technologie> technologies;
+    
+    @Column(name = "trl_debut")
     private int trlDebut;
+    
+    @Column(name = "trl_fin")
     private int trlFin;
+    
     private boolean brevet;
+    
+    @Column(name = "priorite_weamec")
     private int prioriteWeamec;
+    
+    @Column(name = "objectif_weamec")
     private int objectifWeamec;
+    
+    @Column(name = "defi_weamec")
     private int defiWeamec;
+    
     private String valeur;
     private String theme;
-    private ArrayList<Partenaire> listePartenaires;
-    private ArrayList<Expert> listeExperts;
+    
+    @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER)
+    private List<Partenaire> listePartenaires;
+    
+    @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER)
+    private List<Expert> listeExperts;
+    
+    /**
+     * Constructeur par defaut
+     */
+    public Projet() {}
     
     /**
      * Constructeur de Projet
      * @param id                        Identifiant
      * @param coordinateurScientifique  Coordinateur Scientifique du projet
+     * @param dir                       Chemin d'acces aux fichiers
      * @param statut                    Statut du projet
-     * @param nomAccro                  Accronyme du nom du projet
+     * @param nomAcro                  Acronyme du nom du projet
      * @param nomComplet                Nom Complet du Projet
      * @param categorie                 Categorie WEAMEC
      * @param type                      Type de projet
@@ -83,11 +164,12 @@ public class Projet {
      * @param listePartenaires          Liste des partenaires du projet
      * @param listeExperts              Liste des experts du projet
      */
-    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String statut, String nomAccro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, ArrayList<String> technologies, int trlDebut, int trlFin, boolean brevet, int prioriteWeamec, int objectifWeamec, int defiWeamec, String valeur, String theme, ArrayList<Partenaire> listePartenaires, ArrayList<Expert> listeExperts) {
+    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String dir, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, int prioriteWeamec, int objectifWeamec, int defiWeamec, String valeur, String theme, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
         this.id = id;
         this.coordinateurScientifique = coordinateurScientifique;
+        this.dir = dir;
         this.statut = statut;
-        this.nomAccro = nomAccro;
+        this.nomAcro = nomAcro;
         this.nomComplet = nomComplet;
         this.categorie = categorie;
         this.type = type;
@@ -151,6 +233,22 @@ public class Projet {
     public void setCoordinateurScientifique(CoordinateurScientifique coordinateurScientifique) {
         this.coordinateurScientifique = coordinateurScientifique;
     }
+    
+    /**
+     * dir Getter
+     * @return Chemin d'acces aux fichiers
+     */
+    public String getDir() {
+        return dir;
+    }
+    
+    /**
+     * dir Setter
+     * @param dir Chemin d'acces aux fichiers
+     */
+    public void setDir(String dir) {
+        this.dir = dir;
+    }
 
     /**
      * statut Getter
@@ -169,19 +267,19 @@ public class Projet {
     }
 
     /**
-     * nomAccro Getter
-     * @return Accronyme du nom du projet
+     * nomAcro Getter
+     * @return Acronyme du nom du projet
      */
-    public String getNomAccro() {
-        return nomAccro;
+    public String getNomAcro() {
+        return nomAcro;
     }
 
     /**
-     * nomAccro Setter
-     * @param nomAccro Accronyme du nom du projet
+     * nomAcro Setter
+     * @param nomAcro Acronyme du nom du projet
      */
-    public void setNomAccro(String nomAccro) {
-        this.nomAccro = nomAccro;
+    public void setNomAcro(String nomAcro) {
+        this.nomAcro = nomAcro;
     }
 
     /**
@@ -492,7 +590,7 @@ public class Projet {
      * technologies Getter
      * @return Liste des technologies du projet
      */
-    public ArrayList<String> getTechnologies() {
+    public List<Technologie> getTechnologies() {
         return technologies;
     }
 
@@ -500,7 +598,7 @@ public class Projet {
      * technologies Setter
      * @param technologies Liste des technologies du projet
      */
-    public void setTechnologies(ArrayList<String> technologies) {
+    public void setTechnologies(List<Technologie> technologies) {
         this.technologies = technologies;
     }
 
@@ -636,7 +734,7 @@ public class Projet {
      * listePartenaires Getter
      * @return Liste des partenaires du projet
      */
-    public ArrayList<Partenaire> getListePartenaires() {
+    public List<Partenaire> getListePartenaires() {
         return listePartenaires;
     }
 
@@ -644,7 +742,7 @@ public class Projet {
      * listePartenaires Setter
      * @param listePartenaires Liste des partenaires du projet
      */
-    public void setListePartenaires(ArrayList<Partenaire> listePartenaires) {
+    public void setListePartenaires(List<Partenaire> listePartenaires) {
         this.listePartenaires = listePartenaires;
     }
 
@@ -652,7 +750,7 @@ public class Projet {
      * listeExperts Getter
      * @return Liste des experts du projet
      */
-    public ArrayList<Expert> getListeExperts() {
+    public List<Expert> getListeExperts() {
         return listeExperts;
     }
 
@@ -660,7 +758,7 @@ public class Projet {
      * listeExperts Setter
      * @param listeExperts Liste des experts du projet
      */
-    public void setListeExperts(ArrayList<Expert> listeExperts) {
+    public void setListeExperts(List<Expert> listeExperts) {
         this.listeExperts = listeExperts;
     }
 }

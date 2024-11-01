@@ -4,12 +4,26 @@
  */
 package fr.weamec.projectsManager.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
 /**
  * Classe représentant un Coordinateut Scientifique d'un projet
  * @author simon
  */
+@Entity
+@Table(name = "coordinateurscientifique")
 public class CoordinateurScientifique extends Personne {
+    @OneToOne
+    @JoinColumn(name = "id_structure", referencedColumnName = "id")
     private StructureRattachement structureRattachement;
+    
+    /**
+     * Constructeur par defaut
+     */
+    public CoordinateurScientifique() {}
     
     /**
      * Constructeur de CoordinateurScientifique

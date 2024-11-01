@@ -4,16 +4,30 @@
  */
 package fr.weamec.projectsManager.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+
 /**
  * Classe abstraire représentant une personnne
  * @author simon
  */
+@MappedSuperclass
 public abstract class Personne {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;    
+    
     private String nom;
     private String prenom;
     private String mail;
     private String telephone;
+    
+    /**
+     * Constructeur par defaut
+     */
+    public Personne() {}
     
     /**
      * Constructeur de Personne

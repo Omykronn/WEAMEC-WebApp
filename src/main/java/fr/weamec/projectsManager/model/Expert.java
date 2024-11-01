@@ -4,31 +4,51 @@
  */
 package fr.weamec.projectsManager.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 /**
  * Classe représentant un Expert associé à un projet
  * @author simon
  */
+@Entity
+@Table(name = "expert")
 public class Expert extends Personne {
+    @Column(name = "entite_rattachement")
     private String entiteRattachement;
+    
+    @Column(name = "laboratoire_rattachement")
     private String laboratoireRattachement;
+    
     private String specialite;
+    
+    @Column(name = "id_projet")
+    private int idProjet;
+    
+    /**
+     * Constructeur par defaut
+     */
+    public Expert() {}
     
     /**
      * Constructeur de Expert
      * @param entiteRattachement        Nom de l'entite de rattachement
      * @param laboratoireRattachement   Nom du laboratoire de rattachement
      * @param specialite                Specialite de l'expert
+     * @param idProjet                  Identifiant du projet
      * @param id                        Identifiant
      * @param nom                       Nom
      * @param prenom                    Prenom
      * @param mail                      Mail
      * @param telephone                 Telephone
      */
-    public Expert(String entiteRattachement, String laboratoireRattachement, String specialite, int id, String nom, String prenom, String mail, String telephone) {
+    public Expert(String entiteRattachement, String laboratoireRattachement, String specialite, int idProjet, int id, String nom, String prenom, String mail, String telephone) {
         super(id, nom, prenom, mail, telephone);
         this.entiteRattachement = entiteRattachement;
         this.laboratoireRattachement = laboratoireRattachement;
         this.specialite = specialite;
+        this.idProjet = idProjet;
     }
     
     /**
@@ -77,5 +97,21 @@ public class Expert extends Personne {
      */
     public void setSpecialite(String specialite) {
         this.specialite = specialite;
+    } 
+
+    /**
+     * idProjet Getter
+     * @return Identifiant du projet
+     */
+    public int getIdProjet() {
+        return idProjet;
+    }
+
+    /**
+     * idProjet Setter
+     * @param idProjet Identifiant du projet 
+     */
+    public void setIdProjet(int idProjet) {
+        this.idProjet = idProjet;
     }   
 }
