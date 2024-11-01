@@ -4,6 +4,7 @@
  */
 package fr.weamec.projectsManager.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -17,7 +18,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "partenaire")
 public class Partenaire extends Personne{
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_entite_rattachement", referencedColumnName = "id")
     private StructureRattachement structureRattachement;
     

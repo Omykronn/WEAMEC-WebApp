@@ -4,6 +4,7 @@
  */
 package fr.weamec.projectsManager.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,7 +31,7 @@ public class Projet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_coordinateur", referencedColumnName = "id")
     private CoordinateurScientifique coordinateurScientifique;
     
@@ -89,7 +90,7 @@ public class Projet {
     @Column(name = "impact_soc")
     private String impactSoc;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "technoduprojet",
                joinColumns = @JoinColumn(name = "id_projet"),
                inverseJoinColumns = @JoinColumn(name = "nom_techno"))
@@ -115,10 +116,10 @@ public class Projet {
     private String valeur;
     private String theme;
     
-    @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Partenaire> listePartenaires;
     
-    @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Expert> listeExperts;
     
     /**
