@@ -12,8 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -90,12 +88,6 @@ public class Projet {
     @Column(name = "impact_soc")
     private String impactSoc;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "technoduprojet",
-               joinColumns = @JoinColumn(name = "id_projet"),
-               inverseJoinColumns = @JoinColumn(name = "nom_techno"))
-    private List<Technologie> technologies;
-    
     @Column(name = "trl_debut")
     private int trlDebut;
     
@@ -121,6 +113,18 @@ public class Projet {
     
     @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Expert> listeExperts;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_projet", referencedColumnName = "id")
+    private List<Technologie> technologies;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_projet", referencedColumnName = "id")
+    private List<Valeur> valeurs;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_projet", referencedColumnName = "id")
+    private List<Theme> themes;
     
     /**
      * Constructeur par defaut

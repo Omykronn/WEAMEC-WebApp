@@ -10,33 +10,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
- * Classe représentant une Technologie
+ * Classe représentant une Valeur
  * @author simon
  */
 @Entity
-@Table(name = "technoduprojet")
-public class Technologie {
+@Table(name = "valeurduprojet")
+public class Valeur {
     @Id
     private int id;
     
     @Column(name = "id_projet")
     private int idProjet;
     
-    @Column(name = "nom_techno")
+    @Column(name = "nom_valeur")
     private String nom;
     
     /**
      * Constructeur par defaut
      */
-    public Technologie() {}
+    public Valeur() {}
     
     /**
-     * Constructeur de Technologie
+     * Constructeur de Valeur
      * @param id        Identifiant
      * @param idProjet  Identifiant du Projet
-     * @param nom       Nom de la technologie
+     * @param nom       Nom de la valeur
      */
-    public Technologie(int id, int idProjet, String nom) {
+    public Valeur(int id, int idProjet, String nom) {
         this.id = id;
         this.idProjet = idProjet;
         this.nom = nom;
@@ -76,7 +76,7 @@ public class Technologie {
     
     /**
      * nom Getter
-     * @return Nom de la technologie
+     * @return Nom de la valeur
      */
     public String getNom() {
         return nom;
@@ -84,7 +84,7 @@ public class Technologie {
 
     /**
      * nom Setter
-     * @param nom Nom de la technologie 
+     * @param nom Nom de la valeur 
      */
     public void setNom(String nom) {
         this.nom = nom;
