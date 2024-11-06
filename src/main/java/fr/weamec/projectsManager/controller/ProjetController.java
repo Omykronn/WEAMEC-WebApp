@@ -7,16 +7,11 @@ package fr.weamec.projectsManager.controller;
 import fr.weamec.projectsManager.model.*;
 import fr.weamec.projectsManager.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Controller pour Projet
@@ -25,23 +20,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProjetController {
     @Autowired
-    StructureRattachementService scService;
+    CoordinateurScientifiqueService csService;
     
-    @GetMapping("/createAccount")
+    @Autowired
+    StructureRattachementService srService;
+    
+    @GetMapping("/newStructureRattachement")
     public String createAccount() {
         return "formNewStructureRattachement";
     }
     
-    @PostMapping("/createAccount2")
+    @PostMapping("/saveStructureRattachement")
     public String saveStructureRattachement(@ModelAttribute StructureRattachement structureRattachement, Model model) {
-        
         // Sauvegarde de la nouvelle structure
         structureRattachement.setDir("zrbzoubev");
-        StructureRattachement sc = scService.save(structureRattachement);
-        
-        // Transmission de l'indice pour le coordinateurScientifique
-        model.addAttribute("idStruct", sc.getId());
+        StructureRattachement sc = srService.save(structureRattachement);
         
         return "done";	
+    }
+    
+    @GetMapping("/newCoordinateurScientifique")
+    public String newCoordinateurScientitifque() {
+        return "formNewCoordinateurScientifique";
+    }
+    
+    @PostMapping("/saveCoordinateurScientifique")
+    public String saveCoordinateurScientifique(@ModelAttribute CoordinateurScientifique coordinateurScientifique,
+                                               @ModelAttribute StructureRattachement structureRattachement) {
+        // Sauvegarde de la structure de rattachement
+        structureRattachement.setDir("helloworld");
+        structureRattachement = srService.save(structureRattachement);
+        
+        // Sauvegarde du coordinateurScientifique
+        coordinateurScientifique.setStructureRattachement(structureRattachement);
+        coordinateurScientifique = csService.save(coordinateurScientifique);
+        
+        return "done";
     }
 }
