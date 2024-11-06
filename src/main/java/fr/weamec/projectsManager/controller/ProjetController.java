@@ -30,10 +30,8 @@ public class ProjetController {
     @Autowired
     StructureRattachementService srService;
     
-    @GetMapping("/home")
-    public String home(Model model) {
-        int id = 3;
-        
+    @GetMapping("/home/{id}")
+    public String home(Model model, @PathVariable int id) {        
         Optional<CoordinateurScientifique> csOpt = csService.getCoordinateurScientifique(id);
         String template;
         
