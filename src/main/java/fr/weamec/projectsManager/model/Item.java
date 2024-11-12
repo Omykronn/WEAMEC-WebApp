@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 /**
- * Classe abstraite représentant un item
+ * Interface d'un item
  * @author simon
  */
 @MappedSuperclass

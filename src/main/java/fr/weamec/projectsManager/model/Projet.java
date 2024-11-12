@@ -97,16 +97,7 @@ public class Projet {
     private boolean brevet;
     
     @Column(name = "priorite_weamec")
-    private int prioriteWeamec;
-    
-    @Column(name = "objectif_weamec")
-    private int objectifWeamec;
-    
-    @Column(name = "defi_weamec")
-    private int defiWeamec;
-    
-    private String valeur;
-    private String theme;
+    private String prioriteWeamec;
     
     @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Partenaire> listePartenaires;
@@ -115,16 +106,24 @@ public class Projet {
     private List<Expert> listeExperts;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_projet", referencedColumnName = "id")
+    @JoinColumn(name = "idProjet", referencedColumnName = "id")
     private List<Technologie> technologies;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_projet", referencedColumnName = "id")
+    @JoinColumn(name = "idProjet", referencedColumnName = "id")
     private List<Valeur> valeurs;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_projet", referencedColumnName = "id")
+    @JoinColumn(name = "idProjet", referencedColumnName = "id")
     private List<Theme> themes;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    private List<Objectif> objectifsWeamec;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    private List<Defi> defisWeamec;
     
     /**
      * Constructeur par defaut
@@ -162,14 +161,14 @@ public class Projet {
      * @param trlFin                    TRL à la fin
      * @param brevet                    Brevet vise
      * @param prioriteWeamec            Priorite WEAMEC
-     * @param objectifWeamec            Objectifs WEAMEC
-     * @param defiWeamec                Defis WEAMEC
-     * @param valeur                    Valeur du projet
-     * @param theme                     Theme du projet
+     * @param objectifsWeamec           Objectifs WEAMEC
+     * @param defisWeamec               Defis WEAMEC
+     * @param valeurs                   Valeurs du projet
+     * @param themes                    Themes du projet
      * @param listePartenaires          Liste des partenaires du projet
      * @param listeExperts              Liste des experts du projet
      */
-    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String dir, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, int prioriteWeamec, int objectifWeamec, int defiWeamec, String valeur, String theme, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
+    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String dir, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, String prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
         this.id = id;
         this.coordinateurScientifique = coordinateurScientifique;
         this.dir = dir;
@@ -199,10 +198,10 @@ public class Projet {
         this.trlFin = trlFin;
         this.brevet = brevet;
         this.prioriteWeamec = prioriteWeamec;
-        this.objectifWeamec = objectifWeamec;
-        this.defiWeamec = defiWeamec;
-        this.valeur = valeur;
-        this.theme = theme;
+        this.objectifsWeamec = objectifsWeamec;
+        this.defisWeamec = defisWeamec;
+        this.valeurs = valeurs;
+        this.themes = themes;
         this.listePartenaires = listePartenaires;
         this.listeExperts = listeExperts;
     }
@@ -659,7 +658,7 @@ public class Projet {
      * prioriteWeamec Getter
      * @return Priorite WEAMEC
      */
-    public int getPrioriteWeamec() {
+    public String getPrioriteWeamec() {
         return prioriteWeamec;
     }
 
@@ -667,72 +666,72 @@ public class Projet {
      * prioriteWeamec Setter
      * @param prioriteWeamec Priorite WEAMEC
      */
-    public void setPrioriteWeamec(int prioriteWeamec) {
+    public void setPrioriteWeamec(String prioriteWeamec) {
         this.prioriteWeamec = prioriteWeamec;
     }
 
     /**
-     * objectifWeamec Getter
+     * objectifsWeamec Getter
      * @return Objectifs WEAMEC
      */
-    public int getObjectifWeamec() {
-        return objectifWeamec;
+    public List<Objectif> getObjectifsWeamec() {
+        return objectifsWeamec;
     }
 
     /**
-     * objectifWeamec Setter
-     * @param objectifWeamec Objectifs WEAMEC
+     * objectifsWeamec Setter
+     * @param objectifsWeamec Objectifs WEAMEC
      */
-    public void setObjectifWeamec(int objectifWeamec) {
-        this.objectifWeamec = objectifWeamec;
+    public void setObjectifsWeamec(List<Objectif> objectifsWeamec) {
+        this.objectifsWeamec = objectifsWeamec;
     }
 
     /**
-     * defiWeamec Getter
+     * defisWeamec Getter
      * @return Defis WEAMEC
      */
-    public int getDefiWeamec() {
-        return defiWeamec;
+    public List<Defi> getDefisWeamec() {
+        return defisWeamec;
     }
 
     /**
-     * defiWeamec Setter
-     * @param defiWeamec Defis WEAMEC
+     * defisWeamec Setter
+     * @param defisWeamec Defis WEAMEC
      */
-    public void setDefiWeamec(int defiWeamec) {
-        this.defiWeamec = defiWeamec;
+    public void setDefiWeamec(List<Defi> defisWeamec) {
+        this.defisWeamec = defisWeamec;
     }
 
     /**
-     * valeur Getter
-     * @return Valeur du projet
+     * valeurs Getter
+     * @return Valeurs du projet
      */
-    public String getValeur() {
-        return valeur;
+    public List<Valeur> getValeurs() {
+        return valeurs;
     }
 
     /**
-     * valeur Setter
-     * @param valeur Valeur du projet
+     * valeurs Setter
+     * @param valeurs Valeurs du projet
      */
-    public void setValeur(String valeur) {
-        this.valeur = valeur;
+    public void setValeurs(List<Valeur> valeurs) {
+        this.valeurs = valeurs;
     }
 
     /**
-     * theme Getter
-     * @return Theme du projet
+     * themes Getter
+     * @return Themes du projet
      */
-    public String getTheme() {
-        return theme;
+    public List<Theme> getThemes() {
+        return themes;
     }
 
     /**
-     * theme Setter
-     * @param theme Theme du projet
+     * themes Setter
+     * @param themes Themes du projet
      */
-    public void setTheme(String theme) {
-        this.theme = theme;
+    public void setThemes(List<Theme> themes) {
+        this.themes = themes;
     }
 
     /**
