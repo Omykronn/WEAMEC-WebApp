@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "valeurduprojet")
-public class Valeur {
+public class Valeur extends Item{
     @Id
     private int id;
     
@@ -28,7 +28,9 @@ public class Valeur {
     /**
      * Constructeur par defaut
      */
-    public Valeur() {}
+    public Valeur() {
+        super();
+    }
     
     /**
      * Constructeur de Valeur
@@ -37,56 +39,6 @@ public class Valeur {
      * @param nom       Nom de la valeur
      */
     public Valeur(int id, int idProjet, String nom) {
-        this.id = id;
-        this.idProjet = idProjet;
-        this.nom = nom;
-    }
-    
-    /**
-     * id Getter
-     * @return Identifiant
-     */
-    public int getId() {
-        return id;
-    }
-    
-    /**
-     * id Setter
-     * @param id Identifiant 
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    /**
-     * idProjet Getter
-     * @return Identifiant du projet
-     */
-    public int getIdProjet() {
-        return idProjet;
-    }
-    
-    /**
-     * idProjet Setter
-     * @param idProjet Identifiant du projet 
-     */
-    public void setIdProjet(int idProjet) {
-        this.idProjet = idProjet;
-    }
-    
-    /**
-     * nom Getter
-     * @return Nom de la valeur
-     */
-    public String getNom() {
-        return nom;
-    }
-
-    /**
-     * nom Setter
-     * @param nom Nom de la valeur 
-     */
-    public void setNom(String nom) {
-        this.nom = nom;
+        super(id, idProjet, nom);
     }
 }

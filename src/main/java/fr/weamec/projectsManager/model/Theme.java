@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "themeduprojet")
-public class Theme {
+public class Theme extends Item{
     @Id
     private int id;
     
@@ -28,7 +28,9 @@ public class Theme {
     /**
      * Constructeur par defaut
      */
-    public Theme() {}
+    public Theme() {
+        super();
+    }
     
     /**
      * Constructeur de Theme
@@ -37,56 +39,6 @@ public class Theme {
      * @param nom       Nom du theme
      */
     public Theme(int id, int idProjet, String nom) {
-        this.id = id;
-        this.idProjet = idProjet;
-        this.nom = nom;
-    }
-    
-    /**
-     * id Getter
-     * @return Identifiant
-     */
-    public int getId() {
-        return id;
-    }
-    
-    /**
-     * id Setter
-     * @param id Identifiant 
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    /**
-     * idProjet Getter
-     * @return Identifiant du projet
-     */
-    public int getIdProjet() {
-        return idProjet;
-    }
-    
-    /**
-     * idProjet Setter
-     * @param idProjet Identifiant du projet 
-     */
-    public void setIdProjet(int idProjet) {
-        this.idProjet = idProjet;
-    }
-    
-    /**
-     * nom Getter
-     * @return Nom du theme
-     */
-    public String getNom() {
-        return nom;
-    }
-
-    /**
-     * nom Setter
-     * @param nom Nom du theme
-     */
-    public void setNom(String nom) {
-        this.nom = nom;
+        super(id, idProjet, nom);
     }
 }
