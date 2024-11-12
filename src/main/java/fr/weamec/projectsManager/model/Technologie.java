@@ -22,7 +22,6 @@ public class Technologie extends Item{
     @Column(name = "id_projet")
     private int idProjet;
     
-    @Column(name = "nom_techno")
     private String nom;
     
     /**
@@ -40,5 +39,29 @@ public class Technologie extends Item{
      */
     public Technologie(int id, int idProjet, String nom) {
         super(id, idProjet, nom);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdProjet() {
+        return idProjet;
+    }
+
+    public void setIdProjet(int idProjet) {
+        this.idProjet = idProjet;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 }
