@@ -96,9 +96,6 @@ public class Projet {
     
     private boolean brevet;
     
-    @Column(name = "priorite_weamec")
-    private String prioriteWeamec;
-    
     @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Partenaire> listePartenaires;
     
@@ -124,6 +121,10 @@ public class Projet {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "idProjet", referencedColumnName = "id")
     private List<Defi> defisWeamec;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    private List<Priorite> prioriteWeamec;
     
     /**
      * Constructeur par defaut
@@ -168,7 +169,7 @@ public class Projet {
      * @param listePartenaires          Liste des partenaires du projet
      * @param listeExperts              Liste des experts du projet
      */
-    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String dir, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, String prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
+    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String dir, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
         this.id = id;
         this.coordinateurScientifique = coordinateurScientifique;
         this.dir = dir;
@@ -658,7 +659,7 @@ public class Projet {
      * prioriteWeamec Getter
      * @return Priorite WEAMEC
      */
-    public String getPrioriteWeamec() {
+    public List<Priorite> getPrioriteWeamec() {
         return prioriteWeamec;
     }
 
@@ -666,7 +667,7 @@ public class Projet {
      * prioriteWeamec Setter
      * @param prioriteWeamec Priorite WEAMEC
      */
-    public void setPrioriteWeamec(String prioriteWeamec) {
+    public void setPrioriteWeamec(List<Priorite> prioriteWeamec) {
         this.prioriteWeamec = prioriteWeamec;
     }
 
