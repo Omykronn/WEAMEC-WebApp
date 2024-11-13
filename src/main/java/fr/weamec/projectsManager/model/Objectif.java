@@ -4,7 +4,6 @@
  */
 package fr.weamec.projectsManager.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -14,13 +13,10 @@ import jakarta.persistence.Table;
  * @author simon
  */
 @Entity
-@Table(name = "objectifduprojet")
+@Table(name = "objectif")
 public class Objectif extends Item{
     @Id
     private int id;
-    
-    @Column(name = "id_projet")
-    private int idProjet;
     
     private String nom;
     
@@ -34,11 +30,10 @@ public class Objectif extends Item{
     /**
      * Constructeur de Objectif
      * @param id        Identifiant
-     * @param idProjet  Identifiant du Projet
      * @param nom       Nom du objectif
      */
-    public Objectif(int id, int idProjet, String nom) {
-        super(id, idProjet, nom);
+    public Objectif(int id, String nom) {
+        super(id, nom);
     }
 
     public int getId() {
@@ -47,14 +42,6 @@ public class Objectif extends Item{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getIdProjet() {
-        return idProjet;
-    }
-
-    public void setIdProjet(int idProjet) {
-        this.idProjet = idProjet;
     }
 
     public String getNom() {

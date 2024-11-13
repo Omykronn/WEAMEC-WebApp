@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -102,28 +104,52 @@ public class Projet {
     @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Expert> listeExperts;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "technoduprojet",
+            joinColumns = @JoinColumn(name = "id_projet"),
+            inverseJoinColumns = @JoinColumn(name = "id_item")
+            )
     private List<Technologie> technologies;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "valeurduprojet",
+            joinColumns = @JoinColumn(name = "id_projet"),
+            inverseJoinColumns = @JoinColumn(name = "id_item")
+            )
     private List<Valeur> valeurs;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "themeduprojet",
+            joinColumns = @JoinColumn(name = "id_projet"),
+            inverseJoinColumns = @JoinColumn(name = "id_item")
+            )
     private List<Theme> themes;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "objectifduprojet",
+            joinColumns = @JoinColumn(name = "id_projet"),
+            inverseJoinColumns = @JoinColumn(name = "id_item")
+            )
     private List<Objectif> objectifsWeamec;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "defiduprojet",
+            joinColumns = @JoinColumn(name = "id_projet"),
+            inverseJoinColumns = @JoinColumn(name = "id_item")
+            )
     private List<Defi> defisWeamec;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "idProjet", referencedColumnName = "id")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "prioriteduprojet",
+            joinColumns = @JoinColumn(name = "id_projet"),
+            inverseJoinColumns = @JoinColumn(name = "id_item")
+            )
     private List<Priorite> prioriteWeamec;
     
     /**
