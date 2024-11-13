@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.ArrayList;
 
 /**
  * Service pour CoordinateurScientifique
@@ -23,8 +22,8 @@ public class CoordinateurScientifiqueService {
     private CoordinateurScientifiqueRepository coordinateurScientifiqueRepo;
     
     /**
-     * Renvoie le coordinateur scientifiqueRepo dont l'identifiant est spécifié (s'il existe)
-     * @param id Identifiant du coordinateur scientifiqueRepo
+     * Renvoie le coordinateur scientifique dont l'identifiant est spécifié (s'il existe)
+     * @param id Identifiant du coordinateur scientifique
      * @return   CoordinateurScientifique correspondant à l'identifiant
      */
     public Optional<CoordinateurScientifique> getCoordinateurScientifique(int id) {
@@ -32,24 +31,24 @@ public class CoordinateurScientifiqueService {
     }
     
     /**
-     * Renvoie tous les coordinateur scientifiqueRepos
-     * @return Liste de tous les coordinateur scientifiqueRepos de la base de données
+     * Renvoie tous les coordinateur scientifique
+     * @return Liste de tous les coordinateur scientifiques de la base de données
      */
     public Iterable<CoordinateurScientifique> getCoordinateurScientifiques() {
         return coordinateurScientifiqueRepo.findAll();
     }
     
     /**
-     * Supprime un coordinateur scientifiqueRepo par son identifiant
-     * @param id Identifiant du coordinateur scientifiqueRepo à supprimer
+     * Supprime un coordinateur scientifique par son identifiant
+     * @param id Identifiant du coordinateur scientifique à supprimer
      */
     public void deleteCoordinateurScientifique(int id) {
         coordinateurScientifiqueRepo.deleteById(id);
     }
     
     /**
-     * Sauvegarde un coordinateur scientifiqueRepo dans la base de données
-     * @param coordinateur scientifiqueRepo Instance de CoordinateurScientifique à sauvegarder
+     * Sauvegarde un coordinateur scientifique dans la base de données
+     * @param coordinateurScientifique Instance de CoordinateurScientifique à sauvegarder
      * @return Instance de CoordinateurScientifique sauvegardé
      */
     public CoordinateurScientifique save(CoordinateurScientifique coordinateurScientifique) {
