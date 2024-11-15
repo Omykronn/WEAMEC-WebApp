@@ -286,12 +286,58 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </tr>
             </table>
             
-            <div>
+            <section id="experts">
+                <h2>Experts suceptibles de réaliser l'évaluation du projet</h2>
+                
+                <table th:each="expert, itemStat: *{listeExperts}">
+                    <tr>
+                        <td></td>
+                        <td><input type="number" th:field="*{listeExperts[__${itemStat.index}__].id}" required hidden/></td>
+                    </tr>
+
+                    <tr>
+                        <td><label th:for="'expert' + ${itemStat.index} + 'NomInput'">Nom</label></td>
+                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].nom}" th:id="'expert' + ${itemStat.index} + 'NomInput'" required /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label th:for="'expert' + ${itemStat.index} + 'PrenomInput'">Prénom</label></td>
+                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].prenom}" th:id="'expert' + ${itemStat.index} + 'PrenomInput'" required /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label th:for="'expert' + ${itemStat.index} + 'MailInput'">Mail</label></td>
+                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].mail}" th:id="'expert' + ${itemStat.index} + 'MailInput'" required /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label th:for="'expert' + ${itemStat.index} + 'TelephoneInput'">Numéro de Téléphone</label></td>
+                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].telephone}" th:id="'expert' + ${itemStat.index} + 'TelephoneInput'" required /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label th:for="'expert' + ${itemStat.index} + 'EntiterattachementInput'">Entité de Rattachement</label></td>
+                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].entiteRattachement}" th:id="'expert' + ${itemStat.index} + 'EntiterattachementInput'" required /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label th:for="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'">Laboratoire de rattachement</label></td>
+                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].laboratoireRattachement}" th:id="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'" required /></td>
+                    </tr>
+
+                    <tr>
+                        <td><label th:for="'expert' + ${itemStat.index} + 'SpecialiteInput'">Specialité</label></td>
+                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].specialite}" th:id="'expert' + ${itemStat.index} + 'SpecialiteInput'" required /></td>
+                    </tr>
+                </table>
+            </section>
+            
+            <section>
                 <label for="StatutInput">Statut du traitement du projet</label>
                 <input type="text" th:field="*{statut}" id="StatutInput" required />
-            </div>
+            </section>
+            
+            <input type="submit" value="Valider les modifications" />
         </form>
-        
-        <button form="formProjet">Valider les modifications</button>
     </body>
 </html>
