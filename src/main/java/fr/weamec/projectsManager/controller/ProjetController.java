@@ -46,6 +46,22 @@ public class ProjetController {
     @Autowired
     TechnologieService technologieService;
     
+    /**
+     * Fonction associée à l'affichage de la page dashboard
+     * @param model Model fourni par Spring
+     * @return      Nom de la page HTML à afficher
+     */
+    @GetMapping("/dashboard/")
+    public String dashboard(Model model) {
+        model.addAttribute("projets", projService.getProjets());
+        
+        return "dashboard"; 
+    
+    /**
+     * Fonction associée à l'affichage de la page d'un projet
+     * @param model Model fourni par Spring
+     * @return      Nom de la page HTML à afficher
+     */
     @GetMapping("/viewProject/idProjet={id}")
     public String viewProject(@PathVariable("id") int id, Model model) {
         String pageName;
@@ -62,6 +78,11 @@ public class ProjetController {
         return pageName;
     }
     
+    /**
+     * Fonction associée à l'affichage du formulaire de modidification d'un projet
+     * @param model Model fourni par Spring
+     * @return      Nom de la page HTML à afficher
+     */
     @GetMapping("/editProject/idProjet={id}")
     public String editProject(@PathVariable("id") int id, Model model) {
         String pageName;
