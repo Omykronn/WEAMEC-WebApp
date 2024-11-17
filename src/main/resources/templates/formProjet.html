@@ -10,7 +10,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Modifier un projet</h1>
+        <header>
+            <h1>Modifier un projet</h1>
+        </header>
         
         <form method="post" id="formProjet" th:action="@{/saveProjet}" th:object="${projet}">               
             <section id="general">
@@ -70,12 +72,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <tr>
                         <td><label for="DatedebutInput">Date de début</label></td>
                         <td><input type="date" th:field="*{dateDebut}" id="DatedebutInput" required /></td>
-                    </rd>
+                    </td>
 
                     <tr>
                         <td><label for="DatefinInput">Date de fin</label></td>
                         <td><input type="date" th:field="*{dateFin}" id="DatefinInput" required /></td>
-                    </rd>
+                    </td>
 
                     <tr>
                         <td><label for="DescriptionInput">Description synthétique du projet</label></td>
@@ -91,7 +93,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <tr>
                         <td><label for="coordinateurScientifiqueIdInput"></label></td>
                         <td><input type="number" th:field="*{coordinateurScientifique.id}" id="coordinateurScientifiqueIdInput" min="0" max="9" required disabled hidden/></td>
-                    </rd>
+                    </td>
 
                     <tr>
                         <td><label for="coordinateurScientifiqueNomInput">Nom</label></td>
@@ -116,7 +118,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <tr>
                         <td><label for="structureCoordinateurScientifiqueIdInput"></label></td>
                         <td><input type="number" th:field="*{coordinateurScientifique.structureRattachement.id}" id="structureCoordinateurScientifiqueIdInput" min="0" max="9" required disabled hidden /></td>
-                        </rd>
+                        </td>
 
                     <tr>
                         <td><label for="structureCoordinateurScientifiqueEtablissementInput">Nom de l'établissement</label></td>
@@ -273,12 +275,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <tr>
                         <td><label for="TrldebutInput">Niveau TRL de début</label></td>
                         <td><input type="number" th:field="*{trlDebut}" id="TrldebutInput" min="0" max="9" required /></td>
-                    </rd>
+                    </td>
 
                     <tr>
                         <td><label for="TrlfinInput">Niveau TRL de fin visé</label></td>
                         <td><input type="number" th:field="*{trlFin}" id="TrlfinInput" min="0" max="9" required /></td>
-                    </rd>
+                    </td>
 
                     <tr>
                         <td></td>
@@ -313,12 +315,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <label th:for="'theme' + ${theme.id}" th:text="${theme.nom}"> Theme </label>
                             </div>
                         </td>
-                    </tr>  
+                    </tr> 
+                </table>
+            </section>
 
-                    <tr>
-                        <td colspan="2"><h2>Adequation avec la feuille de route WEAMEC</h2></td>
-                    </tr>
+            <section id="adequations">
+                <h2>Adequation avec la feuille de route WEAMEC</h2></td>
 
+                <table>
                     <tr>
                         <td>Priorites</td>
                         <td>
