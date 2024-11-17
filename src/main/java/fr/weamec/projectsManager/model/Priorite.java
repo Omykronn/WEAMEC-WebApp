@@ -5,17 +5,20 @@
 package fr.weamec.projectsManager.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
- * Classe représentant un Objectif
+ * Classe représentant une Priorite
  * @author simon
  */
 @Entity
-@Table(name = "objectif")
-public class Objectif extends Item{
+@Table(name = "priorite")
+public class Priorite extends Item{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     private String nom;
@@ -23,16 +26,16 @@ public class Objectif extends Item{
     /**
      * Constructeur par defaut
      */
-    public Objectif() {
+    public Priorite() {
         super();
     }
     
     /**
-     * Constructeur de Objectif
+     * Constructeur de Priorite
      * @param id        Identifiant
-     * @param nom       Nom du objectif
+     * @param nom       Nom de la priorite
      */
-    public Objectif(int id, String nom) {
+    public Priorite(int id, String nom) {
         super(id, nom);
     }
 

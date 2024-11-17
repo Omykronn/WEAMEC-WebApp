@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Appel à  WEAMEC</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <h1 th:text="${projet.nomAcro}">Projet</h1>
+            
+            <a th:href="@{/editProject/idProjet={id}(id=${projet.id})}"><button>Modifier le projet</button></a>
+        </header>
+        
+        <section id="general">
+            <h2>Elements Clefs du Projet</h2>
+
+            <table>
+                <tr>
+                    <td>Nom du projet (explicitation de l'acronyme)</td>
+                    <td th:text="${projet.nomComplet}"></td>
+                </tr>
+
+                <tr>
+                    <td>Catégorie</td>
+                    <td th:text="${projet.categorie}"></td>
+                </tr>
+
+                <tr>
+                    <td>Type</td>
+                    <td th:text="${projet.type}"></td>
+                </tr>
+
+                <tr>
+                    <td>Objectif du projet</td>
+                    <td><p th:text="${projet.objectifSynth}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Site web du projet</td>
+                    <td th:text="${projet.siteWeb}"></td>
+                </tr>
+
+                <tr>
+                    <td>Durée du projet (en mois)</td>
+                    <td th:text="${projet.duree}"></td>
+                </tr>
+
+                <tr>
+                    <td>Date de début</td>
+                    <td th:text="${projet.dateDebut}"></td>
+                </td>
+
+                <tr>
+                    <td>Date de fin</td>
+                    <td th:text="${projet.dateFin}"></td>
+                </td>
+
+                <tr>
+                    <td>Description synthétique du projet</td>
+                    <td><p th:text="${projet.description}"></p></td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="coordinateurScientifique">
+            <h2>Coordinateur Scientifique</h2>
+
+            <table>
+                <tr>
+                    <td>Nom</td>
+                    <td th:text="${projet.coordinateurScientifique.nom}"></td>
+                </tr>
+
+                <tr>
+                    <td>Prénom</td>
+                    <td th:text="${projet.coordinateurScientifique.prenom}"></td>
+                </tr>
+
+                <tr>
+                    <td>Email</td>
+                    <td th:text="${projet.coordinateurScientifique.mail}"></td>
+                </tr>
+
+                <tr>
+                    <td>Telephone</td>
+                    <td th:text="${projet.coordinateurScientifique.telephone}"></td>
+                </tr>
+                
+                <tr>
+                    <td>Nom de l'établissement</td>
+                    <td th:text="${projet.coordinateurScientifique.structureRattachement.etablissement}"></td>
+                </tr>
+
+                <tr>
+                    <td>Nom du laboratoire</td>
+                    <td th:text="${projet.coordinateurScientifique.structureRattachement.laboratoire}"></td>
+                </tr>
+
+                <tr>
+                    <td>Nom de l'équipe</td>
+                    <td th:text="${projet.coordinateurScientifique.structureRattachement.equipe}"></td>
+                </tr>
+
+                <tr>
+                    <td>Adresse postale</td>
+                    <td><p th:text="${projet.coordinateurScientifique.structureRattachement.adresse}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Nom du référent administratif et budgétaire</td>
+                    <td th:text="${projet.coordinateurScientifique.structureRattachement.nomRef}"></td>
+                </tr>
+
+                <tr>
+                    <td>Téléphone du référent</td>
+                    <td th:text="${projet.coordinateurScientifique.structureRattachement.telephoneRef}"></td>
+                </tr>
+
+                <tr>
+                    <td>Mail du référent</td>
+                    <td th:text="${projet.coordinateurScientifique.structureRattachement.mailRef}"></td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="partenaires">
+            <h2>Partenaires</h2>
+
+            <table th:each="partenaire: ${projet.listePartenaires}">
+                <tr>
+                    <td>Nom</td>
+                    <td th:text="*{partenaire.nom}"></td>
+                </tr>
+
+                <tr>
+                    <td>Prenom</td>
+                    <td th:text="*{partenaire.prenom}"></td>
+                </tr>
+
+                <tr>
+                    <td>Mail</td>
+                    <td th:text="*{partenaire.mail}"></td>
+                </tr>
+
+                <tr>
+                    <td>Telephone</td>
+                    <td th:text="*{partenaire.telephone}"></td>
+                </tr>
+
+                <tr>
+                    <td>Nom de l'établissement</td>
+                    <td th:text="*{partenaire.structureRattachement.etablissement}"></td>
+                </tr>
+
+                <tr>
+                    <td>Nom du laboratoire</td>
+                    <td th:text="*{partenaire.structureRattachement.laboratoire}"></td>
+                </tr>
+
+                <tr>
+                    <td>Nom de l'équipe</td>
+                    <td th:text="*{partenaire.structureRattachement.equipe}"></td>
+                </tr>
+
+                <tr>
+                    <td>Adresse postale</td>
+                    <td><p th:text="*{partenaire.structureRattachement.adresse}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Nom du référent administratif et budgétaire</td>
+                    <td th:text="*{partenaire.structureRattachement.nomRef}"></td>
+                </tr>
+
+                <tr>
+                    <td>Téléphone du référent</td>
+                    <td th:text="*{partenaire.structureRattachement.telephoneRef}"></td>
+                </tr>
+
+                <tr>
+                    <td>Mail du référent</td>
+                    <td th:text="*{partenaire.structureRattachement.mailRef}"></td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="describTech">    
+            <h2>Description technique du Projet</h2>
+
+            <table>
+                <tr>
+                    <td>Objectifs</td>
+                    <td><p th:text="${projet.objectif}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Verrous scientifiques et techniques adressées</td>
+                    <td><p th:text="${projet.verrousScientif}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Programme expérimental</td>
+                    <td><p th:text="${projet.programmeExp}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Moyens d'essais utilisés</td>
+                    <td><p th:text="${projet.moyensEssai}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Démonstrateur éventuellement créé</td>
+                    <td><p th:text="${projet.demonstrateur}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Ruptures scientifiques et innovation</td>
+                    <td><p th:text="${projet.ruptureScient}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Impact Technique attendu</td>
+                    <td><p th:text="${projet.impactTech}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Impact Économique attendu</td>
+                    <td><p th:text="${projet.impactEco}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Impact Environnemental attendu</td>
+                    <td><p th:text="${projet.impactEnv}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Impact sociétal attendu</td>
+                    <td><p th:text="${projet.impactSoc}"></p></td>
+                </tr>
+
+                <tr>
+                    <td>Niveau TRL de début</td>
+                    <td th:text="${projet.trlDebut}"></td>
+                </td>
+
+                <tr>
+                    <td>Niveau TRL de fin visé</td>
+                    <td th:text="${projet.trlFin}"></td>
+                </td>
+
+                <tr>
+                    <td>Brevet visé ?</td>
+                    <td th:text="${projet.brevet}"/></td>
+                </tr>
+
+                <tr>
+                    <td>Technologies</td>
+                    <td>
+                        <ul th:each="technologie : ${projet.technologies}">
+                            <li th:text="${technologie.nom}"> Technologie </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Valeurs</td>
+                    <td>
+                        <ul th:each="valeur : ${projet.valeurs}">
+                            <li th:text="${valeur.nom}"> Valeur </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Themes</td>
+                    <td>
+                        <ul th:each="theme : ${projet.themes}">
+                            <li th:text="${theme.nom}"> Theme </li>
+                        </ul>
+                    </td>
+                </tr>  
+            </table>
+        </section>
+
+        <section id="adequations">
+            <h2>Adequation avec la feuille de route WEAMEC</h2></td>
+
+            <table>
+                <tr>
+                    <td>Priorite</td>
+                    <td th:text="${projet.prioriteWeamec[0].nom}"></td>
+                </tr>
+
+                <tr>
+                    <td>Objectifs</td>
+                    <td>
+                        <ul th:each="objectif : ${projet.objectifsWeamec}">
+                            <li th:text="${objectif.nom}"> Objectif </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Défis</td>
+                    <td>
+                        <ul th:each="defi : ${projet.defisWeamec}">
+                            <li th:text="${defi.nom}"> Defi </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="experts">
+            <h2>Experts suceptibles de réaliser l'évaluation du projet</h2>
+
+            <table th:each="expert: ${projet.listeExperts}">
+                <tr>
+                    <td>Nom</td>
+                    <td th:text="${expert.nom}"></td>
+                </tr>
+
+                <tr>
+                    <td>Prénom</td>
+                    <td th:text="${expert.prenom}"></td>
+                </tr>
+
+                <tr>
+                    <td>Mail</td>
+                    <td th:text="${expert.mail}"></td>
+                </tr>
+
+                <tr>
+                    <td>Numéro de Téléphone</td>
+                    <td th:text="${expert.telephone}"></td>
+                </tr>
+
+                <tr>
+                    <td>Entité de Rattachement</td>
+                    <td th:text="${expert.entiteRattachement}"></td>
+                </tr>
+
+                <tr>
+                    <td>Laboratoire de rattachement</td>
+                    <td th:text="${expert.laboratoireRattachement}"></td>
+                </tr>
+
+                <tr>
+                    <td>Specialité</td>
+                    <td th:text="${expert.specialite}"></td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</html>

@@ -48,7 +48,7 @@ public class StructureRattachementService {
     
     /**
      * Sauvegarde un structure rattachement dans la base de données
-     * @param structure rattachement Instance de StructureRattachement à sauvegarder
+     * @param structureRattachement Instance de StructureRattachement à sauvegarder
      * @return Instance de StructureRattachement sauvegardé
      */
     public StructureRattachement save(StructureRattachement structureRattachement) {

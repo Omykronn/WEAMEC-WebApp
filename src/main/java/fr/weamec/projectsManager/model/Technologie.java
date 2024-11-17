@@ -4,8 +4,9 @@
  */
 package fr.weamec.projectsManager.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -14,13 +15,11 @@ import jakarta.persistence.Table;
  * @author simon
  */
 @Entity
-@Table(name = "technoduprojet")
+@Table(name = "technologie")
 public class Technologie extends Item{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @Column(name = "id_projet")
-    private int idProjet;
     
     private String nom;
     
@@ -34,11 +33,10 @@ public class Technologie extends Item{
     /**
      * Constructeur de Technologie
      * @param id        Identifiant
-     * @param idProjet  Identifiant du Projet
      * @param nom       Nom de la technologie
      */
-    public Technologie(int id, int idProjet, String nom) {
-        super(id, idProjet, nom);
+    public Technologie(int id, String nom) {
+        super(id, nom);
     }
 
     public int getId() {
@@ -47,14 +45,6 @@ public class Technologie extends Item{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getIdProjet() {
-        return idProjet;
-    }
-
-    public void setIdProjet(int idProjet) {
-        this.idProjet = idProjet;
     }
 
     public String getNom() {
