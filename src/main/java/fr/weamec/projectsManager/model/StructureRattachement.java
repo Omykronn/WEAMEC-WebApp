@@ -22,7 +22,6 @@ public class StructureRattachement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    private String dir;
     private String etablissement;
     private String laboratoire;
     private String equipe;
@@ -45,7 +44,6 @@ public class StructureRattachement {
     /**
      * Constructeur de StructureRattachement
      * @param id            Identifiant
-     * @param dir           Chemin d'accès aux fichiers
      * @param etablissement Nom de l'etablissement
      * @param laboratoire   Nom du laboratoire
      * @param equipe        Nom de l'equipe
@@ -54,9 +52,8 @@ public class StructureRattachement {
      * @param telephoneRef  Numero de Telephone du référent
      * @param mailRef       Adresse mail du référent
      */
-    public StructureRattachement(int id, String dir, String etablissement, String laboratoire, String equipe, String adresse, String nomRef, String telephoneRef, String mailRef) {
+    public StructureRattachement(int id, String etablissement, String laboratoire, String equipe, String adresse, String nomRef, String telephoneRef, String mailRef) {
         this.id = id;
-        this.dir = dir;
         this.etablissement = etablissement;
         this.laboratoire = laboratoire;
         this.equipe = equipe;
@@ -80,22 +77,6 @@ public class StructureRattachement {
      */
     public void setId(int id) {
         this.id = id;
-    }
-    
-    /**
-     * directory Getter
-     * @return Chemin d'accès aux fichiers relatifs à la Structure de Rattachement
-     */
-    public String getDir() {
-        return dir;
-    }
-    
-    /**
-     * directory Setter
-     * @param dir Chemin d'accès aux fichiers relatifs à la Structure de Rattachement
-     */
-    public void setDir(String dir) {
-        this.dir = dir;
     }
     
     /**

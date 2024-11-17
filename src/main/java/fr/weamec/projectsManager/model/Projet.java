@@ -35,7 +35,6 @@ public class Projet {
     @JoinColumn(name = "id_coordinateur", referencedColumnName = "id")
     private CoordinateurScientifique coordinateurScientifique;
     
-    private String dir;
     private String statut;
     
     @Column(name = "nom_acro")
@@ -161,7 +160,6 @@ public class Projet {
      * Constructeur de Projet
      * @param id                        Identifiant
      * @param coordinateurScientifique  Coordinateur Scientifique du projet
-     * @param dir                       Chemin d'acces aux fichiers
      * @param statut                    Statut du projet
      * @param nomAcro                  Acronyme du nom du projet
      * @param nomComplet                Nom Complet du Projet
@@ -195,10 +193,9 @@ public class Projet {
      * @param listePartenaires          Liste des partenaires du projet
      * @param listeExperts              Liste des experts du projet
      */
-    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String dir, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
+    public Projet(int id, CoordinateurScientifique coordinateurScientifique, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
         this.id = id;
         this.coordinateurScientifique = coordinateurScientifique;
-        this.dir = dir;
         this.statut = statut;
         this.nomAcro = nomAcro;
         this.nomComplet = nomComplet;
@@ -263,22 +260,6 @@ public class Projet {
      */
     public void setCoordinateurScientifique(CoordinateurScientifique coordinateurScientifique) {
         this.coordinateurScientifique = coordinateurScientifique;
-    }
-    
-    /**
-     * dir Getter
-     * @return Chemin d'acces aux fichiers
-     */
-    public String getDir() {
-        return dir;
-    }
-    
-    /**
-     * dir Setter
-     * @param dir Chemin d'acces aux fichiers
-     */
-    public void setDir(String dir) {
-        this.dir = dir;
     }
 
     /**
