@@ -53,9 +53,10 @@ public class ProjetController {
      */
     @GetMapping("/dashboard/")
     public String dashboard(Model model) {
-        model.addAttribute("projets", projService.getProjets());
+        model.addAttribute("projets", projetService.getProjets());
         
         return "dashboard"; 
+    }
     
     /**
      * Fonction associée à l'affichage de la page d'un projet
