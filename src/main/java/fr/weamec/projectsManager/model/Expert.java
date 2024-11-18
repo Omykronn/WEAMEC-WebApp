@@ -23,7 +23,7 @@ public class Expert extends Personne {
     
     private String specialite;
     
-    @Column(name = "id_projet")
+    @Column(name = "idProjet")
     private int idProjet;
     
     /**
@@ -32,22 +32,20 @@ public class Expert extends Personne {
     public Expert() {}
     
     /**
-     * Constructeur de Expert (sans id)
+     * Constructeur de Expert (sans id, ni idProjet)
      * @param entiteRattachement        Nom de l'entite de rattachement
      * @param laboratoireRattachement   Nom du laboratoire de rattachement
      * @param specialite                Specialite de l'expert
-     * @param idProjet                  Identifiant du projet
      * @param nom                       Nom
      * @param prenom                    Prenom
      * @param mail                      Mail
      * @param telephone                 Telephone
      */
-    public Expert(String entiteRattachement, String laboratoireRattachement, String specialite, int idProjet, String nom, String prenom, String mail, String telephone) {
+    public Expert(String entiteRattachement, String laboratoireRattachement, String specialite, String nom, String prenom, String mail, String telephone) {
         super(nom, prenom, mail, telephone);
         this.entiteRattachement = entiteRattachement;
         this.laboratoireRattachement = laboratoireRattachement;
         this.specialite = specialite;
-        this.idProjet = idProjet;
     }
     
     /**
