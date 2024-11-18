@@ -14,13 +14,10 @@ import jakarta.persistence.Table;
  * @author simon
  */
 @Entity
-@Table(name = "valeurduprojet")
+@Table(name = "valeur")
 public class Valeur extends Item{
     @Id
     private int id;
-    
-    @Column(name = "id_projet")
-    private int idProjet;
     
     private String nom;
     
@@ -34,11 +31,10 @@ public class Valeur extends Item{
     /**
      * Constructeur de Valeur
      * @param id        Identifiant
-     * @param idProjet  Identifiant du Projet
      * @param nom       Nom de la valeur
      */
-    public Valeur(int id, int idProjet, String nom) {
-        super(id, idProjet, nom);
+    public Valeur(int id, String nom) {
+        super(id, nom);
     }
 
     public int getId() {
@@ -47,14 +43,6 @@ public class Valeur extends Item{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getIdProjet() {
-        return idProjet;
-    }
-
-    public void setIdProjet(int idProjet) {
-        this.idProjet = idProjet;
     }
 
     public String getNom() {

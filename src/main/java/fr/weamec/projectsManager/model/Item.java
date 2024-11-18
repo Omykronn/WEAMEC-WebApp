@@ -19,7 +19,6 @@ public abstract class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;   
     
-    private int idProjet;
     private String nom;
     
     /**
@@ -30,12 +29,10 @@ public abstract class Item {
     /**
      * Constructeur de Item
      * @param id        Identifiant
-     * @param idProjet  Identifiant du Projet
      * @param nom       Nom du theme
      */
-    public Item(int id, int idProjet, String nom) {
+    public Item(int id, String nom) {
         this.id = id;
-        this.idProjet = idProjet;
         this.nom = nom;
     }
         
@@ -53,22 +50,6 @@ public abstract class Item {
      */
     public void setId(int id) {
         this.id = id;
-    }
-    
-    /**
-     * idProjet Getter
-     * @return Identifiant du projet
-     */
-    public int getIdProjet() {
-        return idProjet;
-    }
-    
-    /**
-     * idProjet Setter
-     * @param idProjet Identifiant du projet 
-     */
-    public void setIdProjet(int idProjet) {
-        this.idProjet = idProjet;
     }
     
     /**

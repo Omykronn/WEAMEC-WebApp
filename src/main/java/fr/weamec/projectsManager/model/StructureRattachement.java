@@ -22,11 +22,13 @@ public class StructureRattachement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    private String dir;
     private String etablissement;
     private String laboratoire;
     private String equipe;
     private String adresse;
+    
+    @Column(name = "nom_ref")
+    private String nomRef;
     
     @Column(name = "telephone_ref")
     private String telephoneRef;
@@ -42,21 +44,21 @@ public class StructureRattachement {
     /**
      * Constructeur de StructureRattachement
      * @param id            Identifiant
-     * @param dir           Chemin d'accès aux fichiers
      * @param etablissement Nom de l'etablissement
      * @param laboratoire   Nom du laboratoire
      * @param equipe        Nom de l'equipe
      * @param adresse       Adresse postale
-     * @param telephoneRef  Numero de Telephone
-     * @param mailRef       Adresse mail
+     * @param nomRef        Nom du référent
+     * @param telephoneRef  Numero de Telephone du référent
+     * @param mailRef       Adresse mail du référent
      */
-    public StructureRattachement(int id, String dir, String etablissement, String laboratoire, String equipe, String adresse, String telephoneRef, String mailRef) {
+    public StructureRattachement(int id, String etablissement, String laboratoire, String equipe, String adresse, String nomRef, String telephoneRef, String mailRef) {
         this.id = id;
-        this.dir = dir;
         this.etablissement = etablissement;
         this.laboratoire = laboratoire;
         this.equipe = equipe;
         this.adresse = adresse;
+        this.nomRef = nomRef;
         this.telephoneRef = telephoneRef;
         this.mailRef = mailRef;
     }
@@ -75,22 +77,6 @@ public class StructureRattachement {
      */
     public void setId(int id) {
         this.id = id;
-    }
-    
-    /**
-     * directory Getter
-     * @return Chemin d'accès aux fichiers relatifs à la Structure de Rattachement
-     */
-    public String getDir() {
-        return dir;
-    }
-    
-    /**
-     * directory Setter
-     * @param dir Chemin d'accès aux fichiers relatifs à la Structure de Rattachement
-     */
-    public void setDir(String dir) {
-        this.dir = dir;
     }
     
     /**
@@ -155,6 +141,22 @@ public class StructureRattachement {
      */
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+    
+    /**
+     * nomRef Getter
+     * @return Nom du referent
+     */
+    public String getNomRef() {
+        return nomRef;
+    }
+
+    /**
+     * nomRef Setter
+     * @param nomRef Nom du referent 
+     */
+    public void setNomRef(String nomRef) {
+        this.nomRef = nomRef;
     }
     
     /**

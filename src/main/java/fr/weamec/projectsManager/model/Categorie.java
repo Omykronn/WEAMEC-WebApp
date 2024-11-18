@@ -9,12 +9,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
- * Classe représentant un Objectif
+ * Classe représentant un Categorie
  * @author simon
  */
 @Entity
-@Table(name = "objectif")
-public class Objectif extends Item{
+@Table(name = "categorie")
+public class Categorie extends Item{
     @Id
     private int id;
     
@@ -23,16 +23,16 @@ public class Objectif extends Item{
     /**
      * Constructeur par defaut
      */
-    public Objectif() {
+    public Categorie() {
         super();
     }
     
     /**
-     * Constructeur de Objectif
+     * Constructeur de Categorie
      * @param id        Identifiant
-     * @param nom       Nom du objectif
+     * @param nom       Nom du theme
      */
-    public Objectif(int id, String nom) {
+    public Categorie(int id, String nom) {
         super(id, nom);
     }
 
