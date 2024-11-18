@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Controller pour Projet
@@ -51,7 +54,7 @@ public class ProjetController {
      * @param model Model fourni par Spring
      * @return      Nom de la page HTML à afficher
      */
-    @GetMapping("/dashboard/")
+    @GetMapping("/projects")
     public String dashboard(Model model) {
         model.addAttribute("projets", projetService.getProjets());
         
@@ -63,7 +66,7 @@ public class ProjetController {
      * @param model Model fourni par Spring
      * @return      Nom de la page HTML à afficher
      */
-    @GetMapping("/viewProject/idProjet={id}")
+    @GetMapping("/projects/{id}")
     public String viewProject(@PathVariable("id") int id, Model model) {
         String pageName;
         Optional<Projet> projet = projetService.getProjet(id);
@@ -84,7 +87,7 @@ public class ProjetController {
      * @param model Model fourni par Spring
      * @return      Nom de la page HTML à afficher
      */
-    @GetMapping("/editProject/idProjet={id}")
+    @GetMapping("/projects/{id}/edit")
     public String editProject(@PathVariable("id") int id, Model model) {
         String pageName;
         Optional<Projet> projet = projetService.getProjet(id);

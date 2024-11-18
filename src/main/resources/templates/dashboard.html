@@ -36,7 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </ul>
                     </td>
                     <td><a th:href="'https://' + ${projet.siteWeb}" th:text="${projet.siteWeb}"> URL </a></td>
-                    <td><a th:href="@{/viewProject/idProjet={id}(id=${projet.id})}"><button>Consulter</button></a></td>
+                    <td><a th:href="@{/projects/{id}(id=${projet.id})}"><button>Consulter</button></a></td>
                 </tr>
             </tbody>
         </table>
