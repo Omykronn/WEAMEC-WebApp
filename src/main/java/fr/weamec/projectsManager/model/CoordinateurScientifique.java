@@ -27,16 +27,15 @@ public class CoordinateurScientifique extends Personne {
     public CoordinateurScientifique() {}
     
     /**
-     * Constructeur de CoordinateurScientifique
+     * Constructeur de CoordinateurScientifique (sans id)
      * @param structureRattachement Structure de Rattachement
-     * @param id                    Identifiant
      * @param nom                   Nom 
      * @param prenom                Prenom
      * @param mail                  Adresse mail
      * @param telephone             Numero de telephone
      */
-    public CoordinateurScientifique(StructureRattachement structureRattachement, int id, String nom, String prenom, String mail, String telephone) {
-        super(id, nom, prenom, mail, telephone);
+    public CoordinateurScientifique(StructureRattachement structureRattachement, String nom, String prenom, String mail, String telephone) {
+        super(nom, prenom, mail, telephone);
         this.structureRattachement = structureRattachement;
     }
     

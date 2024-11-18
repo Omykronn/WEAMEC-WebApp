@@ -42,8 +42,7 @@ public class StructureRattachement {
     public StructureRattachement() {}
     
     /**
-     * Constructeur de StructureRattachement
-     * @param id            Identifiant
+     * Constructeur de StructureRattachement (sans id)
      * @param etablissement Nom de l'etablissement
      * @param laboratoire   Nom du laboratoire
      * @param equipe        Nom de l'equipe
@@ -52,8 +51,7 @@ public class StructureRattachement {
      * @param telephoneRef  Numero de Telephone du référent
      * @param mailRef       Adresse mail du référent
      */
-    public StructureRattachement(int id, String etablissement, String laboratoire, String equipe, String adresse, String nomRef, String telephoneRef, String mailRef) {
-        this.id = id;
+    public StructureRattachement(String etablissement, String laboratoire, String equipe, String adresse, String nomRef, String telephoneRef, String mailRef) {
         this.etablissement = etablissement;
         this.laboratoire = laboratoire;
         this.equipe = equipe;
