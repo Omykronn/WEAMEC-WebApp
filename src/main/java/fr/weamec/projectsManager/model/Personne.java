@@ -30,15 +30,13 @@ public abstract class Personne {
     public Personne() {}
     
     /**
-     * Constructeur de Personne
-     * @param id        Identifiant
+     * Constructeur de Personne (sans id)
      * @param nom       Nom
      * @param prenom    Prenom
      * @param mail      Adresse mail
      * @param telephone Numero de telephone
      */
-    public Personne(int id, String nom, String prenom, String mail, String telephone) {
-        this.id = id;
+    public Personne(String nom, String prenom, String mail, String telephone) {
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
