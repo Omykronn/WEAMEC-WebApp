@@ -52,7 +52,7 @@ public class Projet {
     @Column(name = "site_web")
     private String siteWeb;
     
-    private String duree;
+    private int duree;
     
     @Column(name = "date_debut")
     private Date dateDebut;
@@ -192,7 +192,7 @@ public class Projet {
      * @param listePartenaires          Liste des partenaires du projet
      * @param listeExperts              Liste des experts du projet
      */
-    public Projet(CoordinateurScientifique coordinateurScientifique, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, String duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
+    public Projet(CoordinateurScientifique coordinateurScientifique, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, int duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
         this.coordinateurScientifique = coordinateurScientifique;
         this.statut = statut;
         this.nomAcro = nomAcro;
@@ -376,7 +376,7 @@ public class Projet {
      * duree Getter
      * @return Duree en mois
      */
-    public String getDuree() {
+    public int getDuree() {
         return duree;
     }
 
@@ -384,7 +384,7 @@ public class Projet {
      * duree Setter
      * @param duree Duree en mois
      */
-    public void setDuree(String duree) {
+    public void setDuree(int duree) {
         this.duree = duree;
     }
 
