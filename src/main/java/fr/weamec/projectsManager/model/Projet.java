@@ -46,7 +46,7 @@ public class Projet {
     private String categorie;
     private String type;
     
-    @Column(name = "objetif_synth")
+    @Column(name = "objectif_synth")
     private String objectifSynth;
     
     @Column(name = "site_web")
@@ -83,7 +83,7 @@ public class Projet {
     @Column(name = "impact_eco")
     private String impactEco;
     
-    @Column(name = "impact_enc")
+    @Column(name = "impact_env")
     private String impactEnv;
     
     @Column(name = "impact_soc")
