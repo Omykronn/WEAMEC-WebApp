@@ -131,63 +131,65 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <section id="partenaires">
             <h2>Partenaires</h2>
+            
+            <article th:each="partenaire: ${projet.listePartenaires}">
+                <table>
+                    <tr>
+                        <td>Nom</td>
+                        <td th:text="*{partenaire.nom}"></td>
+                    </tr>
 
-            <table th:each="partenaire: ${projet.listePartenaires}">
-                <tr>
-                    <td>Nom</td>
-                    <td th:text="*{partenaire.nom}"></td>
-                </tr>
+                    <tr>
+                        <td>Prenom</td>
+                        <td th:text="*{partenaire.prenom}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Prenom</td>
-                    <td th:text="*{partenaire.prenom}"></td>
-                </tr>
+                    <tr>
+                        <td>Mail</td>
+                        <td th:text="*{partenaire.mail}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Mail</td>
-                    <td th:text="*{partenaire.mail}"></td>
-                </tr>
+                    <tr>
+                        <td>Telephone</td>
+                        <td th:text="*{partenaire.telephone}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Telephone</td>
-                    <td th:text="*{partenaire.telephone}"></td>
-                </tr>
+                    <tr>
+                        <td>Nom de l'établissement</td>
+                        <td th:text="*{partenaire.structureRattachement.etablissement}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Nom de l'établissement</td>
-                    <td th:text="*{partenaire.structureRattachement.etablissement}"></td>
-                </tr>
+                    <tr>
+                        <td>Nom du laboratoire</td>
+                        <td th:text="*{partenaire.structureRattachement.laboratoire}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Nom du laboratoire</td>
-                    <td th:text="*{partenaire.structureRattachement.laboratoire}"></td>
-                </tr>
+                    <tr>
+                        <td>Nom de l'équipe</td>
+                        <td th:text="*{partenaire.structureRattachement.equipe}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Nom de l'équipe</td>
-                    <td th:text="*{partenaire.structureRattachement.equipe}"></td>
-                </tr>
+                    <tr>
+                        <td>Adresse postale</td>
+                        <td><p th:text="*{partenaire.structureRattachement.adresse}"></p></td>
+                    </tr>
 
-                <tr>
-                    <td>Adresse postale</td>
-                    <td><p th:text="*{partenaire.structureRattachement.adresse}"></p></td>
-                </tr>
+                    <tr>
+                        <td>Nom du référent administratif et budgétaire</td>
+                        <td th:text="*{partenaire.structureRattachement.nomRef}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Nom du référent administratif et budgétaire</td>
-                    <td th:text="*{partenaire.structureRattachement.nomRef}"></td>
-                </tr>
+                    <tr>
+                        <td>Téléphone du référent</td>
+                        <td th:text="*{partenaire.structureRattachement.telephoneRef}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Téléphone du référent</td>
-                    <td th:text="*{partenaire.structureRattachement.telephoneRef}"></td>
-                </tr>
-
-                <tr>
-                    <td>Mail du référent</td>
-                    <td th:text="*{partenaire.structureRattachement.mailRef}"></td>
-                </tr>
-            </table>
+                    <tr>
+                        <td>Mail du référent</td>
+                        <td th:text="*{partenaire.structureRattachement.mailRef}"></td>
+                    </tr>
+                </table>
+            </article>
         </section>
 
         <section id="describTech">    
@@ -289,7 +291,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </section>
 
         <section id="adequations">
-            <h2>Adequation avec la feuille de route WEAMEC</h2></td>
+            <h2>Adequation avec la feuille de route WEAMEC</h2>
 
             <table>
                 <tr>
@@ -319,43 +321,45 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <section id="experts">
             <h2>Experts suceptibles de réaliser l'évaluation du projet</h2>
+            
+            <article th:each="expert: ${projet.listeExperts}">
+                <table>
+                    <tr>
+                        <td>Nom</td>
+                        <td th:text="${expert.nom}"></td>
+                    </tr>
 
-            <table th:each="expert: ${projet.listeExperts}">
-                <tr>
-                    <td>Nom</td>
-                    <td th:text="${expert.nom}"></td>
-                </tr>
+                    <tr>
+                        <td>Prénom</td>
+                        <td th:text="${expert.prenom}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Prénom</td>
-                    <td th:text="${expert.prenom}"></td>
-                </tr>
+                    <tr>
+                        <td>Mail</td>
+                        <td th:text="${expert.mail}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Mail</td>
-                    <td th:text="${expert.mail}"></td>
-                </tr>
+                    <tr>
+                        <td>Numéro de Téléphone</td>
+                        <td th:text="${expert.telephone}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Numéro de Téléphone</td>
-                    <td th:text="${expert.telephone}"></td>
-                </tr>
+                    <tr>
+                        <td>Entité de Rattachement</td>
+                        <td th:text="${expert.entiteRattachement}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Entité de Rattachement</td>
-                    <td th:text="${expert.entiteRattachement}"></td>
-                </tr>
+                    <tr>
+                        <td>Laboratoire de rattachement</td>
+                        <td th:text="${expert.laboratoireRattachement}"></td>
+                    </tr>
 
-                <tr>
-                    <td>Laboratoire de rattachement</td>
-                    <td th:text="${expert.laboratoireRattachement}"></td>
-                </tr>
-
-                <tr>
-                    <td>Specialité</td>
-                    <td th:text="${expert.specialite}"></td>
-                </tr>
-            </table>
+                    <tr>
+                        <td>Specialité</td>
+                        <td th:text="${expert.specialite}"></td>
+                    </tr>
+                </table>
+            </article>
         </section>
     </body>
 </html>

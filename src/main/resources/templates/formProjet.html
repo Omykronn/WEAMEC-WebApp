@@ -14,16 +14,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <h1>Modifier un projet</h1>
         </header>
         
-        <form method="post" id="formProjet" th:action="@{/saveProjet}" th:object="${projet}">               
+        <form method="post" id="formProjet" th:action="@{/saveProject}" th:object="${projet}">               
             <section id="general">
                 <h2>Elements Clefs du Projet</h2>
                 
+                <input type="number" th:field="*{id}" required disabled hidden/>
+                
                 <table>
-                    <tr>
-                        <td></td>
-                        <td><input type="number" th:field="*{id}" required disabled hidden/></td>
-                    </tr>
-
                     <tr>
                         <td><label for="NomacroInput">Nom du projet (acronyme)</label></td>
                         <td><input type="text" th:field="*{nomAcro}" id="NomacroInput" required /></td>
@@ -89,12 +86,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <section id="coordinateurScientifique">
                 <h2>Coordinateur Scientifique</h2>
                 
+                <input type="number" th:field="*{coordinateurScientifique.id}" required disabled hidden/>
+                <input type="number" th:field="*{coordinateurScientifique.structureRattachement.id}" required disabled hidden/>
+                
                 <table>
-                    <tr>
-                        <td><label for="coordinateurScientifiqueIdInput"></label></td>
-                        <td><input type="number" th:field="*{coordinateurScientifique.id}" id="coordinateurScientifiqueIdInput" min="0" max="9" required disabled hidden/></td>
-                    </td>
-
                     <tr>
                         <td><label for="coordinateurScientifiqueNomInput">Nom</label></td>
                         <td><input type="text" th:field="*{coordinateurScientifique.nom}" id="coordinateurScientifiqueNomInput" required /></td>
@@ -114,11 +109,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <td><label for="coordinateurScientifiqueTelephoneInput">Telephone</label></td>
                         <td><input type="tel" th:field="*{coordinateurScientifique.telephone}" id="coordinateurScientifiqueTelephoneInput" required /></td>
                     </tr>
-
-                    <tr>
-                        <td><label for="structureCoordinateurScientifiqueIdInput"></label></td>
-                        <td><input type="number" th:field="*{coordinateurScientifique.structureRattachement.id}" id="structureCoordinateurScientifiqueIdInput" min="0" max="9" required disabled hidden /></td>
-                        </td>
 
                     <tr>
                         <td><label for="structureCoordinateurScientifiqueEtablissementInput">Nom de l'établissement</label></td>
@@ -160,62 +150,67 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <section id="partenaires">
                 <h2>Partenaires</h2>
                 
-                <table th:each="partenaire, itemStat: *{listePartenaires}">
-                    <tr>
-                        <td><label th:for="'partenaire' + ${itemStat.index} + 'NomInput'">Nom</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].nom}" th:id="'partenaire' + ${itemStat.index} + 'NomInput'" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label th:for="'partenaire' + ${itemStat.index} + 'PrenomInput'">Prenom</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].prenom}" th:id="'partenaire' + ${itemStat.index} + 'PrenomInput'" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label th:for="'partenaire' + ${itemStat.index} + 'MailInput'">Mail</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].mail}" th:id="'partenaire' + ${itemStat.index} + 'MailInput'" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label th:for="'partenaire' + ${itemStat.index} + 'TelephoneInput'">Telephone</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].telephone}" th:id="'partenaire' + ${itemStat.index} + 'TelephoneInput'" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label th:for="'structPartenaire' + ${itemStat.index} + 'EtablissementInput'">Nom de l'établissement</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.etablissement}" th:id="'structPartenaire' + ${itemStat.index} + 'EtablissementInput'" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label th:for="'structPartenaire' + ${itemStat.index} + 'LaboratoireInput'">Nom du laboratoire</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.laboratoire}" th:id="'structPartenaire' + ${itemStat.index} + 'LaboratoireInput'" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label th:for="'structPartenaire' + ${itemStat.index} + 'EquipeInput'">Nom de l'équipe</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.equipe}" th:id="'structPartenaire' + ${itemStat.index} + 'EquipeInput'" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label th:for="'structPartenaire' + ${itemStat.index} + 'AdresseInput'">Adresse postale</label></td>
-                        <td><textarea th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.adresse}" th:id="'structPartenaire' + ${itemStat.index} + 'AdresseInput'" cols="100" rows="5"/></textarea></td>
-                    </tr>
+                <article th:each="partenaire, itemStat: *{listePartenaires}">
+                    <input type="number" th:field="*{listePartenaires[__${itemStat.index}__].id}" required disabled hidden/>
+                    <input type="number" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.id}" required disabled hidden/>
                     
-                    <tr>
-                        <td><label th:for="'structPartenaire' + ${itemStat.index} + 'NomrefInput'">Nom du référent administratif et budgétaire</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.nomRef}" th:id="'structPartenaire' + ${itemStat.index} + 'NomrefInput'" required /></td>
-                    </tr>
+                    <table>
+                        <tr>
+                            <td><label th:for="'partenaire' + ${itemStat.index} + 'NomInput'">Nom</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].nom}" th:id="'partenaire' + ${itemStat.index} + 'NomInput'" required /></td>
+                        </tr>
 
-                    <tr>
-                        <td><label th:for="'structPartenaire' + ${itemStat.index} + 'TelephonerefInput'">Téléphone du référent</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.telephoneRef}" th:id="'structPartenaire' + ${itemStat.index} + 'TelephonerefInput'" required /></td>
-                    </tr>
+                        <tr>
+                            <td><label th:for="'partenaire' + ${itemStat.index} + 'PrenomInput'">Prenom</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].prenom}" th:id="'partenaire' + ${itemStat.index} + 'PrenomInput'" required /></td>
+                        </tr>
 
-                    <tr>
-                        <td><label th:for="'structPartenaire' + ${itemStat.index} + 'MailrefInput'">Mail du référent</label></td>
-                        <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.mailRef}" th:id="'structPartenaire' + ${itemStat.index} + 'MailrefInput'" required /></td>
-                    </tr>
-                </table>
+                        <tr>
+                            <td><label th:for="'partenaire' + ${itemStat.index} + 'MailInput'">Mail</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].mail}" th:id="'partenaire' + ${itemStat.index} + 'MailInput'" required /></td>
+                        </tr>
+
+                        <tr>
+                            <td><label th:for="'partenaire' + ${itemStat.index} + 'TelephoneInput'">Telephone</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].telephone}" th:id="'partenaire' + ${itemStat.index} + 'TelephoneInput'" required /></td>
+                        </tr>
+
+                        <tr>
+                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'EtablissementInput'">Nom de l'établissement</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.etablissement}" th:id="'structPartenaire' + ${itemStat.index} + 'EtablissementInput'" required /></td>
+                        </tr>
+
+                        <tr>
+                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'LaboratoireInput'">Nom du laboratoire</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.laboratoire}" th:id="'structPartenaire' + ${itemStat.index} + 'LaboratoireInput'" required /></td>
+                        </tr>
+
+                        <tr>
+                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'EquipeInput'">Nom de l'équipe</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.equipe}" th:id="'structPartenaire' + ${itemStat.index} + 'EquipeInput'" required /></td>
+                        </tr>
+
+                        <tr>
+                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'AdresseInput'">Adresse postale</label></td>
+                            <td><textarea th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.adresse}" th:id="'structPartenaire' + ${itemStat.index} + 'AdresseInput'" cols="100" rows="5"/></textarea></td>
+                        </tr>
+
+                        <tr>
+                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'NomrefInput'">Nom du référent administratif et budgétaire</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.nomRef}" th:id="'structPartenaire' + ${itemStat.index} + 'NomrefInput'" required /></td>
+                        </tr>
+
+                        <tr>
+                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'TelephonerefInput'">Téléphone du référent</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.telephoneRef}" th:id="'structPartenaire' + ${itemStat.index} + 'TelephonerefInput'" required /></td>
+                        </tr>
+
+                        <tr>
+                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'MailrefInput'">Mail du référent</label></td>
+                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.mailRef}" th:id="'structPartenaire' + ${itemStat.index} + 'MailrefInput'" required /></td>
+                        </tr>
+                    </table>
+                </article>
             </section>
 
             <section id="describTech">    
@@ -320,7 +315,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </section>
 
             <section id="adequations">
-                <h2>Adequation avec la feuille de route WEAMEC</h2></td>
+                <h2>Adequation avec la feuille de route WEAMEC</h2>
 
                 <table>
                     <tr>
@@ -358,47 +353,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <section id="experts">
                 <h2>Experts suceptibles de réaliser l'évaluation du projet</h2>
                 
-                <table th:each="expert, itemStat: *{listeExperts}">
-                    <tr>
-                        <td></td>
-                        <td><input type="number" th:field="*{listeExperts[__${itemStat.index}__].id}" required hidden/></td>
-                    </tr>
+                <article th:each="expert, itemStat: *{listeExperts}">
+                    <input type="number" th:field="*{listeExperts[__${itemStat.index}__].id}" required hidden/>
+                    
+                    <table>
+                        <tr>
+                            <td><label th:for="'expert' + ${itemStat.index} + 'NomInput'">Nom</label></td>
+                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].nom}" th:id="'expert' + ${itemStat.index} + 'NomInput'" required /></td>
+                        </tr>
 
-                    <tr>
-                        <td><label th:for="'expert' + ${itemStat.index} + 'NomInput'">Nom</label></td>
-                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].nom}" th:id="'expert' + ${itemStat.index} + 'NomInput'" required /></td>
-                    </tr>
+                        <tr>
+                            <td><label th:for="'expert' + ${itemStat.index} + 'PrenomInput'">Prénom</label></td>
+                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].prenom}" th:id="'expert' + ${itemStat.index} + 'PrenomInput'" required /></td>
+                        </tr>
 
-                    <tr>
-                        <td><label th:for="'expert' + ${itemStat.index} + 'PrenomInput'">Prénom</label></td>
-                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].prenom}" th:id="'expert' + ${itemStat.index} + 'PrenomInput'" required /></td>
-                    </tr>
+                        <tr>
+                            <td><label th:for="'expert' + ${itemStat.index} + 'MailInput'">Mail</label></td>
+                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].mail}" th:id="'expert' + ${itemStat.index} + 'MailInput'" required /></td>
+                        </tr>
 
-                    <tr>
-                        <td><label th:for="'expert' + ${itemStat.index} + 'MailInput'">Mail</label></td>
-                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].mail}" th:id="'expert' + ${itemStat.index} + 'MailInput'" required /></td>
-                    </tr>
+                        <tr>
+                            <td><label th:for="'expert' + ${itemStat.index} + 'TelephoneInput'">Numéro de Téléphone</label></td>
+                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].telephone}" th:id="'expert' + ${itemStat.index} + 'TelephoneInput'" required /></td>
+                        </tr>
 
-                    <tr>
-                        <td><label th:for="'expert' + ${itemStat.index} + 'TelephoneInput'">Numéro de Téléphone</label></td>
-                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].telephone}" th:id="'expert' + ${itemStat.index} + 'TelephoneInput'" required /></td>
-                    </tr>
+                        <tr>
+                            <td><label th:for="'expert' + ${itemStat.index} + 'EntiterattachementInput'">Entité de Rattachement</label></td>
+                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].entiteRattachement}" th:id="'expert' + ${itemStat.index} + 'EntiterattachementInput'" required /></td>
+                        </tr>
 
-                    <tr>
-                        <td><label th:for="'expert' + ${itemStat.index} + 'EntiterattachementInput'">Entité de Rattachement</label></td>
-                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].entiteRattachement}" th:id="'expert' + ${itemStat.index} + 'EntiterattachementInput'" required /></td>
-                    </tr>
+                        <tr>
+                            <td><label th:for="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'">Laboratoire de rattachement</label></td>
+                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].laboratoireRattachement}" th:id="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'" required /></td>
+                        </tr>
 
-                    <tr>
-                        <td><label th:for="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'">Laboratoire de rattachement</label></td>
-                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].laboratoireRattachement}" th:id="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label th:for="'expert' + ${itemStat.index} + 'SpecialiteInput'">Specialité</label></td>
-                        <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].specialite}" th:id="'expert' + ${itemStat.index} + 'SpecialiteInput'" required /></td>
-                    </tr>
-                </table>
+                        <tr>
+                            <td><label th:for="'expert' + ${itemStat.index} + 'SpecialiteInput'">Specialité</label></td>
+                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].specialite}" th:id="'expert' + ${itemStat.index} + 'SpecialiteInput'" required /></td>
+                        </tr>
+                    </table>
+                </article>
             </section>
             
             <section>
