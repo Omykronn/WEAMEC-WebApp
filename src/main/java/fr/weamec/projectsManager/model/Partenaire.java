@@ -31,18 +31,16 @@ public class Partenaire extends Personne{
     public Partenaire() {}
     
     /**
-     * Constructeur de Partenaire (sans id)
+     * Constructeur de Partenaire (sans id, ni idProjet)
      * @param structureRattachement Structure de Rattachement
-     * @param idProjet              Identifiant du projet
      * @param nom                   Nom 
      * @param prenom                Prenom
      * @param mail                  Adresse mail
      * @param telephone             Numero de telephone
      */
-    public Partenaire(StructureRattachement structureRattachement, int idProjet, String nom, String prenom, String mail, String telephone) {
+    public Partenaire(StructureRattachement structureRattachement, String nom, String prenom, String mail, String telephone) {
         super(nom, prenom, mail, telephone);
         this.structureRattachement = structureRattachement;
-        this.idProjet = idProjet;
     }
     
     /**
