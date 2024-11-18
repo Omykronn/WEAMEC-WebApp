@@ -4,15 +4,15 @@
  */
 package fr.weamec.projectsManager.repository;
 
-import fr.weamec.projectsManager.model.CoordinateurScientifique;
+import fr.weamec.projectsManager.model.Technologie;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository pour CoordinateurScientifique
+ * Repository pour Technologie
  * @author simon
  */
 @Repository
-public interface CoordinateurScientifiqueRepository extends CrudRepository<CoordinateurScientifique, Integer> {
+public interface TechnologieRepository extends CrudRepository<Technologie, Integer> {
 }
