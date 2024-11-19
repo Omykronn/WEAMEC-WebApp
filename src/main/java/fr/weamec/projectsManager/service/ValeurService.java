@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.Valeur;
 import fr.weamec.projectsManager.repository.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.json.simple.JSONArray;
 
 /**
  * Service pour Valeur
@@ -53,5 +56,24 @@ public class ValeurService {
      */
     public Valeur save(Valeur valeur) {
         return valeurRepo.save(valeur);
+    }
+    
+    /**
+     * Génère la liste des Valeurs depuis leur index stocké dans un tableau JSON
+     * @param jsonArray Tableau contenant les index
+     * @return Liste des Valeurs
+     */
+    public List<Valeur> listFromJSONArray(JSONArray jsonArray) {
+        ArrayList<Valeur> valeurs = new ArrayList<>();
+        
+        for (Object i: jsonArray) {
+            Optional<Valeur> valeurOpt = this.getValeur(((Long) i).intValue());
+            
+            if (valeurOpt.isPresent()) {
+                valeurs.add(valeurOpt.get());
+            }
+        }
+        
+        return valeurs;
     }
 }

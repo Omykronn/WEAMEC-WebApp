@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.Priorite;
 import fr.weamec.projectsManager.repository.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.json.simple.JSONArray;
 
 /**
  * Service pour Priorite
@@ -53,5 +56,24 @@ public class PrioriteService {
      */
     public Priorite save(Priorite priorite) {
         return prioriteRepo.save(priorite);
+    }
+    
+    /**
+     * Génère la liste des Priorites depuis leur index stocké dans un tableau JSON
+     * @param jsonArray Tableau contenant les index
+     * @return Liste des Priorites
+     */
+    public List<Priorite> listFromJSONArray(JSONArray jsonArray) {
+        ArrayList<Priorite> priorites = new ArrayList<>();
+        
+        for (Object i: jsonArray) {
+            Optional<Priorite> prioriteOpt = this.getPriorite(((Long) i).intValue());
+            
+            if (prioriteOpt.isPresent()) {
+                priorites.add(prioriteOpt.get());
+            }
+        }
+        
+        return priorites;
     }
 }

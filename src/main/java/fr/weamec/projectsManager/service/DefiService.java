@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.Defi;
 import fr.weamec.projectsManager.repository.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.json.simple.JSONArray;
 
 /**
  * Service pour Defi
@@ -53,5 +56,24 @@ public class DefiService {
      */
     public Defi save(Defi defi) {
         return defiRepo.save(defi);
+    }
+    
+    /**
+     * Génère la liste des Defis depuis leur index stocké dans un tableau JSON
+     * @param jsonArray Tableau contenant les index
+     * @return Liste des Defis
+     */
+    public List<Defi> listFromJSONArray(JSONArray jsonArray) {
+        ArrayList<Defi> defis = new ArrayList<>();
+        
+        for (Object i: jsonArray) {
+            Optional<Defi> defiOpt = this.getDefi(((Long) i).intValue());
+            
+            if (defiOpt.isPresent()) {
+                defis.add(defiOpt.get());
+            }
+        }
+        
+        return defis;
     }
 }
