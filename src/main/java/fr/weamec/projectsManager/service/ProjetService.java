@@ -4,15 +4,19 @@
  */
 package fr.weamec.projectsManager.service;
 
-import fr.weamec.projectsManager.model.Projet;
-import fr.weamec.projectsManager.model.CoordinateurScientifique;
+import fr.weamec.projectsManager.model.*;
 import fr.weamec.projectsManager.repository.*;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.List;
+import org.json.simple.JSONArray;
+
+import org.json.simple.JSONObject;
 
 /**
  * Service pour Projet
@@ -23,8 +27,29 @@ public class ProjetService {
     @Autowired
     private ProjetRepository projetRepo;
     
-    @Autowired
-    private CoordinateurScientifiqueRepository coordinateurScientifiqueRepo;
+    @Autowired 
+    private TechnologieService technologieService;
+    
+    @Autowired 
+    private ValeurService valeurService;
+    
+    @Autowired 
+    private PrioriteService prioriteService;
+    
+    @Autowired 
+    private ObjectifService objectifService;
+    
+    @Autowired 
+    private DefiService defiService;
+    
+    @Autowired 
+    private ThemeService themeService;
+    
+    @Autowired 
+    private ExpertService expertService;
+    
+    @Autowired 
+    private PartenaireService partenaireService;
     
     /**
      * Renvoie le projet dont l'identifiant est spécifié (s'il existe)
@@ -44,22 +69,6 @@ public class ProjetService {
     }
     
     /**
-     * Renvoie tous les projets d'un coordinateur scientifique
-     * @param id Identifiant du coordinateur scientifique
-     * @return   Liste des projets du coordinateur scientifique
-     */
-    public Iterable<Projet> getProjetsByCoordinateurScientifiqueId(int id) {
-        Iterable<Projet> listeProjets = new ArrayList<>();
-        Optional<CoordinateurScientifique> coordinateurScientifiqueOpt = coordinateurScientifiqueRepo.findById(id);
-        
-        if (coordinateurScientifiqueOpt.isPresent()) {
-            listeProjets = projetRepo.findByCoordinateurScientifique(coordinateurScientifiqueOpt.get());
-        }
-        
-        return listeProjets;
-    }
-    
-    /**
      * Supprime un projet par son identifiant
      * @param id Identifiant du projet à supprimer
      */
@@ -74,5 +83,70 @@ public class ProjetService {
      */
     public Projet save(Projet projet) {
         return projetRepo.save(projet);
+    }
+    
+    /**
+     * Importe un projet depuis un fichier JSON préalablement analysé vers la base de données
+     * @param json Object d'un fichier JSON analysé
+     * @return Instance du projet importé
+     */
+    public Projet importFromJSON(JSONObject json) {       
+        Projet projet = new Projet(new CoordinateurScientifique((JSONObject) json.get("coordinateurScientifique")),
+                                   "A VERIFIER",
+                                   (String) json.get("nomAcro"),
+                                   (String) json.get("nomComplet"),
+                                   (String) json.get("categorie"),
+                                   (String) json.get("type"),
+                                   (String) json.get("objectifSynth"),
+                                   (String) json.get("siteWeb"),
+                                   ((Long) json.get("duree")).intValue(),
+                                   Date.valueOf((String) json.get("dateDebut")),
+                                   Date.valueOf((String) json.get("dateFin")),
+                                   (String) json.get("description"),
+                                   (String) json.get("objectif"),
+                                   (String) json.get("verrousScientif"),
+                                   (String) json.get("programmeExp"),
+                                   (String) json.get("moyensEssai"),
+                                   (String) json.get("demonstrateur"),
+                                   (String) json.get("ruptureScient"),
+                                   (String) json.get("impactTech"),
+                                   (String) json.get("impactEco"),
+                                   (String) json.get("impactEnv"),
+                                   (String) json.get("impactSoc"),
+                                   technologieService.listFromJSONArray((JSONArray) json.get("technologies")),
+                                   ((Long) json.get("trlDebut")).intValue(),
+                                   ((Long) json.get("trlFin")).intValue(),
+                                   (boolean) json.get("brevet"),
+                                   prioriteService.listFromJSONArray((JSONArray) json.get("prioriteWeamec")),
+                                   objectifService.listFromJSONArray((JSONArray) json.get("objectifsWeamec")),
+                                   defiService.listFromJSONArray((JSONArray) json.get("defisWeamec")),
+                                   valeurService.listFromJSONArray((JSONArray) json.get("defisWeamec")),
+                                   themeService.listFromJSONArray((JSONArray) json.get("themes")),
+                                   new ArrayList<Partenaire>(),
+                                   new ArrayList<Expert>());
+        
+        projet = this.save(projet);
+        
+        // Import des Partenaires après définition de l'identifiant du projet
+        List<Partenaire> listePartenaires = partenaireService.listFromJSONArray((JSONArray) json.get("listePartenaires"));
+        
+        for (Partenaire partenaire: listePartenaires) {
+            partenaire.setIdProjet(projet.getId());
+        }
+        
+        projet.setListePartenaires(listePartenaires);
+        
+        // Import des Experts après définition de l'identifiant du projet
+        List<Expert> listeExperts = expertService.listFromJSONArray((JSONArray) json.get("listeExperts"));
+        
+        for (Expert expert: listeExperts) {
+            expert.setIdProjet(projet.getId());
+        }
+        
+        projet.setListeExperts(listeExperts);
+        
+        projet = this.save(projet);
+        
+        return projet;
     }
 }
