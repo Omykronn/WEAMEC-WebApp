@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.Theme;
 import fr.weamec.projectsManager.repository.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.json.simple.JSONArray;
 
 /**
  * Service pour Theme
@@ -53,5 +56,24 @@ public class ThemeService {
      */
     public Theme save(Theme theme) {
         return themeRepo.save(theme);
+    }
+    
+    /**
+     * Génère la liste des Themes depuis leur index stocké dans un tableau JSON
+     * @param jsonArray Tableau contenant les index
+     * @return Liste des Themes
+     */
+    public List<Theme> listFromJSONArray(JSONArray jsonArray) {
+        ArrayList<Theme> themes = new ArrayList<>();
+        
+        for (Object i: jsonArray) {
+            Optional<Theme> themeOpt = this.getTheme(((Long) i).intValue());
+            
+            if (themeOpt.isPresent()) {
+                themes.add(themeOpt.get());
+            }
+        }
+        
+        return themes;
     }
 }

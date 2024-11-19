@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.Technologie;
 import fr.weamec.projectsManager.repository.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.json.simple.JSONArray;
 
 /**
  * Service pour Technologie
@@ -53,5 +56,24 @@ public class TechnologieService {
      */
     public Technologie save(Technologie technologie) {
         return technologieRepo.save(technologie);
+    }
+    
+    /**
+     * Génère la liste des Technologies depuis leur index stocké dans un tableau JSON
+     * @param jsonArray Tableau contenant les index
+     * @return Liste des Technologies
+     */
+    public List<Technologie> listFromJSONArray(JSONArray jsonArray) {
+        ArrayList<Technologie> technologies = new ArrayList<>();
+        
+        for (Object i: jsonArray) {
+            Optional<Technologie> technologieOpt = this.getTechnologie(((Long) i).intValue());
+            
+            if (technologieOpt.isPresent()) {
+                technologies.add(technologieOpt.get());
+            }
+        }
+        
+        return technologies;
     }
 }

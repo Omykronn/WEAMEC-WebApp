@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.Objectif;
 import fr.weamec.projectsManager.repository.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.json.simple.JSONArray;
 
 /**
  * Service pour Objectif
@@ -53,5 +56,24 @@ public class ObjectifService {
      */
     public Objectif save(Objectif objectif) {
         return objectifRepo.save(objectif);
+    }
+    
+    /**
+     * Génère la liste des Objectifs depuis leur index stocké dans un tableau JSON
+     * @param jsonArray Tableau contenant les index
+     * @return Liste des Objectifs
+     */
+    public List<Objectif> listFromJSONArray(JSONArray jsonArray) {
+        ArrayList<Objectif> objectifs = new ArrayList<>();
+        
+        for (Object i: jsonArray) {
+            Optional<Objectif> objectifOpt = this.getObjectif(((Long) i).intValue());
+            
+            if (objectifOpt.isPresent()) {
+                objectifs.add(objectifOpt.get());
+            }
+        }
+        
+        return objectifs;
     }
 }
