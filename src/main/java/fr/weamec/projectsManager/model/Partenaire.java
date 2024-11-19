@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import org.json.simple.JSONObject;
 
 /**
  * Classe représentant un Partenaire d'un projet
@@ -31,16 +32,28 @@ public class Partenaire extends Personne{
     public Partenaire() {}
     
     /**
-     * Constructeur de Partenaire (sans id, ni idProjet)
+     * Constructeur de Partenaire
      * @param structureRattachement Structure de Rattachement
+     * @param idProjet              Identifiant du projet
+     * @param id                    Identifiant
      * @param nom                   Nom 
      * @param prenom                Prenom
      * @param mail                  Adresse mail
      * @param telephone             Numero de telephone
      */
-    public Partenaire(StructureRattachement structureRattachement, String nom, String prenom, String mail, String telephone) {
-        super(nom, prenom, mail, telephone);
+    public Partenaire(StructureRattachement structureRattachement, int idProjet, int id, String nom, String prenom, String mail, String telephone) {
+        super(id, nom, prenom, mail, telephone);
         this.structureRattachement = structureRattachement;
+        this.idProjet = idProjet;
+    }
+    
+    /**
+     * Constructeur à partir d'un Objet JSON (id et idProjet ne sont pas à renseigner)
+     * @param json Objet JSON
+     */
+    public Partenaire(JSONObject json) {
+        super(json);
+        this.structureRattachement = new StructureRattachement((JSONObject) json.get("structureRattachement"));
     }
     
     /**

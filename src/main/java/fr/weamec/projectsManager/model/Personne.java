@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import org.json.simple.JSONObject;
 
 /**
  * Classe abstraire représentant une personnne
@@ -30,17 +31,30 @@ public abstract class Personne {
     public Personne() {}
     
     /**
-     * Constructeur de Personne (sans id)
+     * Constructeur de Personne
+     * @param id        Identifiant
      * @param nom       Nom
      * @param prenom    Prenom
      * @param mail      Adresse mail
      * @param telephone Numero de telephone
      */
-    public Personne(String nom, String prenom, String mail, String telephone) {
+    public Personne(int id, String nom, String prenom, String mail, String telephone) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.telephone = telephone;
+    }
+    
+    /**
+     * Constructeur à partir d'un Objet JSON (id n'est pas à renseigner)
+     * @param json Objet JSON
+     */
+    public Personne(JSONObject json) {
+        this.nom = (String) json.get("nom");
+        this.prenom = (String) json.get("prenom");
+        this.mail = (String) json.get("mail");
+        this.telephone = (String) json.get("telephone");
     }
     
     /**

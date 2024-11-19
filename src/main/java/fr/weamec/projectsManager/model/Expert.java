@@ -7,6 +7,7 @@ package fr.weamec.projectsManager.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import org.json.simple.JSONObject;
 
 /**
  * Classe représentant un Expert associé à un projet
@@ -32,20 +33,34 @@ public class Expert extends Personne {
     public Expert() {}
     
     /**
-     * Constructeur de Expert (sans id, ni idProjet)
+     * Constructeur de Expert
      * @param entiteRattachement        Nom de l'entite de rattachement
      * @param laboratoireRattachement   Nom du laboratoire de rattachement
      * @param specialite                Specialite de l'expert
+     * @param idProjet                  Identifiant du projet
+     * @param id                        Identifiant
      * @param nom                       Nom
      * @param prenom                    Prenom
      * @param mail                      Mail
      * @param telephone                 Telephone
      */
-    public Expert(String entiteRattachement, String laboratoireRattachement, String specialite, String nom, String prenom, String mail, String telephone) {
-        super(nom, prenom, mail, telephone);
+    public Expert(String entiteRattachement, String laboratoireRattachement, String specialite, int idProjet, int id, String nom, String prenom, String mail, String telephone) {
+        super(id, nom, prenom, mail, telephone);
+        this.idProjet = idProjet;
         this.entiteRattachement = entiteRattachement;
         this.laboratoireRattachement = laboratoireRattachement;
         this.specialite = specialite;
+    }
+    
+    /**
+     * Constructeur à partir d'un Objet JSON (id et idProjet ne sont pas à renseigner)
+     * @param json Objet JSON
+     */
+    public Expert(JSONObject json) {
+        super(json);
+        this.entiteRattachement = (String) json.get("entiteRattachement");
+        this.laboratoireRattachement = (String) json.get("laboratoireRattachement");
+        this.specialite = (String) json.get("specialite");
     }
     
     /**
