@@ -13,8 +13,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <header>
             <h1 th:text="${projet.nomAcro}">Projet</h1>
             
-            <a th:href="@{/project/{id}/edit(id=${projet.id})}"><button>Modifier le projet</button></a>
-            <a th:href="@{/project/{id}/drop(id=${projet.id})}"><button>Supprimer le projet</button></a>
+            <a th:href="@{/projects/{id}/edit(id=${projet.id})}"><button>Modifier le projet</button></a>
+            <a th:href="@{/projects/{id}/drop(id=${projet.id})}"><button>Supprimer le projet</button></a>
         </header>
         
         <section id="general">
