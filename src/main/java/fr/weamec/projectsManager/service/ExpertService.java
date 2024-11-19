@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.Expert;
 import fr.weamec.projectsManager.repository.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -21,9 +24,6 @@ import org.json.simple.JSONObject;
 public class ExpertService {    
     @Autowired
     private ExpertRepository expertRepo;
-    
-    @Autowired
-    private StructureRattachementService structureRattachementService;
     
     /**
      * Renvoie le expert dont l'identifiant est spécifié (s'il existe)
@@ -60,17 +60,17 @@ public class ExpertService {
     }
     
     /**
-     * Importe un expert depuis un fichier JSON préalablement analysé
-     * @param json Object d'un fichier JSON analysé
-     * @return Instance d'un expert importé
-     */    
-    public Expert importFromJSON(JSONObject json) {
-        Expert expert = new Expert(structureRattachementService.importFromJSON((JSONObject) json.get("structureRattachement")),
-                                                                                         (String) json.get("nom"),
-                                                                                         (String) json.get("prenom"),
-                                                                                         (String) json.get("mail"),
-                                                                                         (String) json.get("telephone"));                                                                                
+     * Génère la liste des Experts depuis leur index stocké dans un tableau JSON
+     * @param jsonArray Tableau contenant les index
+     * @return Liste des Experts
+     */
+    public List<Expert> listFromJSONArray(JSONArray jsonArray) {
+        ArrayList<Expert> experts = new ArrayList<>();
         
-        return expert;
+        for (Object obj: jsonArray) {
+            experts.add(new Expert((JSONObject) obj));
+        }
+        
+        return experts;
     }
 }
