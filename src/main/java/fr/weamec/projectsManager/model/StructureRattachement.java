@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.json.simple.JSONObject;
 
 /**
  * Classe représentant une structure de rattachement : organisme de recherche ou entreprise
@@ -42,7 +43,8 @@ public class StructureRattachement {
     public StructureRattachement() {}
     
     /**
-     * Constructeur de StructureRattachement (sans id)
+     * Constructeur de StructureRattachement
+     * @param id            Identifiant
      * @param etablissement Nom de l'etablissement
      * @param laboratoire   Nom du laboratoire
      * @param equipe        Nom de l'equipe
@@ -51,7 +53,8 @@ public class StructureRattachement {
      * @param telephoneRef  Numero de Telephone du référent
      * @param mailRef       Adresse mail du référent
      */
-    public StructureRattachement(String etablissement, String laboratoire, String equipe, String adresse, String nomRef, String telephoneRef, String mailRef) {
+    public StructureRattachement(int id, String etablissement, String laboratoire, String equipe, String adresse, String nomRef, String telephoneRef, String mailRef) {
+        this.id = id;
         this.etablissement = etablissement;
         this.laboratoire = laboratoire;
         this.equipe = equipe;
@@ -59,6 +62,20 @@ public class StructureRattachement {
         this.nomRef = nomRef;
         this.telephoneRef = telephoneRef;
         this.mailRef = mailRef;
+    }
+    
+    /**
+     * Constructeur à partir d'un Objet JSON (id n'est pas à renseigner)
+     * @param json Objet JSON source
+     */
+    public StructureRattachement(JSONObject json) {
+        this.etablissement = (String) json.get("etablissement");
+        this.laboratoire = (String) json.get("laboratoire");
+        this.equipe = (String) json.get("equipe");
+        this.adresse = (String) json.get("adresse");
+        this.nomRef = (String) json.get("nomRef");
+        this.telephoneRef = (String) json.get("telephoneRef");
+        this.mailRef = (String) json.get("mailRef");
     }
     
     /**

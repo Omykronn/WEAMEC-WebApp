@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import org.json.simple.JSONObject;
 
 /**
  * Classe représentant un Coordinateut Scientifique d'un projet
@@ -27,16 +28,26 @@ public class CoordinateurScientifique extends Personne {
     public CoordinateurScientifique() {}
     
     /**
-     * Constructeur de CoordinateurScientifique (sans id)
+     * Constructeur de CoordinateurScientifique
      * @param structureRattachement Structure de Rattachement
+     * @param id                    Identifiant
      * @param nom                   Nom 
      * @param prenom                Prenom
      * @param mail                  Adresse mail
      * @param telephone             Numero de telephone
      */
-    public CoordinateurScientifique(StructureRattachement structureRattachement, String nom, String prenom, String mail, String telephone) {
-        super(nom, prenom, mail, telephone);
+    public CoordinateurScientifique(StructureRattachement structureRattachement, int id, String nom, String prenom, String mail, String telephone) {
+        super(id, nom, prenom, mail, telephone);
         this.structureRattachement = structureRattachement;
+    }
+    
+    /**
+     * Constructeur à partir d'un Objet JSON (id n'est pas à renseigner)
+     * @param json Objet JSON
+     */
+    public CoordinateurScientifique(JSONObject json) {
+        super(json);
+        this.structureRattachement = new StructureRattachement((JSONObject) json.get("structureRattachement"));
     }
     
     /**
