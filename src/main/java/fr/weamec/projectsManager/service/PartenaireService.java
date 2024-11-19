@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.Partenaire;
 import fr.weamec.projectsManager.repository.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -21,9 +24,6 @@ import org.json.simple.JSONObject;
 public class PartenaireService {    
     @Autowired
     private PartenaireRepository partenaireRepo;
-    
-    @Autowired
-    private StructureRattachementService structureRattachementService;
     
     /**
      * Renvoie le partenaire dont l'identifiant est spécifié (s'il existe)
@@ -60,17 +60,17 @@ public class PartenaireService {
     }
     
     /**
-     * Importe un partenaire depuis un fichier JSON préalablement analysé
-     * @param json Object d'un fichier JSON analysé
-     * @return Instance d'un partenaire importé
-     */    
-    public Partenaire importFromJSON(JSONObject json) {
-        Partenaire partenaire = new Partenaire(structureRattachementService.importFromJSON((JSONObject) json.get("structureRattachement")),
-                                                                                         (String) json.get("nom"),
-                                                                                         (String) json.get("prenom"),
-                                                                                         (String) json.get("mail"),
-                                                                                         (String) json.get("telephone"));                                                                                
+     * Génère la liste des Partenaires depuis leur index stocké dans un tableau JSON
+     * @param jsonArray Tableau contenant les index
+     * @return Liste des Partenaires
+     */
+    public List<Partenaire> listFromJSONArray(JSONArray jsonArray) {
+        ArrayList<Partenaire> partenaires = new ArrayList<>();
         
-        return partenaire;
+        for (Object obj: jsonArray) {
+            partenaires.add(new Partenaire((JSONObject) obj));
+        }
+        
+        return partenaires;
     }
 }
