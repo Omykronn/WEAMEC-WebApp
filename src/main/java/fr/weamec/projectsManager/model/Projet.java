@@ -103,7 +103,7 @@ public class Projet {
     @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Expert> listeExperts;
     
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "technoduprojet",
             joinColumns = @JoinColumn(name = "id_projet"),
@@ -111,7 +111,7 @@ public class Projet {
             )
     private List<Technologie> technologies;
     
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "valeurduprojet",
             joinColumns = @JoinColumn(name = "id_projet"),
@@ -119,7 +119,7 @@ public class Projet {
             )
     private List<Valeur> valeurs;
     
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "themeduprojet",
             joinColumns = @JoinColumn(name = "id_projet"),
@@ -127,7 +127,7 @@ public class Projet {
             )
     private List<Theme> themes;
     
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "objectifduprojet",
             joinColumns = @JoinColumn(name = "id_projet"),
@@ -135,7 +135,7 @@ public class Projet {
             )
     private List<Objectif> objectifsWeamec;
     
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "defiduprojet",
             joinColumns = @JoinColumn(name = "id_projet"),
@@ -143,7 +143,7 @@ public class Projet {
             )
     private List<Defi> defisWeamec;
     
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "prioriteduprojet",
             joinColumns = @JoinColumn(name = "id_projet"),
