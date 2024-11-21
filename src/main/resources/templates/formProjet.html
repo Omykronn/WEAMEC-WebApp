@@ -8,399 +8,421 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title>Appel à  WEAMEC</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
     <body>
-        <header>
-            <h1>Modifier un projet</h1>
-        </header>
+        <nav class="navbar navbar-expand-lg bg-primary">
+            <div class="container">                
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link text-white" th:href="@{/projects}">Tous les projets</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" th:href="@{/projects/import}">Importer un projet</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="pb-10">
+            <div class="container">
+                <div class="col-sm-12 my-5">
+                    <h1>Modifier le projet</h1>
+                </div>
+
+                <form method="post" id="formProjet" th:action="@{/projects/save}" th:object="${projet}">               
+                    <div class="col-sm-12 my-5" id="general">
+                        <h2>Elements Clefs du Projet</h2>
+                        
+                        <input class="form-control" type="number" th:field="*{id}" required disabled hidden/>
+                        
+                        <table class="table">
+                            <tr>
+                                <th><label class="form-label" for="NomacroInput">Nom du projet (acronyme)</label></th>
+                                <td><input class="form-control" type="text" th:field="*{nomAcro}" id="NomacroInput" required /></td>
+                            </tr>
         
-        <form method="post" id="formProjet" th:action="@{/projects/save}" th:object="${projet}">               
-            <section id="general">
-                <h2>Elements Clefs du Projet</h2>
-                
-                <input type="number" th:field="*{id}" required disabled hidden/>
-                
-                <table>
-                    <tr>
-                        <td><label for="NomacroInput">Nom du projet (acronyme)</label></td>
-                        <td><input type="text" th:field="*{nomAcro}" id="NomacroInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="NomcompletInput">Nom du projet (explicitation de l'acronyme)</label></td>
-                        <td><input type="text" th:field="*{nomComplet}" id="NomcompletInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td>Catégorie</td>
-                        <td>
-                            <div th:each="categorie : ${allCategories}">
-                                <input type="radio" th:value="${categorie.nom}" th:field="*{categorie}" th:id="'categorie' + ${categorie.id}"/>
-                                <label th:for="'categorie' + ${categorie.id}" th:text="${categorie.nom}"> Categorie </label>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Type</td>
-                        <td>
-                            <div th:each="type : ${allTypes}">
-                                <input type="radio" th:value="${type.nom}" th:field="*{type}" th:id="'type' + ${type.id}"/>
-                                <label th:for="'type' + ${type.id}" th:text="${type.nom}"> Type </label>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="ObjectifsynthInput">Objectif du projet</label></td>
-                        <td><textarea th:field="*{objectifSynth}" id="ObjectifsynthInput" cols="100" rows="5" required /></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="SitewebInput">Site web du projet</label></td>
-                        <td><input type="text" th:field="*{siteWeb}" id="SitewebInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="DureeInput">Durée du projet (en mois)</label></td>
-                        <td><input type="number" th:field="*{duree}" id="DureeInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="DatedebutInput">Date de début</label></td>
-                        <td><input type="date" th:field="*{dateDebut}" id="DatedebutInput" required /></td>
-                    </td>
-
-                    <tr>
-                        <td><label for="DatefinInput">Date de fin</label></td>
-                        <td><input type="date" th:field="*{dateFin}" id="DatefinInput" required /></td>
-                    </td>
-
-                    <tr>
-                        <td><label for="DescriptionInput">Description synthétique du projet</label></td>
-                        <td><textarea th:field="*{description}" id="DescriptionInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-                </table>
-            </section>
-
-            <section id="coordinateurScientifique">
-                <h2>Coordinateur Scientifique</h2>
-                
-                <input type="number" th:field="*{coordinateurScientifique.id}" required disabled hidden/>
-                <input type="number" th:field="*{coordinateurScientifique.structureRattachement.id}" required disabled hidden/>
-                
-                <table>
-                    <tr>
-                        <td><label for="coordinateurScientifiqueNomInput">Nom</label></td>
-                        <td><input type="text" th:field="*{coordinateurScientifique.nom}" id="coordinateurScientifiqueNomInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="coordinateurScientifiquePrenomInput">Prénom</label></td>
-                        <td><input type="text" th:field="*{coordinateurScientifique.prenom}" id="coordinateurScientifiquePrenomInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="coordinateurScientifiqueMailInput">Email</label></td>
-                        <td><input type="email" th:field="*{coordinateurScientifique.mail}" id="coordinateurScientifiqueMailInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="coordinateurScientifiqueTelephoneInput">Telephone</label></td>
-                        <td><input type="tel" th:field="*{coordinateurScientifique.telephone}" id="coordinateurScientifiqueTelephoneInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="structureCoordinateurScientifiqueEtablissementInput">Nom de l'établissement</label></td>
-                        <td><input type="text" th:field="*{coordinateurScientifique.structureRattachement.etablissement}" id="structureCoordinateurScientifiqueEtablissementInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="structureCoordinateurScientifiqueLaboratoireInput">Nom du laboratoire</label></td>
-                        <td><input type="text" th:field="*{coordinateurScientifique.structureRattachement.laboratoire}" id="structureCoordinateurScientifiqueLaboratoireInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="structureCoordinateurScientifiqueEquipeInput">Nom de l'équipe</label></td>
-                        <td><input type="text" th:field="*{coordinateurScientifique.structureRattachement.equipe}" id="structureCoordinateurScientifiqueEquipeInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="structureCoordinateurScientifiqueAdresseInput">Adresse postale</label></td>
-                        <td><textarea th:field="*{coordinateurScientifique.structureRattachement.adresse}" id="structureCoordinateurScientifiqueAdresseInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="structureCoordinateurScientifiqueNomRefInput">Nom du référent administratif et budgétaire</label></td>
-                        <td><input type="text" th:field="*{coordinateurScientifique.structureRattachement.nomRef}" id="structureCoordinateurScientifiqueNomRefInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="structureCoordinateurScientifiqueTelephonerefInput">Téléphone du référent</label></td>
-                        <td><input type="text" th:field="*{coordinateurScientifique.structureRattachement.telephoneRef}" id="structureCoordinateurScientifiqueTelephonerefInput" required /></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="structureCoordinateurScientifiqueMailrefInput">Mail du référent</label></td>
-                        <td><input type="text" th:field="*{coordinateurScientifique.structureRattachement.mailRef}" id="structureCoordinateurScientifiqueMailrefInput" required /></td>
-                    </tr>
-                </table>
-            </section>
+                            <tr>
+                                <th><label class="form-label" for="NomcompletInput">Nom du projet (explicitation de l'acronyme)</label></th>
+                                <td><input class="form-control" type="text" th:field="*{nomComplet}" id="NomcompletInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th scope="col">Catégorie</th>
+                                <td>
+                                    <div class="form-check" th:each="categorie : ${allCategories}">
+                                        <input class="form-check-input" type="radio" th:value="${categorie.nom}" th:field="*{categorie}" th:id="'categorie' + ${categorie.id}"/>
+                                        <label class="form-check-label" th:for="'categorie' + ${categorie.id}" th:text="${categorie.nom}"> Categorie </label>
+                                    </div>
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <th scope="col">Type</th>
+                                <td>
+                                    <div class="form-check" th:each="type : ${allTypes}">
+                                        <input class="form-check-input" type="radio" th:value="${type.nom}" th:field="*{type}" th:id="'type' + ${type.id}"/>
+                                        <label class="form-check-label" th:for="'type' + ${type.id}" th:text="${type.nom}"> Type </label>
+                                    </div>
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="ObjectifsynthInput">Objectif du projet</label></th>
+                                <td><textarea class="form-control" th:field="*{objectifSynth}" id="ObjectifsynthInput" cols="100" rows="5" required /></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="SitewebInput">Site web du projet</label></th>
+                                <td><input class="form-control" type="text" th:field="*{siteWeb}" id="SitewebInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="DureeInput">Durée du projet (en mois)</label></th>
+                                <td><input class="form-control" type="number" th:field="*{duree}" id="DureeInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="DatedebutInput">Date de début</label></th>
+                                <td><input class="form-control" type="date" th:field="*{dateDebut}" id="DatedebutInput" required /></td>
+                            </td>
+        
+                            <tr>
+                                <th><label class="form-label" for="DatefinInput">Date de fin</label></th>
+                                <td><input class="form-control" type="date" th:field="*{dateFin}" id="DatefinInput" required /></td>
+                            </td>
+        
+                            <tr>
+                                <th><label class="form-label" for="DescriptionInput">Description synthétique du projet</label></th>
+                                <td><textarea class="form-control" th:field="*{description}" id="DescriptionInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+                        </table>
+                    </div>
+        
+                    <div class="col-sm-12 my-5" id="coordinateurScientifique">
+                        <h2>Coordinateur Scientifique</h2>
+                        
+                        <input class="form-control" type="number" th:field="*{coordinateurScientifique.id}" required disabled hidden/>
+                        <input class="form-control" type="number" th:field="*{coordinateurScientifique.structureRattachement.id}" required disabled hidden/>
+                        
+                        <table class="table">
+                            <tr>
+                                <th><label class="form-label" for="coordinateurScientifiqueNomInput">Nom</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.nom}" id="coordinateurScientifiqueNomInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="coordinateurScientifiquePrenomInput">Prénom</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.prenom}" id="coordinateurScientifiquePrenomInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="coordinateurScientifiqueMailInput">Email</label></th>
+                                <td><input class="form-control" type="email" th:field="*{coordinateurScientifique.mail}" id="coordinateurScientifiqueMailInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="coordinateurScientifiqueTelephoneInput">Telephone</label></th>
+                                <td><input class="form-control" type="tel" th:field="*{coordinateurScientifique.telephone}" id="coordinateurScientifiqueTelephoneInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueEtablissementInput">Nom de l'établissement</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.structureRattachement.etablissement}" id="structureCoordinateurScientifiqueEtablissementInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueLaboratoireInput">Nom du laboratoire</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.structureRattachement.laboratoire}" id="structureCoordinateurScientifiqueLaboratoireInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueEquipeInput">Nom de l'équipe</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.structureRattachement.equipe}" id="structureCoordinateurScientifiqueEquipeInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueAdresseInput">Adresse postale</label></th>
+                                <td><textarea class="form-control" th:field="*{coordinateurScientifique.structureRattachement.adresse}" id="structureCoordinateurScientifiqueAdresseInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueNomRefInput">Nom du référent administratif et budgétaire</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.structureRattachement.nomRef}" id="structureCoordinateurScientifiqueNomRefInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueTelephonerefInput">Téléphone du référent</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.structureRattachement.telephoneRef}" id="structureCoordinateurScientifiqueTelephonerefInput" required /></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueMailrefInput">Mail du référent</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.structureRattachement.mailRef}" id="structureCoordinateurScientifiqueMailrefInput" required /></td>
+                            </tr>
+                        </table>
+                    </div>
+                            
+                    <div class="col-sm-12 my-5" id="partenaires">
+                        <h2>Partenaires</h2>
+                        
+                        <div class="my-5" th:each="partenaire, itemStat: *{listePartenaires}">
+                            <input class="form-control" type="number" th:field="*{listePartenaires[__${itemStat.index}__].id}" required disabled hidden/>
+                            <input class="form-control" type="number" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.id}" required disabled hidden/>
+                            
+                            <table class="table">
+                                <tr>
+                                    <th><label class="form-label" th:for="'partenaire' + ${itemStat.index} + 'NomInput'">Nom</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].nom}" th:id="'partenaire' + ${itemStat.index} + 'NomInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'partenaire' + ${itemStat.index} + 'PrenomInput'">Prenom</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].prenom}" th:id="'partenaire' + ${itemStat.index} + 'PrenomInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'partenaire' + ${itemStat.index} + 'MailInput'">Mail</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].mail}" th:id="'partenaire' + ${itemStat.index} + 'MailInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'partenaire' + ${itemStat.index} + 'TelephoneInput'">Telephone</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].telephone}" th:id="'partenaire' + ${itemStat.index} + 'TelephoneInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'EtablissementInput'">Nom de l'établissement</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.etablissement}" th:id="'structPartenaire' + ${itemStat.index} + 'EtablissementInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'LaboratoireInput'">Nom du laboratoire</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.laboratoire}" th:id="'structPartenaire' + ${itemStat.index} + 'LaboratoireInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'EquipeInput'">Nom de l'équipe</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.equipe}" th:id="'structPartenaire' + ${itemStat.index} + 'EquipeInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'AdresseInput'">Adresse postale</label></th>
+                                    <td><textarea class="form-control" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.adresse}" th:id="'structPartenaire' + ${itemStat.index} + 'AdresseInput'" cols="100" rows="5"></textarea></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'NomrefInput'">Nom du référent administratif et budgétaire</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.nomRef}" th:id="'structPartenaire' + ${itemStat.index} + 'NomrefInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'TelephonerefInput'">Téléphone du référent</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.telephoneRef}" th:id="'structPartenaire' + ${itemStat.index} + 'TelephonerefInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'MailrefInput'">Mail du référent</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.mailRef}" th:id="'structPartenaire' + ${itemStat.index} + 'MailrefInput'" required /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+        
+                    <div class="col-sm-12 my-5" id="describTech">    
+                        <h2>Description technique du Projet</h2>
+                        
+                        <table class="table">
+                            <tr>
+                                <th><label class="form-label" for="ObjectifInput">Objectifs</label></th>
+                                <td><textarea class="form-control" th:field="*{objectif}" id="ObjectifInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="VerrousscientifInput">Verrous scientifiques et techniques adressées</label></th>
+                                <td><textarea class="form-control" th:field="*{verrousScientif}" id="VerrousscientifInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="ProgrammeexpInput">Programme expérimental</label></th>
+                                <td><textarea class="form-control" th:field="*{programmeExp}" id="ProgrammeexpInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="MoyensessaiInput">Moyens d'essais utilisés</label></th>
+                                <td><textarea class="form-control" th:field="*{moyensEssai}" id="MoyensessaiInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="DemonstrateurInput">Démonstrateur éventuellement créé</label></th>
+                                <td><textarea class="form-control" th:field="*{demonstrateur}" id="DemonstrateurInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="RupturescientInput">Ruptures scientifiques et innovation</label></th>
+                                <td><textarea class="form-control" th:field="*{ruptureScient}" id="RupturescientInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="ImpacttechInput">Impact Technique attendu</label></th>
+                                <td><textarea class="form-control" th:field="*{impactTech}" id="ImpacttechInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="ImpactecoInput">Impact Économique attendu</label></th>
+                                <td><textarea class="form-control" th:field="*{impactEco}" id="ImpactecoInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="ImpactenvInput">Impact Environnemental attendu</label></th>
+                                <td><textarea class="form-control" th:field="*{impactEnv}" id="ImpactenvInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="ImpactsocInput">Impact sociétal attendu</label></th>
+                                <td><textarea class="form-control" th:field="*{impactSoc}" id="ImpactsocInput" cols="100" rows="5"></textarea></td>
+                            </tr>
+        
+                            <tr>
+                                <th><label class="form-label" for="TrldebutInput">Niveau TRL de début</label></th>
+                                <td><input class="form-control" type="number" th:field="*{trlDebut}" id="TrldebutInput" min="0" max="9" required /></td>
+                            </td>
+        
+                            <tr>
+                                <th><label class="form-label" for="TrlfinInput">Niveau TRL de fin visé</label></th>
+                                <td><input class="form-control" type="number" th:field="*{trlFin}" id="TrlfinInput" min="0" max="9" required /></td>
+                            </td>
+        
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" th:field="*{brevet}" id="BrevetInput" th:checked="${brevet}" />
+                                        <label class="form-check-label" for="BrevetInput">Brevet visé ?</label>
+                                    </div>
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <th scope="col">Technologies</th>
+                                <td>
+                                    <div class="form-check" th:each="technologie : ${allTechnologies}">
+                                        <input class="form-check-input" type="checkbox" th:value="${technologie.id}" th:field="*{technologies}" th:id="'technologie' + ${technologie.id}"/>
+                                        <label class="form-check-label" th:for="'technologie' + ${technologie.id}" th:text="${technologie.nom}"> Technologie </label>
+                                    </div>
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <th scope="col">Valeurs</th>
+                                <td>
+                                    <div class="form-check" th:each="valeur : ${allValeurs}">
+                                        <input class="form-check-input" type="checkbox" th:value="${valeur.id}" th:field="*{valeurs}" th:id="'valeur' + ${valeur.id}"/>
+                                        <label class="form-check-label" th:for="'valeur' + ${valeur.id}" th:text="${valeur.nom}"> Valeur </label>
+                                    </div>
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <th scope="col">Themes</th>
+                                <td>
+                                    <div class="form-check" th:each="theme : ${allThemes}">
+                                        <input class="form-check-input" type="checkbox" th:value="${theme.id}" th:field="*{themes}" th:id="'theme' + ${theme.id}"/>
+                                        <label class="form-check-label" th:for="'theme' + ${theme.id}" th:text="${theme.nom}"> Theme </label>
+                                    </div>
+                                </td>
+                            </tr> 
+                        </table>
+                    </div>
+        
+                    <div class="col-sm-12 my-5" id="adequations">
+                        <h2>Adequation avec la feuille de route WEAMEC</h2>
+        
+                        <table class="table">
+                            <tr>
+                                <th scope="col">Priorites</th>
+                                <td>
+                                    <div class="form-check" th:each="priorite : ${allPriorites}">
+                                        <input class="form-check-input" type="radio" th:value="${priorite.id}" th:field="*{prioriteWeamec}" th:id="'priorite' + ${priorite.id}"/>
+                                        <label class="form-check-label" th:for="'priorite' + ${priorite.id}" th:text="${priorite.nom}"> Priorite </label>
+                                    </div>
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <th scope="col">Objectifs</th>
+                                <td>
+                                    <div class="form-check" th:each="objectif : ${allObjectifs}">
+                                        <input class="form-check-input" type="checkbox" th:value="${objectif.id}" th:field="*{objectifsWeamec}" th:id="'objectif' + ${objectif.id}"/>
+                                        <label class="form-check-label" th:for="'objectif' + ${objectif.id}" th:text="${objectif.nom}"> Objectif </label>
+                                    </div>
+                                </td>
+                            </tr>
+        
+                            <tr>
+                                <th scope="col">Défis</th>
+                                <td>
+                                    <div class="form-check" th:each="defi : ${allDefis}">
+                                        <input class="form-check-input" type="checkbox" th:value="${defi.id}" th:field="*{defisWeamec}" th:id="'defi' + ${defi.id}"/>
+                                        <label class="form-check-label" th:for="'defi' + ${defi.id}" th:text="${defi.nom}"> Defi </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                     
-            <section id="partenaires">
-                <h2>Partenaires</h2>
-                
-                <article th:each="partenaire, itemStat: *{listePartenaires}">
-                    <input type="number" th:field="*{listePartenaires[__${itemStat.index}__].id}" required disabled hidden/>
-                    <input type="number" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.id}" required disabled hidden/>
+                    <div class="col-sm-12 my-5" id="experts">
+                        <h2>Experts suceptibles de réaliser l'évaluation du projet</h2>
+                        
+                        <div class="my-5" th:each="expert, itemStat: *{listeExperts}">
+                            <input class="form-control" type="number" th:field="*{listeExperts[__${itemStat.index}__].id}" required hidden/>
+                            
+                            <table class="table">
+                                <tr>
+                                    <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'NomInput'">Nom</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].nom}" th:id="'expert' + ${itemStat.index} + 'NomInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'PrenomInput'">Prénom</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].prenom}" th:id="'expert' + ${itemStat.index} + 'PrenomInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'MailInput'">Mail</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].mail}" th:id="'expert' + ${itemStat.index} + 'MailInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'TelephoneInput'">Numéro de Téléphone</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].telephone}" th:id="'expert' + ${itemStat.index} + 'TelephoneInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'EntiterattachementInput'">Entité de Rattachement</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].entiteRattachement}" th:id="'expert' + ${itemStat.index} + 'EntiterattachementInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'">Laboratoire de rattachement</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].laboratoireRattachement}" th:id="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'" required /></td>
+                                </tr>
+        
+                                <tr>
+                                    <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'SpecialiteInput'">Specialité</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].specialite}" th:id="'expert' + ${itemStat.index} + 'SpecialiteInput'" required /></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                     
-                    <table>
-                        <tr>
-                            <td><label th:for="'partenaire' + ${itemStat.index} + 'NomInput'">Nom</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].nom}" th:id="'partenaire' + ${itemStat.index} + 'NomInput'" required /></td>
-                        </tr>
+                    <div class="col-sm-12 my-5">
+                        <label class="form-label" for="StatutInput">Statut du traitement du projet</label>
+                        <input class="form-control" type="text" th:field="*{statut}" id="StatutInput" required />
 
-                        <tr>
-                            <td><label th:for="'partenaire' + ${itemStat.index} + 'PrenomInput'">Prenom</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].prenom}" th:id="'partenaire' + ${itemStat.index} + 'PrenomInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'partenaire' + ${itemStat.index} + 'MailInput'">Mail</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].mail}" th:id="'partenaire' + ${itemStat.index} + 'MailInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'partenaire' + ${itemStat.index} + 'TelephoneInput'">Telephone</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].telephone}" th:id="'partenaire' + ${itemStat.index} + 'TelephoneInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'EtablissementInput'">Nom de l'établissement</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.etablissement}" th:id="'structPartenaire' + ${itemStat.index} + 'EtablissementInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'LaboratoireInput'">Nom du laboratoire</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.laboratoire}" th:id="'structPartenaire' + ${itemStat.index} + 'LaboratoireInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'EquipeInput'">Nom de l'équipe</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.equipe}" th:id="'structPartenaire' + ${itemStat.index} + 'EquipeInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'AdresseInput'">Adresse postale</label></td>
-                            <td><textarea th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.adresse}" th:id="'structPartenaire' + ${itemStat.index} + 'AdresseInput'" cols="100" rows="5"/></textarea></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'NomrefInput'">Nom du référent administratif et budgétaire</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.nomRef}" th:id="'structPartenaire' + ${itemStat.index} + 'NomrefInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'TelephonerefInput'">Téléphone du référent</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.telephoneRef}" th:id="'structPartenaire' + ${itemStat.index} + 'TelephonerefInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'structPartenaire' + ${itemStat.index} + 'MailrefInput'">Mail du référent</label></td>
-                            <td><input type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.mailRef}" th:id="'structPartenaire' + ${itemStat.index} + 'MailrefInput'" required /></td>
-                        </tr>
-                    </table>
-                </article>
-            </section>
-
-            <section id="describTech">    
-                <h2>Description technique du Projet</h2>
-                
-                <table>
-                    <tr>
-                        <td><label for="ObjectifInput">Objectifs</label></td>
-                        <td><textarea th:field="*{objectif}" id="ObjectifInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="VerrousscientifInput">Verrous scientifiques et techniques adressées</label></td>
-                        <td><textarea th:field="*{verrousScientif}" id="VerrousscientifInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="ProgrammeexpInput">Programme expérimental</label></td>
-                        <td><textarea th:field="*{programmeExp}" id="ProgrammeexpInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="MoyensessaiInput">Moyens d'essais utilisés</label></td>
-                        <td><textarea th:field="*{moyensEssai}" id="MoyensessaiInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="DemonstrateurInput">Démonstrateur éventuellement créé</label></td>
-                        <td><textarea th:field="*{demonstrateur}" id="DemonstrateurInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="RupturescientInput">Ruptures scientifiques et innovation</label></td>
-                        <td><textarea th:field="*{ruptureScient}" id="RupturescientInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="ImpacttechInput">Impact Technique attendu</label></td>
-                        <td><textarea th:field="*{impactTech}" id="ImpacttechInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="ImpactecoInput">Impact Économique attendu</label></td>
-                        <td><textarea th:field="*{impactEco}" id="ImpactecoInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="ImpactenvInput">Impact Environnemental attendu</label></td>
-                        <td><textarea th:field="*{impactEnv}" id="ImpactenvInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="ImpactsocInput">Impact sociétal attendu</label></td>
-                        <td><textarea th:field="*{impactSoc}" id="ImpactsocInput" cols="100" rows="5"/></textarea></td>
-                    </tr>
-
-                    <tr>
-                        <td><label for="TrldebutInput">Niveau TRL de début</label></td>
-                        <td><input type="number" th:field="*{trlDebut}" id="TrldebutInput" min="0" max="9" required /></td>
-                    </td>
-
-                    <tr>
-                        <td><label for="TrlfinInput">Niveau TRL de fin visé</label></td>
-                        <td><input type="number" th:field="*{trlFin}" id="TrlfinInput" min="0" max="9" required /></td>
-                    </td>
-
-                    <tr>
-                        <td></td>
-                        <td><input type="checkbox" th:field="*{brevet}" id="BrevetInput" th:checked="${brevet}" /><label for="BrevetInput">Brevet visé ?</label></td>
-                    </tr>
-
-                    <tr>
-                        <td>Technologies</td>
-                        <td>
-                            <div th:each="technologie : ${allTechnologies}">
-                                <input type="checkbox" th:value="${technologie.id}" th:field="*{technologies}" th:id="'technologie' + ${technologie.id}"/>
-                                <label th:for="'technologie' + ${technologie.id}" th:text="${technologie.nom}"> Technologie </label>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Valeurs</td>
-                        <td>
-                            <div th:each="valeur : ${allValeurs}">
-                                <input type="checkbox" th:value="${valeur.id}" th:field="*{valeurs}" th:id="'valeur' + ${valeur.id}"/>
-                                <label th:for="'valeur' + ${valeur.id}" th:text="${valeur.nom}"> Valeur </label>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Themes</td>
-                        <td>
-                            <div th:each="theme : ${allThemes}">
-                                <input type="checkbox" th:value="${theme.id}" th:field="*{themes}" th:id="'theme' + ${theme.id}"/>
-                                <label th:for="'theme' + ${theme.id}" th:text="${theme.nom}"> Theme </label>
-                            </div>
-                        </td>
-                    </tr> 
-                </table>
-            </section>
-
-            <section id="adequations">
-                <h2>Adequation avec la feuille de route WEAMEC</h2>
-
-                <table>
-                    <tr>
-                        <td>Priorites</td>
-                        <td>
-                            <div th:each="priorite : ${allPriorites}">
-                                <input type="radio" th:value="${priorite.id}" th:field="*{prioriteWeamec}" th:id="'priorite' + ${priorite.id}"/>
-                                <label th:for="'priorite' + ${priorite.id}" th:text="${priorite.nom}"> Priorite </label>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Objectifs</td>
-                        <td>
-                            <div th:each="objectif : ${allObjectifs}">
-                                <input type="checkbox" th:value="${objectif.id}" th:field="*{objectifsWeamec}" th:id="'objectif' + ${objectif.id}"/>
-                                <label th:for="'objectif' + ${objectif.id}" th:text="${objectif.nom}"> Objectif </label>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Défis</td>
-                        <td>
-                            <div th:each="defi : ${allDefis}">
-                                <input type="checkbox" th:value="${defi.id}" th:field="*{defisWeamec}" th:id="'defi' + ${defi.id}"/>
-                                <label th:for="'defi' + ${defi.id}" th:text="${defi.nom}"> Defi </label>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </section>
-            
-            <section id="experts">
-                <h2>Experts suceptibles de réaliser l'évaluation du projet</h2>
-                
-                <article th:each="expert, itemStat: *{listeExperts}">
-                    <input type="number" th:field="*{listeExperts[__${itemStat.index}__].id}" required hidden/>
-                    
-                    <table>
-                        <tr>
-                            <td><label th:for="'expert' + ${itemStat.index} + 'NomInput'">Nom</label></td>
-                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].nom}" th:id="'expert' + ${itemStat.index} + 'NomInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'expert' + ${itemStat.index} + 'PrenomInput'">Prénom</label></td>
-                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].prenom}" th:id="'expert' + ${itemStat.index} + 'PrenomInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'expert' + ${itemStat.index} + 'MailInput'">Mail</label></td>
-                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].mail}" th:id="'expert' + ${itemStat.index} + 'MailInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'expert' + ${itemStat.index} + 'TelephoneInput'">Numéro de Téléphone</label></td>
-                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].telephone}" th:id="'expert' + ${itemStat.index} + 'TelephoneInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'expert' + ${itemStat.index} + 'EntiterattachementInput'">Entité de Rattachement</label></td>
-                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].entiteRattachement}" th:id="'expert' + ${itemStat.index} + 'EntiterattachementInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'">Laboratoire de rattachement</label></td>
-                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].laboratoireRattachement}" th:id="'expert' + ${itemStat.index} + 'LaboratoirerattachementInput'" required /></td>
-                        </tr>
-
-                        <tr>
-                            <td><label th:for="'expert' + ${itemStat.index} + 'SpecialiteInput'">Specialité</label></td>
-                            <td><input type="text" th:field="*{listeExperts[__${itemStat.index}__].specialite}" th:id="'expert' + ${itemStat.index} + 'SpecialiteInput'" required /></td>
-                        </tr>
-                    </table>
-                </article>
-            </section>
-            
-            <section>
-                <label for="StatutInput">Statut du traitement du projet</label>
-                <input type="text" th:field="*{statut}" id="StatutInput" required />
-            </section>
-            
-            <input type="submit" value="Valider les modifications" />
-        </form>
+                        <input class="btn btn-success mt-3" type="submit" value="Valider les modifications" />
+                        <input class="btn btn-warning mt-3" type="reset" value="Réinitialiser" />
+                    </div>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
