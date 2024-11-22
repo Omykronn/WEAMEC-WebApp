@@ -126,4 +126,16 @@ public class ProjetController {
         
         return "viewProjet";
     }
+    
+    /**
+     * Fonction associée à la suppression d'un projet
+     * @param id Identifiant du projet à supprimer
+     * @return   Redirection vers la page principale
+     */
+    @GetMapping("/projects/{id}/drop")
+    public ModelAndView dropProject(@PathVariable("id") int id) {
+        projetService.deleteProjet(id);
+        
+        return new ModelAndView("redirect:/projects");
+    }
 }
