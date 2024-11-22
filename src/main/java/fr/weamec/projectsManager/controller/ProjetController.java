@@ -4,7 +4,7 @@
  */
 package fr.weamec.projectsManager.controller;
 
-import fr.weamec.projectsManager.model.Projet;
+import fr.weamec.projectsManager.model.*;
 import fr.weamec.projectsManager.service.*;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class ProjetController {
     
     @Autowired
     TechnologieService technologieService;
-    
+   
     /**
      * Fonction associée à l'affichage de la page dashboard
      * @param model Model fourni par Spring
@@ -112,5 +112,18 @@ public class ProjetController {
         }
         
         return pageName;
+    }
+    
+    /**
+     * Fonction associée à l'enregistrement des modifications d'un projet
+     * @param projet Instance du projet modifié
+     * @param model  Model fourni par Spring
+     * @return       Nom de la page HTML à afficher
+     */
+    @PostMapping("/projects/{id}")
+    public String saveProject(@ModelAttribute Projet projet, Model model) {        
+        projet = projetService.save(projet);
+        
+        return "viewProjet";
     }
 }

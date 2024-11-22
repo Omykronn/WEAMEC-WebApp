@@ -28,11 +28,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <h1>Modifier le projet</h1>
                 </div>
 
-                <form method="post" id="formProjet" th:action="@{/projects/save}" th:object="${projet}">               
+                <form method="post" id="formProjet" th:action="@{/projects/{id}(id=${projet.id})}" th:object="${projet}">               
                     <div class="col-sm-12 my-5" id="general">
                         <h2>Elements Clefs du Projet</h2>
                         
-                        <input class="form-control" type="number" th:field="*{id}" required disabled hidden/>
+                        <input class="form-control" type="hidden" th:field="*{id}" required/>
                         
                         <table class="table">
                             <tr>
@@ -83,12 +83,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <tr>
                                 <th><label class="form-label" for="DatedebutInput">Date de début</label></th>
                                 <td><input class="form-control" type="date" th:field="*{dateDebut}" id="DatedebutInput" required /></td>
-                            </td>
+                            </tr>
         
                             <tr>
                                 <th><label class="form-label" for="DatefinInput">Date de fin</label></th>
                                 <td><input class="form-control" type="date" th:field="*{dateFin}" id="DatefinInput" required /></td>
-                            </td>
+                            </tr>
         
                             <tr>
                                 <th><label class="form-label" for="DescriptionInput">Description synthétique du projet</label></th>
@@ -100,8 +100,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="col-sm-12 my-5" id="coordinateurScientifique">
                         <h2>Coordinateur Scientifique</h2>
                         
-                        <input class="form-control" type="number" th:field="*{coordinateurScientifique.id}" required disabled hidden/>
-                        <input class="form-control" type="number" th:field="*{coordinateurScientifique.structureRattachement.id}" required disabled hidden/>
+                        <input class="form-control" type="hidden" th:field="*{coordinateurScientifique.id}" required/>
+                        <input class="form-control" type="hidden" th:field="*{coordinateurScientifique.structureRattachement.id}" required/>
                         
                         <table class="table">
                             <tr>
@@ -165,8 +165,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <h2>Partenaires</h2>
                         
                         <div class="my-5" th:each="partenaire, itemStat: *{listePartenaires}">
-                            <input class="form-control" type="number" th:field="*{listePartenaires[__${itemStat.index}__].id}" required disabled hidden/>
-                            <input class="form-control" type="number" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.id}" required disabled hidden/>
+                            <input class="form-control" type="hidden" th:field="*{listePartenaires[__${itemStat.index}__].id}" required/>
+                            <input class="form-control" type="hidden" th:field="*{listePartenaires[__${itemStat.index}__].idProjet}" required/>
+                            <input class="form-control" type="hidden" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.id}" required/>
                             
                             <table class="table">
                                 <tr>
@@ -373,7 +374,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <h2>Experts suceptibles de réaliser l'évaluation du projet</h2>
                         
                         <div class="my-5" th:each="expert, itemStat: *{listeExperts}">
-                            <input class="form-control" type="number" th:field="*{listeExperts[__${itemStat.index}__].id}" required hidden/>
+                            <input class="form-control" type="hidden" th:field="*{listeExperts[__${itemStat.index}__].id}" required />
+                            <input class="form-control" type="hidden" th:field="*{listeExperts[__${itemStat.index}__].idProjet}" required />
                             
                             <table class="table">
                                 <tr>
