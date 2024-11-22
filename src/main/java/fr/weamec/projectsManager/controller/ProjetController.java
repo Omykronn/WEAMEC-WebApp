@@ -138,4 +138,13 @@ public class ProjetController {
         
         return new ModelAndView("redirect:/projects");
     }
+    
+    /**
+     * Fonction associée à l'affichage de la page d'import
+     * @return Nom de la page HTML à afficher
+     */
+    @GetMapping("/projects/import")
+    public String importProject() {
+        return "importProjet";
+    }
 }
