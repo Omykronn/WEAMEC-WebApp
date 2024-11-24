@@ -57,7 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <li>Tel. : <span th:text="${projet.coordinateurScientifique.telephone}"></li>
                                     </ul>
                                 </td>
-                                <td><a th:href="'https://' + ${projet.siteWeb}" th:text="${projet.siteWeb}"></a></td>
+                                <td><a th:href="'https://' + ${projet.siteWeb}" th:text="${projet.siteWeb}" target="_blank"></a></td>
                                 <td><a th:href="@{/projects/{id}(id=${projet.id})}"><button class="btn btn-primary">Consulter</button></a></td>
                             </tr>
                         </tbody>
