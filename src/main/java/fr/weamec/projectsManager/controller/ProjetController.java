@@ -114,7 +114,7 @@ public class ProjetController {
             model.addAttribute("allTypes", typeService.getTypes());
         }
         else {
-            pageName = "unknownProject";
+            pageName = "error";
         }
         
         return pageName;
