@@ -704,7 +704,7 @@ public class Projet {
      * defisWeamec Setter
      * @param defisWeamec Defis WEAMEC
      */
-    public void setDefiWeamec(List<Defi> defisWeamec) {
+    public void setDefisWeamec(List<Defi> defisWeamec) {
         this.defisWeamec = defisWeamec;
     }
 
