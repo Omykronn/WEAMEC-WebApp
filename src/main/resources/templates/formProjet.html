@@ -418,7 +418,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     
                     <div class="col-sm-12 my-5">
                         <label class="form-label" for="StatutInput">Statut du traitement du projet</label>
-                        <input class="form-control" type="text" th:field="*{statut}" id="StatutInput" required />
+                        <select th:field="*{statut}" id="StatutInput" class="form-select">
+                            <option value="À VÉRIFIER">À VÉRIFIER</option>
+                            <option value="VALIDÉ">VALIDÉ</option>
+                            <option value="REJETÉ">REJETÉ</option>
+                        </select>
 
                         <input class="btn btn-success mt-3" type="submit" value="Valider les modifications" />
                         <input class="btn btn-warning mt-3" type="reset" value="Réinitialiser" />

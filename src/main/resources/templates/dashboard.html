@@ -47,7 +47,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             </tr>
 
                             <tr th:each="projet: ${projets}">
-                                <td scope="row" th:text="${projet.statut}"></td>
+                                <td scope="row">
+                                    <button th:if="${projet.statut == 'À VÉRIFIER'}" th:text="${projet.statut}" class="btn btn-warning" disabled></button>
+                                    <button th:if="${projet.statut == 'VALIDÉ'}" th:text="${projet.statut}" class="btn btn-success" disabled></button>
+                                    <button th:if="${projet.statut == 'REJETÉ'}" th:text="${projet.statut}" class="btn btn-danger" disabled></button>
+                                </td>
                                 <td th:text="${projet.nomAcro}"></td>
                                 <td th:text="${projet.coordinateurScientifique.structureRattachement.etablissement}"></td>
                                 <td>

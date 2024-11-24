@@ -92,7 +92,7 @@ public class ProjetService {
      */
     public Projet importFromJSON(JSONObject json) {       
         Projet projet = new Projet(new CoordinateurScientifique((JSONObject) json.get("coordinateurScientifique")),
-                                   "A VERIFIER",
+                                   "À VÉRIFIER",
                                    (String) json.get("nomAcro"),
                                    (String) json.get("nomComplet"),
                                    (String) json.get("categorie"),
