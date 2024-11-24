@@ -6,7 +6,12 @@ package fr.weamec.projectsManager.controller;
 
 import fr.weamec.projectsManager.model.*;
 import fr.weamec.projectsManager.service.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Optional;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +19,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Controller pour Projet
@@ -133,10 +139,10 @@ public class ProjetController {
      * @return   Redirection vers la page principale
      */
     @GetMapping("/projects/{id}/drop")
-    public ModelAndView dropProject(@PathVariable("id") int id) {
+    public String dropProject(@PathVariable("id") int id) {
         projetService.deleteProjet(id);
         
-        return new ModelAndView("redirect:/projects");
+        return "redirect:/projects";
     }
     
     /**
@@ -146,5 +152,26 @@ public class ProjetController {
     @GetMapping("/projects/import")
     public String importProject() {
         return "importProjet";
+    }
+    
+    /**
+     * Fonction associée à l'import d'un projet depuis un fichier importé depuis un formulaire
+     * @param file  Fichier à importé
+     * @return      Redirection vers la page principale
+     * @throws IOException
+     * @throws ParseException 
+     */
+    @PostMapping("/projects/import")
+    public String importProjectFromJson(@RequestParam("file") MultipartFile file) throws IOException, ParseException {
+        // TODO : Gestion des erreurs
+        
+        if (file.getContentType().equals("application/json")) {
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(new InputStreamReader(file.getInputStream(), "UTF-8"));
+            
+            projetService.importFromJSON(json);
+        }
+        
+        return "redirect:/projects";
     }
 }
