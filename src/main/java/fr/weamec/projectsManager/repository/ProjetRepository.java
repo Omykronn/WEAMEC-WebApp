@@ -19,9 +19,8 @@ import java.util.List;
 @Repository
 public interface ProjetRepository extends CrudRepository<Projet, Integer> {
     /**
-     * Retourne les projets d'un coordinateur scientifique
-     * @param coordinateurScientifique  Coordinateur Scientifique cible
-     * @return                          Liste des Projets avec le Coordinateur Scientifique spécifié
+     * Retourne les projets dans l'ordre décroissant
+     * @return Liste des Projets
      */
-    public List<Projet> findByCoordinateurScientifique(CoordinateurScientifique coordinateurScientifique);
+    public List<Projet> findAllByOrderByIdDesc();
 }

@@ -65,7 +65,7 @@ public class ProjetService {
      * @return Liste de tous les projets de la base de données
      */
     public Iterable<Projet> getProjets() {
-        return projetRepo.findAll();
+        return projetRepo.findAllByOrderByIdDesc();
     }
     
     /**
