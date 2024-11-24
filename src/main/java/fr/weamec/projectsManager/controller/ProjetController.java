@@ -157,21 +157,35 @@ public class ProjetController {
     /**
      * Fonction associée à l'import d'un projet depuis un fichier importé depuis un formulaire
      * @param file  Fichier à importé
+     * @param model Model fourni par Spring
      * @return      Redirection vers la page principale
-     * @throws IOException
-     * @throws ParseException 
      */
     @PostMapping("/projects/import")
-    public String importProjectFromJson(@RequestParam("file") MultipartFile file) throws IOException, ParseException {
-        // TODO : Gestion des erreurs
+    public String importProjectFromJson(@RequestParam("file") MultipartFile file, Model model) {    
+        String viewName;
         
         if (file.getContentType().equals("application/json")) {
-            JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(new InputStreamReader(file.getInputStream(), "UTF-8"));
-            
-            projetService.importFromJSON(json);
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject json = (JSONObject) parser.parse(new InputStreamReader(file.getInputStream(), "UTF-8"));
+
+                projetService.importFromJSON(json);
+                viewName = "redirect:/projects";
+            }
+            catch (IOException e) {
+                model.addAttribute("errorMessage", "Une erreur est survenue, merci de réessayer.");
+                viewName = "importProjet";
+            }
+            catch (ParseException e) {
+                model.addAttribute("errorMessage", "La structure du fichier de correspond pas, merci d'utiliser celui issu du logiciel client.");
+                viewName = "importProjet";
+            }
+        }
+        else {
+            model.addAttribute("errorMessage", "La structure du fichier de correspond pas, merci d'utiliser celui issu du logiciel client.");
+            viewName = "importProjet";
         }
         
-        return "redirect:/projects";
+        return viewName;
     }
 }

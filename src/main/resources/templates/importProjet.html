@@ -28,6 +28,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <h1>Importer un projet</h1>
                 </div>
 
+                <div th:if="${errorMessage}" class="alert alert-primary" role="alert" th:text="${errorMessage}"></div>
+
                 <div class="col-sm-12">
                     <form th:action="@{/projects/import}" enctype="multipart/form-data" method="post">
                         <input type="file" name="file" id="fileInput" class="form-control" required>
