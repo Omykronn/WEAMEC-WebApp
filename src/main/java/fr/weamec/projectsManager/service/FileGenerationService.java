@@ -4,12 +4,21 @@
  */
 package fr.weamec.projectsManager.service;
 
+import fr.weamec.projectsManager.model.Projet;
 import org.springframework.stereotype.Service;
-
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashSet;
 
 /**
  * Service pour la génération des fichiers
@@ -46,5 +55,20 @@ public class FileGenerationService {
      */
     private String generateHtml(String template, Context context) {
         return templateEngine.process(template, context);
-    } 
+    }
+    
+    /**
+     * Génère le ByteArray d'un dossier PDF d'un projet
+     * @param projet Projet dont le dossier doit être généré
+     * @return ByteArray du fichier PDF
+     */
+    public byte[] generateCaseFile(Projet projet) {
+        Context context = new Context();
+        context.setVariable("projet", projet);
+        
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        HtmlConverter.convertToPdf(generateHtml("caseFile_template", context), output);
+        
+        return output.toByteArray();
+    }
 }
