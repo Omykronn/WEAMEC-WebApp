@@ -69,6 +69,14 @@ public class ProjetService {
     }
     
     /**
+     * Renvoie tous les projets par acronyme dans l'ordre alphabétique
+     * @return Liste de tous les projets de la base de données
+     */
+    public Iterable<Projet> getProjetsAlphabetic() {
+        return projetRepo.findAllByOrderByNomAcroAscIdDesc();
+    }
+    
+    /**
      * Supprime un projet par son identifiant
      * @param id Identifiant du projet à supprimer
      */

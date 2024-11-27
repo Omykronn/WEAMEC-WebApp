@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -95,5 +96,19 @@ public class FileController {
         byte[] content = generator.generateAll(projet);
         
         prepareResponse(projet.getNomAcro() + ".zip", "application/zip", content, response);
+    }
+    
+    /**
+     * Fonction associée à l'affichage du formulaire pour la génération des rendus
+     * @param model Model fourni par Spring
+     * @return      Nom de la page HTML à afficher
+     */
+    @GetMapping("/file/generate")
+    public String generateForm(Model model) {
+        Iterable<Projet> projets = projetService.getProjetsAlphabetic();
+        
+        model.addAttribute("projets", projets);
+        
+        return "formFile";
     }
 }

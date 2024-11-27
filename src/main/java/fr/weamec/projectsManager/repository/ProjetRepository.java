@@ -23,4 +23,10 @@ public interface ProjetRepository extends CrudRepository<Projet, Integer> {
      * @return Liste des Projets
      */
     public List<Projet> findAllByOrderByIdDesc();
+    
+    /**
+     * Retourne les projets par acronyme dans l'ordre alphabétique
+     * @return Liste des projets
+     */
+    public List<Projet> findAllByOrderByNomAcroAscIdDesc();
 }
