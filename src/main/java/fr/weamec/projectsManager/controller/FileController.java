@@ -26,6 +26,17 @@ public class FileController {
     @Autowired
     ProjetService projetService;
     
+    private void prepareResponse(String fileName, String mimeType, byte[] content, HttpServletResponse response) {
+        response.setContentType(mimeType);
+        response.setContentLength((int) content.length);
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + fileName + "\""));
+        
+        try {
+            response.getOutputStream().write(content);
+        }
+        catch (IOException e) {}
+    }
+    
     /**
      * Fonction relative au téléchargement d'un dossier d'un projet en format PDF
      * @param request   Requête HTML venant du servlet
@@ -38,14 +49,7 @@ public class FileController {
         Projet projet = projetService.getProjet(id).get();
         byte[] content = generator.generateCaseFile(projet);
         
-        response.setContentType("application/pdf");
-        response.setContentLength((int) content.length);
-        response.setHeader("Content-Disposition", String.format("attachment; filename=\"Dossier-" + projet.getNomAcro() + ".pdf\""));
-        
-        try {
-            response.getOutputStream().write(content);
-        }
-        catch (IOException e) {}
+        prepareResponse("Dossier-" + projet.getNomAcro() + ".pdf", "application/pdf", content, response);
     }  
     
     /**
@@ -60,14 +64,7 @@ public class FileController {
         Projet projet = projetService.getProjet(id).get();
         byte[] content = generator.generateSummary(projet);
         
-        response.setContentType("application/pdf");
-        response.setContentLength((int) content.length);
-        response.setHeader("Content-Disposition", String.format("attachment; filename=\"Résumé-" + projet.getNomAcro() + ".pdf\""));
-        
-        try {
-            response.getOutputStream().write(content);
-        }
-        catch (IOException e) {}
+        prepareResponse("Résumé-" + projet.getNomAcro() + ".pdf", "application/pdf", content, response);
     }  
     
     /**
@@ -82,13 +79,6 @@ public class FileController {
         Projet projet = projetService.getProjet(id).get();
         byte[] content = generator.generateHtmlPage(projet);
         
-        response.setContentType("text/html");
-        response.setContentLength((int) content.length);
-        response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + projet.getNomAcro() + ".html\""));
-        
-        try {
-            response.getOutputStream().write(content);
-        }
-        catch (IOException e) {}
+        prepareResponse(projet.getNomAcro() + ".html", "text/html", content, response);
     } 
 }
