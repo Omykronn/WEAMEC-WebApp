@@ -47,4 +47,26 @@ public class FileController {
         }
         catch (IOException e) {}
     }  
+    
+    /**
+     * Fonction relative au téléchargement de la présentation d'un projet en format PDF
+     * @param request   Requête HTML venant du servlet
+     * @param response  Réponse HTML venant du servelet
+     * @param id        Identifiant du projet
+     */
+    @GetMapping("/file/{id}/summary")
+    public void downloadSummary(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") int id) {
+        // TODO : Gerer l'objet Optional (si id absent)
+        Projet projet = projetService.getProjet(id).get();
+        byte[] content = generator.generateSummary(projet);
+        
+        response.setContentType("application/pdf");
+        response.setContentLength((int) content.length);
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"Résumé-" + projet.getNomAcro() + ".pdf\""));
+        
+        try {
+            response.getOutputStream().write(content);
+        }
+        catch (IOException e) {}
+    }  
 }
