@@ -67,7 +67,7 @@ public class FileGenerationService {
     
     /**
      * Génère le ByteArray d'une diapositive de présentation PDF d'un projet
-     * @param projet Projet dont la diapositive doit être généré
+     * @param projet Projet dont la diapositive doit être générée
      * @return ByteArray du fichier PDF
      */
     public byte[] generateSummary(Projet projet) {
@@ -78,5 +78,17 @@ public class FileGenerationService {
         HtmlConverter.convertToPdf(generateHtml("summary_template", context), output);
         
         return output.toByteArray();
+    }
+    
+    /**
+     * Génère le ByteArray de la page HTML d'un projet
+     * @param projet Projet dont la page HTML doit être générée
+     * @return ByteArray du fichier HTML
+     */
+    public byte[] generateHtmlPage(Projet projet) {
+        Context context = new Context();
+        context.setVariable("projet", projet);
+        
+        return generateHtml("htmlPage_template", context).getBytes();
     }
 }
