@@ -45,7 +45,7 @@ public class FileController {
      */
     @GetMapping("/file/{id}/casefile")
     public void downloadCaseFile(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") int id) {
-        // TODO : Gerer l'objet Optional (si id absent)
+        // Si le projet n'existe pas, affiche une erreur dans le terminal, mais affiche bien la page error
         Projet projet = projetService.getProjet(id).get();
         byte[] content = generator.generateCaseFile(projet);
         
@@ -60,7 +60,7 @@ public class FileController {
      */
     @GetMapping("/file/{id}/summary")
     public void downloadSummary(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") int id) {
-        // TODO : Gerer l'objet Optional (si id absent)
+        // Si le projet n'existe pas, affiche une erreur dans le terminal, mais affiche bien la page error
         Projet projet = projetService.getProjet(id).get();
         byte[] content = generator.generateSummary(projet);
         
@@ -75,7 +75,7 @@ public class FileController {
      */
     @GetMapping("/file/{id}/html")
     public void downloadHtmlPage(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") int id) {
-        // TODO : Gerer l'objet Optional (si id absent)
+        // Si le projet n'existe pas, affiche une erreur dans le terminal, mais affiche bien la page error
         Projet projet = projetService.getProjet(id).get();
         byte[] content = generator.generateHtmlPage(projet);
         
@@ -90,7 +90,7 @@ public class FileController {
      */
     @GetMapping("/file/{id}/all")
     public void downloadAll(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") int id){
-        // TODO : Gerer l'objet Optional (si id absent)
+        // Si le projet n'existe pas, affiche une erreur dans le terminal, mais affiche bien la page error
         Projet projet = projetService.getProjet(id).get();
         byte[] content = generator.generateAll(projet);
         
