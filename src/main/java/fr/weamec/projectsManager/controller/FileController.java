@@ -81,4 +81,19 @@ public class FileController {
         
         prepareResponse(projet.getNomAcro() + ".html", "text/html", content, response);
     } 
+    
+    /**
+     * Fonction relative au téléchargement de tous les fichiers sur un projet dans un fichier ZIP
+     * @param request   Requête HTML venant du servlet
+     * @param response  Réponse HTML venant du servelet
+     * @param id        Identifiant du projet 
+     */
+    @GetMapping("/file/{id}/all")
+    public void downloadAll(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") int id){
+        // TODO : Gerer l'objet Optional (si id absent)
+        Projet projet = projetService.getProjet(id).get();
+        byte[] content = generator.generateAll(projet);
+        
+        prepareResponse(projet.getNomAcro() + ".zip", "application/zip", content, response);
+    }
 }

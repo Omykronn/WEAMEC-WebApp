@@ -12,6 +12,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import com.itextpdf.html2pdf.HtmlConverter;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Service pour la génération des fichiers
@@ -19,6 +21,9 @@ import java.io.ByteArrayOutputStream;
  */
 @Service
 public class FileGenerationService {
+    @Autowired
+    ZipService zipper;
+    
     private ClassLoaderTemplateResolver templateResolver;
     private TemplateEngine templateEngine;
     
@@ -90,5 +95,29 @@ public class FileGenerationService {
         context.setVariable("projet", projet);
         
         return generateHtml("htmlPage_template", context).getBytes();
+    }
+    
+    /**
+     * Génère un fichier ZIP avec le dossier, la présentation et la page HTML d'un projet
+     * @param projet Projet cible
+     * @return ByteArray du fichier ZIP
+     */
+    public byte[] generateAll(Projet projet) {
+        ArrayList<String> names = new ArrayList();
+        ArrayList<byte[]> files = new ArrayList();
+        
+        Context context = new Context();
+        context.setVariable("projet", projet);
+        
+        names.add("Dossier-" + projet.getNomAcro() + ".pdf");
+        files.add(generateCaseFile(projet));
+        
+        names.add("Résumé-" + projet.getNomAcro() + ".pdf");
+        files.add(generateSummary(projet));
+        
+        names.add(projet.getNomAcro() + ".html");
+        files.add(generateHtmlPage(projet));
+        
+        return zipper.createZip(names, files);
     }
 }
