@@ -120,4 +120,42 @@ public class FileGenerationService {
         
         return zipper.createZip(names, files);
     }
+    
+    /**
+     * Génère un fichier ZIP un rendu pour plusieurs projets
+     * @param projets   Liste des projets
+     * @param template  Nom du rendu
+     * @return          ByteArray du fichier ZIP
+     */
+    public byte[] generateAll(Iterable<Projet> projets, String template) {
+        ArrayList<String> names = new ArrayList();
+        ArrayList<byte[]> files = new ArrayList();
+        
+        String ext = "";
+        
+        for (Projet projet: projets) {
+            switch (template) {
+                case "casefile":
+                    ext = ".pdf";
+                    files.add(generateCaseFile(projet));
+                    break;
+
+                case "html":
+                    ext = ".html";
+                    files.add(generateHtmlPage(projet));
+                    break;
+
+                case "summary":
+                    ext = ".pdf";
+                    files.add(generateSummary(projet));
+                    break;
+            }
+            
+            if (!ext.equals("")) {
+                names.add(projet.getNomAcro() + ext);
+            }
+        }
+        
+        return zipper.createZip(names, files);
+    }
 }
