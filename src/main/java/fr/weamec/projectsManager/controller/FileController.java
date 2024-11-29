@@ -4,6 +4,7 @@
  */
 package fr.weamec.projectsManager.controller;
 
+import fr.weamec.projectsManager.service.file.HtmlBasedFileGenerationService;
 import fr.weamec.projectsManager.model.Projet;
 import fr.weamec.projectsManager.service.*;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FileController {
     @Autowired
-    FileGenerationService generator;
+    HtmlBasedFileGenerationService generator;
     
     @Autowired
     ProjetService projetService;
