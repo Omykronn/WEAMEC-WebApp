@@ -4,7 +4,7 @@
  */
 package fr.weamec.projectsManager.controller;
 
-import fr.weamec.projectsManager.service.file.HtmlBasedFileGenerationService;
+import fr.weamec.projectsManager.service.file.*;
 import fr.weamec.projectsManager.model.Projet;
 import fr.weamec.projectsManager.service.*;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FileController {
     @Autowired
-    HtmlBasedFileGenerationService generator;
+    HtmlBasedFileGenerationService htmlPdfGenerator;
+    
+    @Autowired
+    ExcelFileGenerationService excelGenerator;
     
     @Autowired
     ProjetService projetService;
@@ -59,7 +62,7 @@ public class FileController {
     public void downloadCaseFile(HttpServletResponse response, @PathVariable("id") int id) {
         // Si le projet n'existe pas, affiche une erreur dans le terminal, mais affiche bien la page error
         Projet projet = projetService.getProjet(id).get();
-        byte[] content = generator.generateCaseFile(projet);
+        byte[] content = htmlPdfGenerator.generateCaseFile(projet);
         
         prepareResponse("Dossier-" + projet.getNomAcro() + ".pdf", "application/pdf", content, response);
     }  
@@ -73,7 +76,7 @@ public class FileController {
     public void downloadSummary(HttpServletResponse response, @PathVariable("id") int id) {
         // Si le projet n'existe pas, affiche une erreur dans le terminal, mais affiche bien la page error
         Projet projet = projetService.getProjet(id).get();
-        byte[] content = generator.generateSummary(projet);
+        byte[] content = htmlPdfGenerator.generateSummary(projet);
         
         prepareResponse("Résumé-" + projet.getNomAcro() + ".pdf", "application/pdf", content, response);
     }  
@@ -87,7 +90,7 @@ public class FileController {
     public void downloadHtmlPage(HttpServletResponse response, @PathVariable("id") int id) {
         // Si le projet n'existe pas, affiche une erreur dans le terminal, mais affiche bien la page error
         Projet projet = projetService.getProjet(id).get();
-        byte[] content = generator.generateHtmlPage(projet);
+        byte[] content = htmlPdfGenerator.generateHtmlPage(projet);
         
         prepareResponse(projet.getNomAcro() + ".html", "text/html", content, response);
     } 
@@ -101,7 +104,7 @@ public class FileController {
     public void downloadAll(HttpServletResponse response, @PathVariable("id") int id){
         // Si le projet n'existe pas, affiche une erreur dans le terminal, mais affiche bien la page error
         Projet projet = projetService.getProjet(id).get();
-        byte[] content = generator.generateAll(projet);
+        byte[] content = htmlPdfGenerator.generateAll(projet);
         
         prepareResponse(projet.getNomAcro() + ".zip", "application/zip", content, response);
     }
@@ -140,6 +143,17 @@ public class FileController {
             }
         }
         
-        prepareResponse(template + ".zip", "application/zip", generator.generateAll(projets, template), response);
+        prepareResponse(template + ".zip", "application/zip", htmlPdfGenerator.generateAll(projets, template), response);
     }
+    
+    /**
+     * Fonction relative au téléchargement du fichier Excel récapitulatif
+     * @param response  Réponse HTML venant du servelet
+     */
+    @GetMapping("/file/excel")
+    public void downloadHtmlPage(HttpServletResponse response) throws IOException {
+        byte[] content = excelGenerator.generateExcel(projetService.getProjets());
+        
+        prepareResponse("Projets W2 - Infos.xlsx", "application/xlsx", content, response);
+    } 
 }
