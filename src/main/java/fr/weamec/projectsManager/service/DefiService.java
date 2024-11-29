@@ -76,4 +76,12 @@ public class DefiService {
         
         return defis;
     }
+    
+    /**
+     * Renvoie le nombre de defis
+     * @return Nombre de defis
+     */
+    public int count() {
+        return (int) defiRepo.count();
+    }
 }

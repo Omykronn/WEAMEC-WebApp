@@ -59,6 +59,14 @@ public class ThemeService {
     }
     
     /**
+     * Renvoie le nombre de themes
+     * @return Nombre de themes
+     */
+    public int count() {
+        return (int) themeRepo.count();
+    }
+    
+    /**
      * Génère la liste des Themes depuis leur index stocké dans un tableau JSON
      * @param jsonArray Tableau contenant les index
      * @return Liste des Themes

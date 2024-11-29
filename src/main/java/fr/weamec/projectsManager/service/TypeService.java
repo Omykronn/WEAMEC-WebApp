@@ -47,6 +47,14 @@ public class TypeService {
     }
     
     /**
+     * Renvoie le nombre de types
+     * @return Nombre de types
+     */
+    public int count() {
+        return (int) typeRepo.count();
+    }
+    
+    /**
      * Sauvegarde un type dans la base de données
      * @param type Instance de Type à sauvegarder
      * @return Instance de Type sauvegardé

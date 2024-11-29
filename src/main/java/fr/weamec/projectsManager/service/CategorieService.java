@@ -54,4 +54,12 @@ public class CategorieService {
     public Categorie save(Categorie categorie) {
         return categorieRepo.save(categorie);
     }
+    
+    /**
+     * Renvoie le nombre de categories
+     * @return Nombre de categories
+     */
+    public int count() {
+        return (int) categorieRepo.count();
+    }
 }

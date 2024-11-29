@@ -59,6 +59,14 @@ public class TechnologieService {
     }
     
     /**
+     * Renvoie le nombre de technologies
+     * @return Nombre de technologies
+     */
+    public int count() {
+        return (int) technologieRepo.count();
+    }
+    
+    /**
      * Génère la liste des Technologies depuis leur index stocké dans un tableau JSON
      * @param jsonArray Tableau contenant les index
      * @return Liste des Technologies
