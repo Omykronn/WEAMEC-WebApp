@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package fr.weamec.projectsManager.service;
+package fr.weamec.projectsManager.service.file;
 
 import fr.weamec.projectsManager.model.Projet;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Service pour la génération des fichiers
+ * Service pour la génération des fichiers HTML & PDF
  * @author simon
  */
 @Service
-public class FileGenerationService {
+public class HtmlBasedFileGenerationService {
     @Autowired
-    ZipService zipper;
+    ZipFileGenerationService zipper;
     
     private ClassLoaderTemplateResolver templateResolver;
     private TemplateEngine templateEngine;
@@ -30,7 +30,7 @@ public class FileGenerationService {
     /**
      * Constructeur par défaut, initie les objects propres à Thymeleaf pour la génération de page Web
      */
-    public FileGenerationService() {
+    public HtmlBasedFileGenerationService() {
         // Initie un templateResolver de Thymeleaf
         templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setTemplateMode(TemplateMode.HTML);
