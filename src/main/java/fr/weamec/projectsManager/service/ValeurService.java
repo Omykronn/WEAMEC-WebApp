@@ -59,6 +59,14 @@ public class ValeurService {
     }
     
     /**
+     * Renvoie le nombre de valeurs
+     * @return Nombre de valeurs
+     */
+    public int count() {
+        return (int) valeurRepo.count();
+    }
+    
+    /**
      * Génère la liste des Valeurs depuis leur index stocké dans un tableau JSON
      * @param jsonArray Tableau contenant les index
      * @return Liste des Valeurs

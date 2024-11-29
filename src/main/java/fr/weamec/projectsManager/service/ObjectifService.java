@@ -59,6 +59,14 @@ public class ObjectifService {
     }
     
     /**
+     * Renvoie le nombre d'objectifs
+     * @return Nombre d'objectifs
+     */
+    public int count() {
+        return (int) objectifRepo.count();
+    }
+    
+    /**
      * Génère la liste des Objectifs depuis leur index stocké dans un tableau JSON
      * @param jsonArray Tableau contenant les index
      * @return Liste des Objectifs

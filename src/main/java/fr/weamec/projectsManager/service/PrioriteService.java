@@ -59,6 +59,14 @@ public class PrioriteService {
     }
     
     /**
+     * Renvoie le nombre de priorites
+     * @return Nombre de priorites
+     */
+    public int count() {
+        return (int) prioriteRepo.count();
+    }
+    
+    /**
      * Génère la liste des Priorites depuis leur index stocké dans un tableau JSON
      * @param jsonArray Tableau contenant les index
      * @return Liste des Priorites
