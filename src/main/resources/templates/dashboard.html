@@ -17,6 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item"><a class="nav-link text-white" th:href="@{/projects}">Tous les projets</a></li>
                         <li class="nav-item"><a class="nav-link text-white" th:href="@{/projects/import}">Importer un projet</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" th:href="@{/file/generate}">Générer les rendus</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,7 +63,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                     </ul>
                                 </td>
                                 <td><a th:href="'https://' + ${projet.siteWeb}" th:text="${projet.siteWeb}" target="_blank"></a></td>
-                                <td><a th:href="@{/projects/{id}(id=${projet.id})}"><button class="btn btn-primary">Consulter</button></a></td>
+                                <td>
+                                    <div class="container text-center">
+                                        <div class="row">
+                                            <a th:href="@{/projects/{id}(id=${projet.id})}"><button class="btn btn-primary">Consulter</button></a>
+                                        </div>
+                                        <div class="row">
+                                            <a th:href="@{/file/{id}/all(id=${projet.id})}"><button class="btn btn-secondary mt-2">Tous les rendus</button></a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
