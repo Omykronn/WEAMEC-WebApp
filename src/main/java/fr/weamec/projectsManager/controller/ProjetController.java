@@ -8,6 +8,8 @@ import fr.weamec.projectsManager.model.*;
 import fr.weamec.projectsManager.service.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Optional;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -141,6 +143,24 @@ public class ProjetController {
     @GetMapping("/projects/{id}/drop")
     public String dropProject(@PathVariable("id") int id) {
         projetService.deleteProjet(id);
+        
+        return "redirect:/projects";
+    }
+    
+    /**
+     * Fonction associée à la clôturation d'un dossier
+     * @param id Identifiant du projet à clôturer
+     * @return   Redirection vers la page principale
+     */
+    @GetMapping("/projects/{id}/close")
+    public String closeProject(@PathVariable("id") int id) {
+        Optional<Projet> projet = projetService.getProjet(id);
+        Calendar calendar = Calendar.getInstance();
+        
+        if (projet.isPresent()) {
+            projet.get().setFinTraitement(new Date(calendar.getTime().getTime()));
+            projetService.save(projet.get());
+        }
         
         return "redirect:/projects";
     }
