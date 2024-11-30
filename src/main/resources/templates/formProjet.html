@@ -29,11 +29,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <h1>Modifier le projet</h1>
                 </div>
 
-                <form method="post" id="formProjet" th:action="@{/projects/{id}(id=${projet.id})}" th:object="${projet}">               
+                <form method="post" id="formProjet" th:action="@{/projects/{id}(id=${projet.id})}" th:object="${projet}">   
+                    
                     <div class="col-sm-12 my-5" id="general">
                         <h2>Elements Clefs du Projet</h2>
                         
                         <input class="form-control" type="hidden" th:field="*{id}" required/>
+                        <input class="form-control" type="hidden" th:field="*{debutTraitement}" required/>
                         
                         <table class="table">
                             <tr>
@@ -45,12 +47,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <th><label class="form-label" for="NomcompletInput">Nom du projet (explicitation de l'acronyme)</label></th>
                                 <td><input class="form-control" type="text" th:field="*{nomComplet}" id="NomcompletInput" required /></td>
                             </tr>
-        
+                            
+                            <tr>
+                                <th><label class="form-label" for="anneeSelectionInput">Année de sélection)</label></th>
+                                <td><input class="form-control" type="number" th:field="*{anneeSelection}" id="anneeSelectionInput" required /></td>
+                            </tr>
+                            
                             <tr>
                                 <th scope="col">Catégorie</th>
                                 <td>
                                     <div class="form-check" th:each="categorie : ${allCategories}">
-                                        <input class="form-check-input" type="radio" th:value="${categorie.nom}" th:field="*{categorie}" th:id="'categorie' + ${categorie.id}"/>
+                                        <input class="form-check-input" type="radio" th:value="${categorie.id}" th:field="*{categorie}" th:id="'categorie' + ${categorie.id}"/>
                                         <label class="form-check-label" th:for="'categorie' + ${categorie.id}" th:text="${categorie.nom}"> Categorie </label>
                                     </div>
                                 </td>
@@ -60,7 +67,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <th scope="col">Type</th>
                                 <td>
                                     <div class="form-check" th:each="type : ${allTypes}">
-                                        <input class="form-check-input" type="radio" th:value="${type.nom}" th:field="*{type}" th:id="'type' + ${type.id}"/>
+                                        <input class="form-check-input" type="radio" th:value="${type.id}" th:field="*{type}" th:id="'type' + ${type.id}"/>
                                         <label class="form-check-label" th:for="'type' + ${type.id}" th:text="${type.nom}"> Type </label>
                                     </div>
                                 </td>
@@ -417,14 +424,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </div>
                     </div>
                     
-                    <div class="col-sm-12 my-5">
-                        <label class="form-label" for="StatutInput">Statut du traitement du projet</label>
-                        <select th:field="*{statut}" id="StatutInput" class="form-select">
-                            <option value="À VÉRIFIER">À VÉRIFIER</option>
-                            <option value="VALIDÉ">VALIDÉ</option>
-                            <option value="REJETÉ">REJETÉ</option>
-                        </select>
-
+                    <div class="col-sm-12 my-5" id="validation">
                         <input class="btn btn-success mt-3" type="submit" value="Valider les modifications" />
                         <input class="btn btn-warning mt-3" type="reset" value="Réinitialiser" />
                     </div>

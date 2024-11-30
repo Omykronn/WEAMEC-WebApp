@@ -6,6 +6,7 @@ package fr.weamec.projectsManager.controller;
 
 import fr.weamec.projectsManager.model.*;
 import fr.weamec.projectsManager.service.*;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Optional;
 import org.json.simple.JSONObject;
@@ -175,7 +176,7 @@ public class ProjetController {
                 model.addAttribute("errorMessage", "La structure du fichier de correspond pas, merci d'utiliser celui issu du logiciel client.");
                 viewName = "importProjet";
             }            
-            catch (Exception e) {
+            catch (IOException e) {
                 model.addAttribute("errorMessage", "Une erreur est survenue, merci de réessayer.");
                 viewName = "importProjet";
             }

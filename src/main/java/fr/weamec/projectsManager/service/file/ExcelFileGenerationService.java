@@ -96,8 +96,9 @@ public class ExcelFileGenerationService {
      */
     private void fillRowProjet(XSSFRow row, Projet projet, CellStyle dateCellStyle) {
         row.createCell(0).setCellValue(projet.getNomAcro());
-        row.createCell(1).setCellValue(projet.getCategorie());
-        row.createCell(2).setCellValue(projet.getType());
+        row.createCell(1).setCellValue(projet.getCategorie().getNom());
+        row.createCell(2).setCellValue(projet.getAnneeSelection());
+        row.createCell(2).setCellValue(projet.getType().getNom());
         row.createCell(9).setCellValue(projet.getCoordinateurScientifique().getStructureRattachement().getEtablissement());
         row.createCell(10).setCellValue(projet.getCoordinateurScientifique().getStructureRattachement().getLaboratoire());
         row.createCell(11).setCellValue(projet.getCoordinateurScientifique().getStructureRattachement().getEquipe());
@@ -115,6 +116,16 @@ public class ExcelFileGenerationService {
         XSSFCell dateFin = row.createCell(7);
         dateFin.setCellValue(projet.getDateFin());
         dateFin.setCellStyle(dateCellStyle);
+        
+        XSSFCell dateDebutTraitement = row.createCell(4);
+        dateDebutTraitement.setCellValue(projet.getDebutTraitement());
+        dateDebutTraitement.setCellStyle(dateCellStyle);
+        
+        if (projet.getFinTraitement() != null) {
+            XSSFCell dateFinTraitement = row.createCell(3);
+            dateFinTraitement.setCellValue(projet.getFinTraitement());
+            dateFinTraitement.setCellStyle(dateCellStyle);
+        }
         
         // Partenaires
         for (int i = 0; i < 3 && i < projet.getListePartenaires().size(); i++) {

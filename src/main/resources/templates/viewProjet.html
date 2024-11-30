@@ -25,10 +25,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <div class="pb-10">
             <div class="container">
-                <div class="col-sm-12 my-5">
+                <div class="col-sm-12 mt-4 mb-3">
                     <h1 th:text="${projet.nomAcro}">Projet</h1>
-                    <p class="fw-light" th:text="${projet.statut}"></p>
-            
+                    <p class="fw-light m-0">
+                        Année de sélection : <span th:text="${projet.anneeSelection}"></span>
+                    </p>
+                    <p class="fw-light m-0">
+                        Début du traitement : <span th:text="${projet.debutTraitement}"></span>
+                    </p>
+                    <p class="fw-light m-0" th:if="${projet.finTraitement}">
+                        Fin du traitement : <span th:text="${projet.finTraitement}"></span>
+                    </p>
+                </div>
+                
+                <div class="col-sm-12 mb-5">
                     <a th:href="@{/projects/{id}/edit(id=${projet.id})}"><button class="btn btn-primary mt-3">Modifier le projet</button></a>
                     <a th:href="@{/projects/{id}/drop(id=${projet.id})}"><button class="btn btn-danger mt-3">Supprimer le projet</button></a>
                     <a th:href="@{/file/{id}/casefile(id=${projet.id})}"><button class="btn btn-secondary mt-3">Dossier</button></a>
@@ -39,7 +49,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <div class="col-sm-12 my-5" id="general">
                     <h2>Elements Clefs du Projet</h2>
         
-                    <table class="table">
+                    <table class="table">                        
                         <tr>
                             <th scope="col">Nom du projet</th>
                             <td th:text="${projet.nomComplet}"></td>
@@ -47,12 +57,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
                         <tr>
                             <th scope="col">Catégorie</th>
-                            <td th:text="${projet.categorie}"></td>
+                            <td th:text="${projet.categorie.nom}"></td>
                         </tr>
         
                         <tr>
                             <th scope="col">Type</th>
-                            <td th:text="${projet.type}"></td>
+                            <td th:text="${projet.type.nom}"></td>
                         </tr>
         
                         <tr>

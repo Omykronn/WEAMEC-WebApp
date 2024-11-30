@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.json.simple.JSONArray;
 
@@ -26,6 +27,12 @@ import org.json.simple.JSONObject;
 public class ProjetService {
     @Autowired
     private ProjetRepository projetRepo;
+    
+    @Autowired 
+    private TypeService typeService;
+    
+    @Autowired 
+    private CategorieService categorieService;
     
     @Autowired 
     private TechnologieService technologieService;
@@ -98,13 +105,17 @@ public class ProjetService {
      * @param json Object d'un fichier JSON analysé
      * @return Instance du projet importé
      */
-    public Projet importFromJSON(JSONObject json) {       
-        Projet projet = new Projet(new CoordinateurScientifique((JSONObject) json.get("coordinateurScientifique")),
-                                   "À VÉRIFIER",
+    public Projet importFromJSON(JSONObject json) {   
+        Calendar calendar = Calendar.getInstance();
+        
+        // Pour categorie et type, si id faux, Optional retourne une erreur et donc affichage de la page error
+        Projet projet = new Projet(calendar.get(Calendar.YEAR),
+                                   new Date(calendar.getTime().getTime()),
+                                   new CoordinateurScientifique((JSONObject) json.get("coordinateurScientifique")),
                                    (String) json.get("nomAcro"),
                                    (String) json.get("nomComplet"),
-                                   (String) json.get("categorie"),
-                                   (String) json.get("type"),
+                                   categorieService.getCategorie(((Long) json.get("categorie")).intValue()).get(),
+                                   typeService.getType(((Long) json.get("type")).intValue()).get(),
                                    (String) json.get("objectifSynth"),
                                    (String) json.get("siteWeb"),
                                    ((Long) json.get("duree")).intValue(),

@@ -31,11 +31,18 @@ public class Projet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @Column(name = "annee_selection")
+    private int anneeSelection;
+    
+    @Column(name = "debut_traitement")
+    private Date debutTraitement;
+    
+    @Column(name = "fin_traitement")
+    private Date finTraitement;
+    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_coordinateur", referencedColumnName = "id")
     private CoordinateurScientifique coordinateurScientifique;
-    
-    private String statut;
     
     @Column(name = "nom_acro")
     private String nomAcro;
@@ -43,8 +50,13 @@ public class Projet {
     @Column(name = "nom_complet")
     private String nomComplet;
     
-    private String categorie;
-    private String type;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_categorie", referencedColumnName = "id")
+    private Categorie categorie;
+    
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_type", referencedColumnName = "id")
+    private Type type;
     
     @Column(name = "objectif_synth")
     private String objectifSynth;
@@ -157,10 +169,11 @@ public class Projet {
     public Projet() {}
     
     /**
-     * Constructeur de Projet (sans id)
+     * Constructeur de Projet (sans id, ni finTraitement)
+     * @param anneeSelection            Annee de Sélection
+     * @param debutTraitement           Date de début du traitement du dossier
      * @param coordinateurScientifique  Coordinateur Scientifique du projet
-     * @param statut                    Statut du projet
-     * @param nomAcro                  Acronyme du nom du projet
+     * @param nomAcro                   Acronyme du nom du projet
      * @param nomComplet                Nom Complet du Projet
      * @param categorie                 Categorie WEAMEC
      * @param type                      Type de projet
@@ -192,9 +205,10 @@ public class Projet {
      * @param listePartenaires          Liste des partenaires du projet
      * @param listeExperts              Liste des experts du projet
      */
-    public Projet(CoordinateurScientifique coordinateurScientifique, String statut, String nomAcro, String nomComplet, String categorie, String type, String objectifSynth, String siteWeb, int duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
+    public Projet(int anneeSelection, Date debutTraitement, CoordinateurScientifique coordinateurScientifique, String nomAcro, String nomComplet, Categorie categorie, Type type, String objectifSynth, String siteWeb, int duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
+        this.anneeSelection = anneeSelection;
+        this.debutTraitement = debutTraitement;
         this.coordinateurScientifique = coordinateurScientifique;
-        this.statut = statut;
         this.nomAcro = nomAcro;
         this.nomComplet = nomComplet;
         this.categorie = categorie;
@@ -261,19 +275,51 @@ public class Projet {
     }
 
     /**
-     * statut Getter
-     * @return Statut du projet
+     * anneeSelection Getter
+     * @return Année de sélection
      */
-    public String getStatut() {
-        return statut;
+    public int getAnneeSelection() {
+        return anneeSelection;
+    }
+    
+    /**
+     * anneeSelection Setter
+     * @param anneeSelection Année de sélection 
+     */
+    public void setAnneeSelection(int anneeSelection) {
+        this.anneeSelection = anneeSelection;
     }
 
     /**
-     * statut Setter
-     * @param statut Statut du projet
+     * debutTraitement Getter
+     * @return Date de début du traitement du dossier
      */
-    public void setStatut(String statut) {
-        this.statut = statut;
+    public Date getDebutTraitement() {
+        return debutTraitement;
+    }
+
+    /**
+     * debutTraitement Setter
+     * @param debutTraitement Date de début du traitement du dossier 
+     */
+    public void setDebutTraitement(Date debutTraitement) {
+        this.debutTraitement = debutTraitement;
+    }
+    
+    /**
+     * finTraitement Getter
+     * @return Date de fin du traitement du dossier
+     */
+    public Date getFinTraitement() {
+        return finTraitement;
+    }
+    
+    /**
+     * finTraitement Setter
+     * @param finTraitement Date de fin du traitement du dossier 
+     */
+    public void setFinTraitement(Date finTraitement) {
+        this.finTraitement = finTraitement;
     }
 
     /**
@@ -312,7 +358,7 @@ public class Projet {
      * categorie Getter
      * @return Categorie WEAMEC
      */
-    public String getCategorie() {
+    public Categorie getCategorie() {
         return categorie;
     }
 
@@ -320,7 +366,7 @@ public class Projet {
      * categorie Setter
      * @param categorie Categorie WEAMEC
      */
-    public void setCategorie(String categorie) {
+    public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
 
@@ -328,7 +374,7 @@ public class Projet {
      * type Getter
      * @return Type de projet
      */
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
@@ -336,7 +382,7 @@ public class Projet {
      * type Setter
      * @param type Type de projet
      */
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
