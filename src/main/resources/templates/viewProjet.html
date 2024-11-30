@@ -31,10 +31,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         Année de sélection : <span th:text="${projet.anneeSelection}"></span>
                     </p>
                     <p class="fw-light m-0">
-                        Début du traitement : <span th:text="${projet.debutTraitement}"></span>
+                        Début du traitement : <span th:text="${#dates.format(projet.debutTraitement, 'dd/MM/yyyy')}"></span>
                     </p>
                     <p class="fw-light m-0" th:if="${projet.finTraitement}">
-                        Fin du traitement : <span th:text="${projet.finTraitement}"></span>
+                        Fin du traitement : <span th:text="${#dates.format(projet.finTraitement, 'dd/MM/yyyy')}"></span>
                     </p>
                 </div>
                 
@@ -83,12 +83,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
                         <tr>
                             <th scope="col">Date de début</th>
-                            <td th:text="${projet.dateDebut}"></th>
+                            <td th:text="${#dates.format(projet.dateDebut, 'dd/MM/yyyy')}"></th>
                         </th>
         
                         <tr>
                             <th scope="col">Date de fin</th>
-                            <td th:text="${projet.dateFin}"></th>
+                            <td th:text="${#dates.format(projet.dateFin, 'dd/MM/yyyy')}"></th>
                         </th>
         
                         <tr>

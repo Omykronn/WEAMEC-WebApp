@@ -60,13 +60,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <td th:text="${projet.anneeSelection}"></td>
                                 <td th:text="${projet.nomAcro}"></td>
                                 <td th:text="${projet.coordinateurScientifique.structureRattachement.etablissement}"></td>
-                                <td>
-                                    <span th:text="${projet.coordinateurScientifique.nom} + ' ' + ${projet.coordinateurScientifique.prenom}"></span>
-                                    <ul>
-                                        <li>Mail : <a th:href="'mailto:' + ${projet.coordinateurScientifique.mail}" th:text="${projet.coordinateurScientifique.mail}"></a></li>
-                                        <li>Tel. : <span th:text="${projet.coordinateurScientifique.telephone}"></li>
-                                    </ul>
-                                </td>
+                                <td th:text="${projet.coordinateurScientifique.nom} + ' ' + ${projet.coordinateurScientifique.prenom}"></td>
                                 <td><a th:href="'https://' + ${projet.siteWeb}" th:text="${projet.siteWeb}" target="_blank"></a></td>
                                 <td>
                                     <div class="container text-center">
