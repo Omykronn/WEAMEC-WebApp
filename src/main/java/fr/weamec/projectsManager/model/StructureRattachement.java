@@ -27,6 +27,10 @@ public class StructureRattachement {
     private String laboratoire;
     private String equipe;
     private String adresse;
+    private String ville;
+    
+    @Column(name = "code_postal")
+    private int codePostal;
     
     @Column(name = "nom_ref")
     private String nomRef;
@@ -49,16 +53,20 @@ public class StructureRattachement {
      * @param laboratoire   Nom du laboratoire
      * @param equipe        Nom de l'equipe
      * @param adresse       Adresse postale
+     * @param ville         Ville
+     * @param codePostal    CodePostal
      * @param nomRef        Nom du référent
      * @param telephoneRef  Numero de Telephone du référent
      * @param mailRef       Adresse mail du référent
      */
-    public StructureRattachement(int id, String etablissement, String laboratoire, String equipe, String adresse, String nomRef, String telephoneRef, String mailRef) {
+    public StructureRattachement(int id, String etablissement, String laboratoire, String equipe, String adresse, String ville, int codePostal, String nomRef, String telephoneRef, String mailRef) {
         this.id = id;
         this.etablissement = etablissement;
         this.laboratoire = laboratoire;
         this.equipe = equipe;
         this.adresse = adresse;
+        this.ville = ville;
+        this.codePostal = codePostal;
         this.nomRef = nomRef;
         this.telephoneRef = telephoneRef;
         this.mailRef = mailRef;
@@ -73,6 +81,8 @@ public class StructureRattachement {
         this.laboratoire = (String) json.get("laboratoire");
         this.equipe = (String) json.get("equipe");
         this.adresse = (String) json.get("adresse");
+        this.ville = (String) json.get("ville");
+        this.codePostal = ((Long) json.get("codePostal")).intValue();
         this.nomRef = (String) json.get("nomRef");
         this.telephoneRef = (String) json.get("telephoneRef");
         this.mailRef = (String) json.get("mailRef");
@@ -156,6 +166,38 @@ public class StructureRattachement {
      */
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+    
+    /**
+     * ville Getter
+     * @return Ville
+     */
+    public String getVille() {
+        return ville;
+    }
+    
+    /**
+     * ville Setter
+     * @param ville Ville 
+     */
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+    
+    /**
+     * codePostal Getter
+     * @return Code Postal
+     */
+    public int getCodePostal() {
+        return codePostal;
+    }
+    
+    /**
+     * codePostal Setter
+     * @param codePostal Code Postal 
+     */
+    public void setCodePostal(int codePostal) {
+        this.codePostal = codePostal;
     }
     
     /**

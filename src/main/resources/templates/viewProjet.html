@@ -139,7 +139,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         
                         <tr>
                             <th scope="col">Adresse postale</th>
-                            <td><p th:text="${projet.coordinateurScientifique.structureRattachement.adresse}"></p></td>
+                            <td><p th:text="${projet.coordinateurScientifique.structureRattachement.adresse} + ', ' + ${projet.coordinateurScientifique.structureRattachement.ville} + ' (' + ${projet.coordinateurScientifique.structureRattachement.codePostal} + ')'"></p></td>
                         </tr>
         
                         <tr>
@@ -163,52 +163,52 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <h2>Partenaires</h2>
 
                     <div class="my-5" th:each="partenaire: ${projet.listePartenaires}">
-                        <h4 th:text="*{partenaire.nom} + ' ' + *{partenaire.prenom}"></h4>
+                        <h4 th:text="${partenaire.nom} + ' ' + ${partenaire.prenom}"></h4>
 
                         <table class="table">                        
                             <tr>
                                 <th scope="col">Mail</th>
-                                <td><a th:href="'mailto:' + *{partenaire.mail}" th:text="*{partenaire.mail}"></a></td>
+                                <td><a th:href="'mailto:' + ${partenaire.mail}" th:text="${partenaire.mail}"></a></td>
                             </tr>
                     
                             <tr>
                                 <th scope="col">Telephone</th>
-                                <td th:text="*{partenaire.telephone}"></td>
+                                <td th:text="${partenaire.telephone}"></td>
                             </tr>
                     
                             <tr>
                                 <th scope="col">Nom de l'établissement</th>
-                                <td th:text="*{partenaire.structureRattachement.etablissement}"></td>
+                                <td th:text="${partenaire.structureRattachement.etablissement}"></td>
                             </tr>
                     
                             <tr>
                                 <th scope="col">Nom du laboratoire</th>
-                                <td th:text="*{partenaire.structureRattachement.laboratoire}"></td>
+                                <td th:text="${partenaire.structureRattachement.laboratoire}"></td>
                             </tr>
                     
                             <tr>
                                 <th scope="col">Nom de l'équipe</th>
-                                <td th:text="*{partenaire.structureRattachement.equipe}"></td>
+                                <td th:text="${partenaire.structureRattachement.equipe}"></td>
                             </tr>
                     
                             <tr>
                                 <th scope="col">Adresse postale</th>
-                                <td th:text="*{partenaire.structureRattachement.adresse}"></td>
+                                <td th:text="${partenaire.structureRattachement.adresse} + ', ' + ${partenaire.structureRattachement.ville} + ' (' + ${partenaire.structureRattachement.codePostal} + ')'"></td>
                             </tr>
                     
                             <tr>
                                 <th scope="col">Nom du référent administratif et budgétaire</th>
-                                <td th:text="*{partenaire.structureRattachement.nomRef}"></td>
+                                <td th:text="${partenaire.structureRattachement.nomRef}"></td>
                             </tr>
                     
                             <tr>
                                 <th scope="col">Téléphone du référent</th>
-                                <td th:text="*{partenaire.structureRattachement.telephoneRef}"></td>
+                                <td th:text="${partenaire.structureRattachement.telephoneRef}"></td>
                             </tr>
                     
                             <tr>
                                 <th scope="col">Mail du référent</th>
-                                <td><a th:href="'mailto:' + *{partenaire.structureRattachement.mailRef}" th:text="*{partenaire.structureRattachement.mailRef}"></a></td>
+                                <td><a th:href="'mailto:' + ${partenaire.structureRattachement.mailRef}" th:text="${partenaire.structureRattachement.mailRef}"></a></td>
                             </tr>
                         </table>
                     </div>

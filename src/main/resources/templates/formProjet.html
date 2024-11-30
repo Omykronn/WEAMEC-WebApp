@@ -151,6 +151,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <th><label class="form-label" for="structureCoordinateurScientifiqueAdresseInput">Adresse postale</label></th>
                                 <td><textarea class="form-control" th:field="*{coordinateurScientifique.structureRattachement.adresse}" id="structureCoordinateurScientifiqueAdresseInput" cols="100" rows="5"></textarea></td>
                             </tr>
+                            
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueVilleInput">Ville</label></th>
+                                <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.structureRattachement.ville}" id="structureCoordinateurScientifiqueVilleInput" required /></td>
+                            </tr>
+                            
+                            <tr>
+                                <th><label class="form-label" for="structureCoordinateurScientifiqueCodePostalInput">Code Postal</label></th>
+                                <td><input class="form-control" type="number" min="0" th:field="*{coordinateurScientifique.structureRattachement.codePostal}" id="structureCoordinateurScientifiqueCodePostalInput" required /></td>
+                            </tr>
         
                             <tr>
                                 <th><label class="form-label" for="structureCoordinateurScientifiqueNomRefInput">Nom du référent administratif et budgétaire</label></th>
@@ -216,6 +226,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <tr>
                                     <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'AdresseInput'">Adresse postale</label></th>
                                     <td><textarea class="form-control" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.adresse}" th:id="'structPartenaire' + ${itemStat.index} + 'AdresseInput'" cols="100" rows="5"></textarea></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'VilleInput'">Ville</label></th>
+                                    <td><input class="form-control" type="text" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.ville}" th:id="'structPartenaire' + ${itemStat.index} + 'VilleInput'" required /></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th><label class="form-label" th:for="'structPartenaire' + ${itemStat.index} + 'CodePostalInput'">Code Postal</label></th>
+                                    <td><input class="form-control" type="number" min="0" th:field="*{listePartenaires[__${itemStat.index}__].structureRattachement.codePostal}" th:id="'structPartenaire' + ${itemStat.index} + 'CodePostalInput'" required /></td>
                                 </tr>
         
                                 <tr>

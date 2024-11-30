@@ -130,6 +130,8 @@ public class ExcelFileGenerationService {
         // Partenaires
         for (int i = 0; i < 3 && i < projet.getListePartenaires().size(); i++) {
             row.createCell(15 + 7*i).setCellValue(projet.getListePartenaires().get(i).getStructureRattachement().getEtablissement());
+            row.createCell(16 + 7*i).setCellValue(projet.getListePartenaires().get(i).getStructureRattachement().getCodePostal());
+            row.createCell(17 + 7*i).setCellValue(projet.getListePartenaires().get(i).getStructureRattachement().getVille());
             row.createCell(18 + 7*i).setCellValue(projet.getListePartenaires().get(i).getStructureRattachement().getLaboratoire());
             row.createCell(19 + 7*i).setCellValue(projet.getListePartenaires().get(i).getNom());
             row.createCell(20 + 7*i).setCellValue(projet.getListePartenaires().get(i).getPrenom());
