@@ -5,114 +5,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 -->
 <html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Appel à projets WEAMEC</title>
+        <title th:text="'Dossier ' + ${projet.nomAcro}"></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.cdnfonts.com/css/neo-sans-pro" rel="stylesheet">
+        <link href="src/main/resources/weamec/resources/caseFile.css" rel="stylesheet">
     </head>
-    
-    <style>
-        @import url('https://fonts.cdnfonts.com/css/neo-sans-pro');
-
-        body {
-            margin: 0;
-
-            font-family: "Neo Sans Pro", sans-serif;
-            color: #003854;
-        }
-
-        section {
-            page-break-after: always;
-            break-after: page;
-        }
-
-        #couverture {
-            text-align: center;
-        }
-
-        h1, h2, h3 {
-            margin: 0;
-        }
-
-        h1 {
-            font-size: 3.4em;
-            font-weight: 500;
-        }    
-
-        h2 {
-            font-weight: 500;
-        }
-
-        h3 {
-            font-weight: initial;
-        }
-
-        h2 span {
-            font-weight: initial;
-            background-color: #003854;
-            color: white;
-            padding-top: 7px;
-        }
-
-        h4 {
-            margin-bottom: 0;
-            font-weight: initial;
-        }
-
-        p {
-            text-align: justify;
-        }
-
-        #logo {
-            margin: 30px 0 20px 0;
-        }
-
-        #separator {
-            margin: 20px 200px;
-
-            background-color: #DD0C29;
-            height: 5px;
-        }
-
-        #partenaires {
-            margin-top: 30px;
-        }
-
-        #cover-image {
-            width: 100%;
-            margin: 30px 0;
-        }
-
-        .logo-partenaire {
-            height: 35px;
-            margin: 0 10px;
-        }
-
-        span, ul {
-            font-weight: 300;
-        }
-
-        span.checkbox {
-            display: inline-block;
-            height: 0.9em;
-            width: 0.9em;
-
-            border: #003854 solid 0.1em;
-            margin: 0 5px;
-        }
-
-        span.checkbox.checked {
-            background-color: #003854;
-        }
-
-        table {
-            border-collapse: collapse;
-            border: #003854 solid 1px;
-            width: 100%;
-            text-align: center;
-        }
-    </style>
-
     <body>        
         <section id="couverture">
             <img src="src/main/resources/weamec/resources/LOGO-WEAMEC.png" alt="Logo WEAMEC" height="100px" id="logo">
