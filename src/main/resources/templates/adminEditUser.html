@@ -29,9 +29,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <h1>Configuration d'un utilisateur</h1>
                 </div>
                 
-                <div class="col-sm-12 mb-5" th:if="${user.id}">
+                <div class="col-sm-12 mb-5">
                     <button type="submit" form="formUser" value="Sauvegarder" class="btn btn-success mt-2">Sauvegarder</button>
-                    <a th:href="@{/admin/drop/{id}(id=${user.id})}"><button class="btn btn-danger mt-2">Supprimer</button></a>
+                    <a th:if="${user.id}" th:href="@{/admin/drop/{id}(id=${user.id})}"><button class="btn btn-danger mt-2">Supprimer</button></a>
                 </div>
 
                 <div class="col-sm-12">
