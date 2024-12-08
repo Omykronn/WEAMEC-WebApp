@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
  * @author simon
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
