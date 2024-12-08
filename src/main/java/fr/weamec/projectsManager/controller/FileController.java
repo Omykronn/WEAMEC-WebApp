@@ -9,6 +9,7 @@ import fr.weamec.projectsManager.model.Projet;
 import fr.weamec.projectsManager.service.*;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class FileController {
         Projet projet = projetService.getProjet(id).get();
         byte[] content = htmlPdfGenerator.generateCaseFile(projet);
         
-        prepareResponse("Dossier-" + projet.getNomAcro() + ".pdf", "application/pdf", content, response);
+        prepareResponse("Dossier-" + projet.getNomAcro() + "-" + Year.now().getValue() + ".pdf", "application/pdf", content, response);
     }  
     
     /**
@@ -78,7 +79,7 @@ public class FileController {
         Projet projet = projetService.getProjet(id).get();
         byte[] content = htmlPdfGenerator.generateSummary(projet);
         
-        prepareResponse("Résumé-" + projet.getNomAcro() + ".pdf", "application/pdf", content, response);
+        prepareResponse("Résumé-" + projet.getNomAcro() + "-" + Year.now().getValue() + ".pdf", "application/pdf", content, response);
     }  
     
     /**
@@ -92,7 +93,7 @@ public class FileController {
         Projet projet = projetService.getProjet(id).get();
         byte[] content = htmlPdfGenerator.generateHtmlPage(projet);
         
-        prepareResponse(projet.getNomAcro() + ".html", "text/html", content, response);
+        prepareResponse(projet.getNomAcro() + "-" + Year.now().getValue() + ".html", "text/html", content, response);
     } 
     
     /**
@@ -106,7 +107,7 @@ public class FileController {
         Projet projet = projetService.getProjet(id).get();
         byte[] content = htmlPdfGenerator.generateAll(projet);
         
-        prepareResponse(projet.getNomAcro() + ".zip", "application/zip", content, response);
+        prepareResponse(projet.getNomAcro() + "-" + Year.now().getValue() + ".zip", "application/zip", content, response);
     }
     
     /**
@@ -154,6 +155,6 @@ public class FileController {
     public void downloadHtmlPage(HttpServletResponse response) throws IOException {
         byte[] content = excelGenerator.generateExcel(projetService.getProjets());
         
-        prepareResponse("Projets W2 - Infos.xlsx", "application/xlsx", content, response);
+        prepareResponse("Projets W2 " + Year.now().getValue() + "- Infos.xlsx", "application/xlsx", content, response);
     } 
 }
