@@ -39,7 +39,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </div>
                 
                 <div class="col-sm-12 mb-5">
-                    <a th:unless="${projet.finTraitement}" th:href="@{/projects/{id}/close(id=${projet.id})}"><button class="btn btn-success mt-3">Clôturer le dossier</button></a>
                     <a th:href="@{/projects/{id}/edit(id=${projet.id})}"><button class="btn btn-primary mt-3">Modifier le projet</button></a>
                     <a th:href="@{/projects/{id}/drop(id=${projet.id})}"><button class="btn btn-danger mt-3">Supprimer le projet</button></a>
                     <a th:href="@{/file/{id}/casefile(id=${projet.id})}"><button class="btn btn-secondary mt-3">Dossier</button></a>

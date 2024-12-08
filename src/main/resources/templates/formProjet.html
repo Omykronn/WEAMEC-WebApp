@@ -444,6 +444,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </div>
                     </div>
                     
+                    <div class="col-sm-12 my-5" id="vieDuProjet">
+                        <h2>Vie du projet</h2>
+                        
+                        <table class="table">
+                            <tr>
+                                <th><label class="form-label" for="finTraitementInput">Fin du traitement du dossier</label></th>
+                                <td><input class="form-control" type="date" th:field="*{finTraitement}" id="finTraitementInput" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                    
                     <div class="col-sm-12 my-5" id="validation">
                         <input class="btn btn-success mt-3" type="submit" value="Valider les modifications" />
                         <input class="btn btn-warning mt-3" type="reset" value="Réinitialiser" />
