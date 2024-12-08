@@ -105,9 +105,13 @@ public class ExcelFileGenerationService {
         row.createCell(12).setCellValue(projet.getCoordinateurScientifique().getNom());
         row.createCell(13).setCellValue(projet.getCoordinateurScientifique().getPrenom());
         row.createCell(14).setCellValue(projet.getCoordinateurScientifique().getMail());
-        row.createCell(71).setCellValue(projet.getTrlDebut());
-        row.createCell(72).setCellValue(projet.getTrlFin());
-        row.createCell(73).setCellValue(projet.getBrevet());
+        row.createCell(92).setCellValue(projet.getTrlDebut());
+        row.createCell(93).setCellValue(projet.getTrlFin());
+        row.createCell(94).setCellValue(projet.getBrevet());
+        
+        if (projet.getFinTraitement() != null) {
+            row.createCell(122).setCellValue("X");
+        }
         
         XSSFCell dateDebut = row.createCell(6);
         dateDebut.setCellValue(projet.getDateDebut());
@@ -128,7 +132,7 @@ public class ExcelFileGenerationService {
         }
         
         // Partenaires
-        for (int i = 0; i < 3 && i < projet.getListePartenaires().size(); i++) {
+        for (int i = 0; i < 6 && i < projet.getListePartenaires().size(); i++) {
             row.createCell(15 + 7*i).setCellValue(projet.getListePartenaires().get(i).getStructureRattachement().getEtablissement());
             row.createCell(16 + 7*i).setCellValue(projet.getListePartenaires().get(i).getStructureRattachement().getCodePostal());
             row.createCell(17 + 7*i).setCellValue(projet.getListePartenaires().get(i).getStructureRattachement().getVille());
@@ -142,38 +146,38 @@ public class ExcelFileGenerationService {
         for (Technologie technologie: projet.getTechnologies()) {
             // Test si "Toute EMR"
             if (technologie.getId() == 8) {
-                for (int i = 49; i < 57; i++) {
+                for (int i = 70; i < 57; i++) {
                     row.createCell(i).setCellValue("X");
                 }
             }
             else {
-                row.createCell(49 + (technologie.getId() - 1)).setCellValue("X");
+                row.createCell(70 + (technologie.getId() - 1)).setCellValue("X");
             }
         }
         
         // Themes
         for (Theme theme: projet.getThemes()) {
-            row.createCell(57 + (theme.getId() - 1)).setCellValue("X");
+            row.createCell(78 + (theme.getId() - 1)).setCellValue("X");
         }
         
         // Valeurs
         for (Valeur valeur: projet.getValeurs()) {
-            row.createCell(62 + (valeur.getId() - 1)).setCellValue("X");
+            row.createCell(83 + (valeur.getId() - 1)).setCellValue("X");
         }
         
         // Priorité
         for (Priorite priorite: projet.getPrioriteWeamec()) {
-            row.createCell(74 + (priorite.getId() - 1)).setCellValue("X");
+            row.createCell(95 + (priorite.getId() - 1)).setCellValue("X");
         }
         
         // Objectifs
         for (Objectif objectif: projet.getObjectifsWeamec()) {
-            row.createCell(76 + (objectif.getId() - 1)).setCellValue("X");
+            row.createCell(97 + (objectif.getId() - 1)).setCellValue("X");
         }
         
         // Defis
         for (Defi defi: projet.getDefisWeamec()) {
-            row.createCell(80 + (defi.getId() - 1)).setCellValue("X");
+            row.createCell(101 + (defi.getId() - 1)).setCellValue("X");
         }
     }
     
