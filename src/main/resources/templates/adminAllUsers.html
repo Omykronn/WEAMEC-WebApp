@@ -51,7 +51,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <td th:text="${user.role}"></td>
                                 <td>
                                     <a th:href="@{/admin/edit/{id}(id=${user.id})}"><button class="btn btn-primary">Modifier</button></a>
-                                    <a th:href="@{/admin/drop/{id}(id=${user.id})}"><button class="btn btn-danger mt-2">Supprimer</button></a>
+                                    <a th:href="@{/admin/drop/{id}(id=${user.id})}"><button class="btn btn-danger">Supprimer</button></a>
                                 </td>
                             </tr>
                         </tbody>
