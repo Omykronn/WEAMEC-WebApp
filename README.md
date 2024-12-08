@@ -13,5 +13,5 @@ Développement d'un client web pour l'administration de projets par l'organisme 
 - [ ] Rendus formatés selon les templates WEAMEC
 - [x] Import d'un projet depuis un fichier JSON
 - [ ] Import d'un projet depuis un fichier chiffré
-- [ ] Authentification des utilisateurs
+- [x] Authentification des utilisateurs
 - [ ] Administration des utilistateurs
