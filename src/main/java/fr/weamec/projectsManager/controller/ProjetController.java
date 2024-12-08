@@ -62,7 +62,7 @@ public class ProjetController {
      * @param model Model fourni par Spring
      * @return      Nom de la page HTML à afficher
      */
-    @GetMapping("/projects")
+    @GetMapping("/projects/")
     public String dashboard(Model model) {
         model.addAttribute("projets", projetService.getProjets());
         
@@ -144,7 +144,7 @@ public class ProjetController {
     public String dropProject(@PathVariable("id") int id) {
         projetService.deleteProjet(id);
         
-        return "redirect:/projects";
+        return "redirect:/projects/";
     }
     
     /**
@@ -162,7 +162,7 @@ public class ProjetController {
             projetService.save(projet.get());
         }
         
-        return "redirect:/projects";
+        return "redirect:/projects/";
     }
     
     /**
@@ -190,7 +190,7 @@ public class ProjetController {
                 JSONObject json = (JSONObject) parser.parse(new InputStreamReader(file.getInputStream(), "UTF-8"));
 
                 projetService.importFromJSON(json);
-                viewName = "redirect:/projects";
+                viewName = "redirect:/projects/";
             }
             catch (ParseException e) {
                 model.addAttribute("errorMessage", "La structure du fichier de correspond pas, merci d'utiliser celui issu du logiciel client.");
@@ -207,5 +207,14 @@ public class ProjetController {
         }
         
         return viewName;
+    }
+    
+    /**
+     * Redirection de root vers projects/ (dashboard)
+     * @return Redirection vers projects/
+     */
+    @GetMapping("/")
+    public String redirectToHome() {        
+        return "redirect:/projects/";
     }
 }
