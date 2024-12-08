@@ -55,4 +55,16 @@ public class AdminController {
         
         return pageName;
     }
+    
+    /**
+     * Fonction associée à l'affichage du formulaire de création d'un utilisateur
+     * @param model Model fourni par Spring
+     * @return      Nom de la page HTML à afficher
+     */
+    @GetMapping("/admin/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new CustomUser());
+        
+        return "adminEditUser";
+    }
 }
