@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * Service pour CustomUser
@@ -52,6 +53,23 @@ public class CustomUserService {
      * @return Instance de CustomUser sauvegardé
      */
     public CustomUser save(CustomUser customUser) {
+        Optional<CustomUser> refUser = customUserRepo.findById(customUser.getId());
+        
+        if (refUser.isEmpty()) {
+            // Création d'un nouveau utilisateur
+            BCryptPasswordEncoder bCryptEncoder = new BCryptPasswordEncoder();
+            customUser.setPassword(bCryptEncoder.encode(customUser.getPassword()));
+        }
+        else if (customUser.getPassword() != null || !customUser.getPassword().equals("")) {
+            // Utilisateur existant, mais changement de mot de passe
+            BCryptPasswordEncoder bCryptEncoder = new BCryptPasswordEncoder();
+            customUser.setPassword(bCryptEncoder.encode(customUser.getPassword()));
+        }
+        else {
+            // Utilisateur existant, et pas de changementde mot de passe
+            customUser.setPassword(refUser.get().getPassword());
+        }
+        
         return customUserRepo.save(customUser);
     }
 }
