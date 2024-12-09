@@ -46,6 +46,7 @@ public class AdminController {
         Optional<CustomUser> user = customUserService.getCustomUser(id);
         
         if (user.isPresent()) {
+            user.get().setPassword("");
             model.addAttribute("user", user.get());
             pageName = "adminEditUser";
         }

@@ -47,7 +47,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                             <tr>
                                 <th><label class="form-label" for="passwordInput">Nouveau mot de passe</label></th>
-                                <td><input class="form-control" type="text" th:field="*{password}" id="passwordInput" required /></td>
+                                <td>
+                                    <input class="form-control" type="text" th:field="*{password}" id="passwordInput" />
+                                    <p class="form-text">À laisser vide si pas de changement de mot de passe</p>
+                                </td>
                             </tr>
                         </table>
                         
