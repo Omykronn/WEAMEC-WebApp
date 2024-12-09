@@ -11,6 +11,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import com.itextpdf.html2pdf.HtmlConverter;
+import fr.weamec.projectsManager.service.*;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class HtmlBasedFileGenerationService {
     @Autowired
     ZipFileGenerationService zipper;
+    
+    @Autowired
+    CategorieService categorieService;
+    
+    @Autowired
+    TypeService typeService;
+    
+    @Autowired
+    PrioriteService prioriteService;
+    
+    @Autowired
+    ObjectifService objectifService;
+    
+    @Autowired 
+    DefiService defiService;
+    
+    @Autowired
+    ValeurService valeurService;
+    
+    @Autowired
+    ThemeService themeService;
+    
+    @Autowired
+    TechnologieService technologieService;
     
     private ClassLoaderTemplateResolver templateResolver;
     private TemplateEngine templateEngine;
@@ -63,6 +88,17 @@ public class HtmlBasedFileGenerationService {
     public byte[] generateCaseFile(Projet projet) {
         Context context = new Context();
         context.setVariable("projet", projet);
+        
+        context.setVariable("listeCategories", categorieService.getCategories());
+        context.setVariable("listeTypes", typeService.getTypes());
+        
+        context.setVariable("listeTechnologies", technologieService.getTechnologies());
+        context.setVariable("listeThemes", themeService.getThemes());
+        context.setVariable("listeValeurs", valeurService.getValeurs());
+        
+        context.setVariable("listePriorites", prioriteService.getPriorites());
+        context.setVariable("listeObjetifs", objectifService.getObjectifs());
+        context.setVariable("listeDefis", defiService.getDefis());
         
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         HtmlConverter.convertToPdf(generateHtml("caseFile_template", context), output);
@@ -105,9 +141,6 @@ public class HtmlBasedFileGenerationService {
     public byte[] generateAll(Projet projet) {
         ArrayList<String> names = new ArrayList();
         ArrayList<byte[]> files = new ArrayList();
-        
-        Context context = new Context();
-        context.setVariable("projet", projet);
         
         names.add("Dossier-" + projet.getNomAcro() + ".pdf");
         files.add(generateCaseFile(projet));
