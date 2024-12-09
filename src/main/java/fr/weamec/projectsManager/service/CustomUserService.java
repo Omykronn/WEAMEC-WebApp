@@ -60,14 +60,14 @@ public class CustomUserService {
             BCryptPasswordEncoder bCryptEncoder = new BCryptPasswordEncoder();
             customUser.setPassword(bCryptEncoder.encode(customUser.getPassword()));
         }
-        else if (customUser.getPassword() != null || !customUser.getPassword().equals("")) {
+        else if (customUser.getPassword() == null || customUser.getPassword().equals("")) {
+            // Utilisateur existant, et pas de changementde mot de passe
+            customUser.setPassword(refUser.get().getPassword());
+        }
+        else {
             // Utilisateur existant, mais changement de mot de passe
             BCryptPasswordEncoder bCryptEncoder = new BCryptPasswordEncoder();
             customUser.setPassword(bCryptEncoder.encode(customUser.getPassword()));
-        }
-        else {
-            // Utilisateur existant, et pas de changementde mot de passe
-            customUser.setPassword(refUser.get().getPassword());
         }
         
         return customUserRepo.save(customUser);
