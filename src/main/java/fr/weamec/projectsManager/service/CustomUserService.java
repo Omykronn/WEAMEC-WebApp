@@ -35,7 +35,7 @@ public class CustomUserService {
      * @return Liste de tous les customUsers de la base de données
      */
     public Iterable<CustomUser> getCustomUsers() {
-        return customUserRepo.findAll();
+        return customUserRepo.findAllByOrderByIdAsc();
     }
     
     /**

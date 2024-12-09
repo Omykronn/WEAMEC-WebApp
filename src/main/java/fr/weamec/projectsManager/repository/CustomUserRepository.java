@@ -16,4 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomUserRepository extends CrudRepository<CustomUser, Integer> {
     public CustomUser findByUsername(String username);
+    
+    public Iterable<CustomUser> findAllByOrderByIdAsc();
 }
