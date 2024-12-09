@@ -1,0 +1,17 @@
+{
+    "nom": "LE GOFF",
+    "prenom": "Gwenaelle",
+    "mail": "gwenaelle.legoff@ec-nantes.fr",
+    "telephone": "+33 4 89 67 23 45",
+    "structureRattachement": {
+        "etablissement": "École Centrale de Nantes",
+        "laboratoire": "WEAMEC",
+        "equipe": "WEAMEC",
+        "adresse": "1 Rue de la Noë",
+        "ville": "Nantes",
+        "codePostal": 44000,
+        "nomRef": "Dominique FOLLUT",
+        "mailRef": "contact@weamec.fr",
+        "telephoneRef": "+33 4 78 04 23 38"
+    }
+} 
