@@ -1,0 +1,17 @@
+{
+    "nom": "MARTIN",
+    "prenom": "Jean-Yves",
+    "mail": "jean-yves.martin@ec-nantes.fr",
+    "telephone": "+33 7 89 01 23 45",
+    "structureRattachement": {
+        "etablissement": "École Centrale de Nantes",
+        "laboratoire": "EI2+",
+        "equipe": "INFOSI",
+        "adresse": "1 Rue de la Noë",
+        "ville": "Nantes",
+        "codePostal": 44000,
+        "nomRef": "Jean-Baptiste AVRILLIER",
+        "mailRef": "contact@ec-nantes.fr",
+        "telephoneRef": "+33 4 78 91 23 45"
+    }
+}
