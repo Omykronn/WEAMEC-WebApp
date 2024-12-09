@@ -1,0 +1,20 @@
+[
+    {
+        "nom": "JOHN",
+        "prenom": "Doe",
+        "entiteRattachement": "École Centrale de Nantes",
+        "laboratoireRattachement": "INFOSI",
+        "specialite": "JAVA Spring Boot",
+        "mail": "john.doe@eleves.ec-nantes.fr",
+        "telephone": "+33 7 89 01 23 45"
+    },
+    {
+        "nom": "ALICE",
+        "prenom": "Bob",
+        "entiteRattachement": "École Centrale de Nantes",
+        "laboratoireRattachement": "INFOSI",
+        "specialite": "JAVA Swing",
+        "mail": "bob.alice@eleves.ec-nantes.fr",
+        "telephone": "+33 7 56 78 90 12"
+    }
+]
