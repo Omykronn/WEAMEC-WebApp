@@ -46,7 +46,7 @@ public class CoordinateurScientifiqueTest {
      */
     @Test
     public void testImportFromJson() throws IOException, ParseException {
-        System.out.println("importFromJSON : StructureRattachement");
+        System.out.println("importFromJSON : CoordinateurScientifique");
         
         JSONParser parser = new JSONParser();
         JSONObject json = (JSONObject) parser.parse(new FileReader("src/test/resources/json/test_CoordinateurScientifique.json"));
