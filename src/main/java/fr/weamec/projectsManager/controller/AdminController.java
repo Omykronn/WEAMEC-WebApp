@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Controller pour l'administration des utilisateurs
@@ -67,5 +69,17 @@ public class AdminController {
         model.addAttribute("user", new CustomUser());
         
         return "adminEditUser";
+    }
+    
+    /**
+     * Fonction associée à la sauvegarde d'un utlisateur (après création ou modification)
+     * @param user  Utilisateur à sauvegardé
+     * @return      Redirection vers la liste des utilisateurs
+     */
+    @PostMapping("/admin/save")
+    public String saveUser(@ModelAttribute CustomUser user) {
+        customUserService.save(user);
+        
+        return "redirect:/admin/";
     }
 }
