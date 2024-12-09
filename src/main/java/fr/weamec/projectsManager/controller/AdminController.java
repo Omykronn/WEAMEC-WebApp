@@ -82,4 +82,17 @@ public class AdminController {
         
         return "redirect:/admin/";
     }
+    
+    /**
+     * Fonction associée à la suppression d'un utilisateur
+     * @param id    Identifiant de l'utilisateur à supprimer
+     * @param model Model fourni par Spring
+     * @return      Nom de la page HTML à afficher
+     */
+    @GetMapping("/admin/drop/{id}")
+    public String dropUser(@PathVariable("id") int id, Model model) {
+        customUserService.deleteCustomUser(id);
+        
+        return "redirect:/admin/";
+    }
 }
