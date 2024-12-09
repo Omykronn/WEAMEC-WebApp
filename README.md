@@ -22,6 +22,7 @@ Développement d'un client web pour l'administration de projets par l'organisme 
     - [ ] Page HTML
 - [x] Import d'un projet 
     - [x] Depuis un fichier JSON
+    - [ ] Depuis un fichier ZIP
     - [ ] Depuis un fichier chiffré
 - [x] Authentification des utilisateurs
 - [x] Administration des utilistateurs
