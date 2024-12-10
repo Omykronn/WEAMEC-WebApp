@@ -180,4 +180,21 @@ public class FileController {
         
         prepareResponse(name, mime, content, response);
     }
+    
+    /**
+     * Fonction relative au téléchargement du logo d'un projet
+     * @param response      Réponse HTTP venant du servelet
+     * @param id            Identifiant du projet
+     * @throws IOException 
+     */
+    @GetMapping("/file/{id}/logo")
+    public void downloadLogo(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
+        File file = fileSystemService.getLogo(id);
+        
+        String name = file.getName();
+        String mime = Files.probeContentType(file.toPath());
+        byte[] content = Files.readAllBytes(file.toPath());
+        
+        prepareResponse(name, mime, content, response);
+    }
 }
