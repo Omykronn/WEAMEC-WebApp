@@ -68,4 +68,17 @@ public class FileSystemService {
         
         return findFile(dir, extensions);
     }
+    
+    /**
+     * Retourne l'objet File associé au budget d'un projet
+     * @param idProjet  Identifiant d'un projet
+     * @return          Objet file du budget
+     * @throws IOException 
+     */
+    public File getBudget(int idProjet) throws IOException {
+        String dir = storageDirectory + "/project" + String.format("%08d", idProjet) + "/budget.";
+        String[] extensions = {"xls", "xlsm", "xlsx"};
+        
+        return findFile(dir, extensions);
+    }
 }
