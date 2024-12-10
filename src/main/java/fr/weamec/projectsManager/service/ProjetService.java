@@ -111,6 +111,8 @@ public class ProjetService {
         // Pour categorie et type, si id faux, Optional retourne une erreur et donc affichage de la page error
         Projet projet = new Projet(calendar.get(Calendar.YEAR),
                                    new Date(calendar.getTime().getTime()),
+                                   false,
+                                   new Date(calendar.getTime().getTime()),
                                    new CoordinateurScientifique((JSONObject) json.get("coordinateurScientifique")),
                                    (String) json.get("nomAcro"),
                                    (String) json.get("nomComplet"),

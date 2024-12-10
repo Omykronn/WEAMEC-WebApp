@@ -35,7 +35,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <p class="fw-light m-0">
                         Début du traitement : <span th:text="${#dates.format(projet.debutTraitement, 'dd/MM/yyyy')}"></span>
                     </p>
-                    <p class="fw-light m-0" th:if="${projet.finTraitement}">
+                    <p class="fw-light m-0" th:if="${projet.traitementFini}">
                         Fin du traitement : <span th:text="${#dates.format(projet.finTraitement, 'dd/MM/yyyy')}"></span>
                     </p>
                 </div>

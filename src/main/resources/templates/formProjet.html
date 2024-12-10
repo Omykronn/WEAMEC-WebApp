@@ -450,8 +450,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         
                         <table class="table">
                             <tr>
-                                <th><label class="form-label" for="finTraitementInput">Fin du traitement du dossier</label></th>
-                                <td><input class="form-control" type="date" th:field="*{finTraitement}" id="finTraitementInput" /></td>
+                                <td></td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" th:field="*{traitementFini}" id="traitementFiniInput" th:checked="${brevet}" />
+                                        <label class="form-check-label" for="traitementFiniInput">Traitement terminé</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <th>
+                                    <label class="form-label" for="finTraitementInput">Fin du traitement du dossier</label>
+                                    <div class="form-text">
+                                        Si le traitement est en cours, la valeur n'a pas d'importance
+                                    </div>
+                                </th>
+                                <td><input class="form-control" type="date" th:field="*{finTraitement}" id="finTraitementInput" required /></td>
                             </tr>
                         </table>
                     </div>

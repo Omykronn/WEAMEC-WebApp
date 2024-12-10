@@ -55,8 +55,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                             <tr th:each="projet: ${projets}">
                                 <td scope="row">
-                                    <button th:unless="${projet.finTraitement}" class="btn btn-warning" disabled>EN COURS</button>
-                                    <button th:if="${projet.finTraitement}" class="btn btn-success" disabled>TERMINÉ</button>
+                                    <button th:unless="${projet.traitementFini}" class="btn btn-warning" disabled>EN COURS</button>
+                                    <button th:if="${projet.traitementFini}" class="btn btn-success" disabled>TERMINÉ</button>
                                 </td>
                                 <td th:text="${projet.anneeSelection}"></td>
                                 <td th:text="${projet.nomAcro}"></td>

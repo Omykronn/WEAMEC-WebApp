@@ -37,6 +37,9 @@ public class Projet {
     @Column(name = "debut_traitement")
     private Date debutTraitement;
     
+    @Column(name ="traitement_fini")
+    private boolean traitementFini;
+    
     @Column(name = "fin_traitement")
     private Date finTraitement;
     
@@ -169,9 +172,11 @@ public class Projet {
     public Projet() {}
     
     /**
-     * Constructeur de Projet (sans id, ni finTraitement)
+     * Constructeur de Projet (sans id)
      * @param anneeSelection            Annee de Sélection
      * @param debutTraitement           Date de début du traitement du dossier
+     * @param traitementFini            Booléen si traitement fini
+     * @param finTraitement             Date de fin du traitement du dossier
      * @param coordinateurScientifique  Coordinateur Scientifique du projet
      * @param nomAcro                   Acronyme du nom du projet
      * @param nomComplet                Nom Complet du Projet
@@ -205,9 +210,11 @@ public class Projet {
      * @param listePartenaires          Liste des partenaires du projet
      * @param listeExperts              Liste des experts du projet
      */
-    public Projet(int anneeSelection, Date debutTraitement, CoordinateurScientifique coordinateurScientifique, String nomAcro, String nomComplet, Categorie categorie, Type type, String objectifSynth, String siteWeb, int duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
+    public Projet(int anneeSelection, Date debutTraitement, boolean traitementFini, Date finTraitement, CoordinateurScientifique coordinateurScientifique, String nomAcro, String nomComplet, Categorie categorie, Type type, String objectifSynth, String siteWeb, int duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
         this.anneeSelection = anneeSelection;
         this.debutTraitement = debutTraitement;
+        this.traitementFini = traitementFini;
+        this.finTraitement = finTraitement;
         this.coordinateurScientifique = coordinateurScientifique;
         this.nomAcro = nomAcro;
         this.nomComplet = nomComplet;
@@ -304,6 +311,22 @@ public class Projet {
      */
     public void setDebutTraitement(Date debutTraitement) {
         this.debutTraitement = debutTraitement;
+    }
+    
+    /**
+     * traitementFini Getter
+     * @return Booléen si le traitement est fini
+     */
+    public boolean getTraitementFini() {
+        return traitementFini;
+    }
+    
+    /**
+     * traitementFini Setter
+     * @param traitementFini Booléen si le traitement est fini
+     */
+    public void setTraitementFini(boolean traitementFini) {
+        this.traitementFini = traitementFini;
     }
     
     /**
