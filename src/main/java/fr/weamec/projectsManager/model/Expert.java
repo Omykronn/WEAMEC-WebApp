@@ -42,10 +42,9 @@ public class Expert extends Personne {
      * @param nom                       Nom
      * @param prenom                    Prenom
      * @param mail                      Mail
-     * @param telephone                 Telephone
      */
-    public Expert(String entiteRattachement, String laboratoireRattachement, String specialite, int idProjet, int id, String nom, String prenom, String mail, String telephone) {
-        super(id, nom, prenom, mail, telephone);
+    public Expert(String entiteRattachement, String laboratoireRattachement, String specialite, int idProjet, int id, String nom, String prenom, String mail) {
+        super(id, nom, prenom, mail);
         this.idProjet = idProjet;
         this.entiteRattachement = entiteRattachement;
         this.laboratoireRattachement = laboratoireRattachement;

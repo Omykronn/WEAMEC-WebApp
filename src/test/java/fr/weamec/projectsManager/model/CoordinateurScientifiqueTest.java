@@ -57,7 +57,8 @@ public class CoordinateurScientifiqueTest {
         assertEquals(instance.getNom(), "MARTIN");
         assertEquals(instance.getPrenom(), "Jean-Yves");
         assertEquals(instance.getMail(), "jean-yves.martin@ec-nantes.fr");
-        assertEquals(instance.getTelephone(), "+33 7 89 01 23 45");
+        assertEquals(instance.getTelephoneFixe(), "+33 1 23 45 67 89");
+        assertEquals(instance.getTelephonePort(), "+33 7 89 01 23 45");
         
         // Simple vérification qu'un object a été créé
         // Vérification du contenu avec le test d'import de StrucutureRattachement 

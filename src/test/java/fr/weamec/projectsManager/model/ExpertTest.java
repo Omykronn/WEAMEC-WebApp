@@ -60,6 +60,5 @@ public class ExpertTest {
         assertEquals(instance.getLaboratoireRattachement(), "INFOSI");
         assertEquals(instance.getSpecialite(), "JAVA Spring Boot");
         assertEquals(instance.getMail(), "john.doe@eleves.ec-nantes.fr");
-        assertEquals(instance.getTelephone(), "+33 7 89 01 23 45");
     }   
 }

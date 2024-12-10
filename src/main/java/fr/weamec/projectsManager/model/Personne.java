@@ -23,7 +23,6 @@ public abstract class Personne {
     private String nom;
     private String prenom;
     private String mail;
-    private String telephone;
     
     /**
      * Constructeur par defaut
@@ -36,14 +35,12 @@ public abstract class Personne {
      * @param nom       Nom
      * @param prenom    Prenom
      * @param mail      Adresse mail
-     * @param telephone Numero de telephone
      */
-    public Personne(int id, String nom, String prenom, String mail, String telephone) {
+    public Personne(int id, String nom, String prenom, String mail) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
-        this.telephone = telephone;
     }
     
     /**
@@ -54,7 +51,6 @@ public abstract class Personne {
         this.nom = (String) json.get("nom");
         this.prenom = (String) json.get("prenom");
         this.mail = (String) json.get("mail");
-        this.telephone = (String) json.get("telephone");
     }
     
     /**
@@ -119,21 +115,5 @@ public abstract class Personne {
      */
     public void setMail(String mail) {
         this.mail = mail;
-    }
-    
-    /**
-     * telephone Getter
-     * @return Numero de telephone
-     */
-    public String getTelephone() {
-        return telephone;
-    }
-
-    /**
-     * telephone Setter
-     * @param telephone Numero de telephone 
-     */
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
     }
 }

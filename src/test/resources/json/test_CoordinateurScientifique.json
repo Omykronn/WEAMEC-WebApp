@@ -2,7 +2,8 @@
     "nom": "MARTIN",
     "prenom": "Jean-Yves",
     "mail": "jean-yves.martin@ec-nantes.fr",
-    "telephone": "+33 7 89 01 23 45",
+    "telFixe": "+33 1 23 45 67 89",
+    "telPort": "+33 7 89 01 23 45",
     "structureRattachement": {
         "etablissement": "École Centrale de Nantes",
         "laboratoire": "EI2+",

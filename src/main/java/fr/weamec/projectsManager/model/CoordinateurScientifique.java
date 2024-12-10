@@ -18,6 +18,9 @@ import org.json.simple.JSONObject;
 @Entity
 @Table(name = "coordinateurscientifique")
 public class CoordinateurScientifique extends Personne {
+    private String telephoneFixe;
+    private String telephonePort;
+    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_structure", referencedColumnName = "id")
     private StructureRattachement structureRattachement;
@@ -34,10 +37,13 @@ public class CoordinateurScientifique extends Personne {
      * @param nom                   Nom 
      * @param prenom                Prenom
      * @param mail                  Adresse mail
-     * @param telephone             Numero de telephone
+     * @param telephoneFixe          Numero de telephone fixe
+     * @param telephonePort         Numéro de téléphone portable
      */
-    public CoordinateurScientifique(StructureRattachement structureRattachement, int id, String nom, String prenom, String mail, String telephone) {
-        super(id, nom, prenom, mail, telephone);
+    public CoordinateurScientifique(StructureRattachement structureRattachement, int id, String nom, String prenom, String mail, String telephoneFixe, String telephonePort) {
+        super(id, nom, prenom, mail);
+        this.telephoneFixe = telephoneFixe;
+        this.telephonePort = telephonePort;
         this.structureRattachement = structureRattachement;
     }
     
@@ -47,6 +53,8 @@ public class CoordinateurScientifique extends Personne {
      */
     public CoordinateurScientifique(JSONObject json) {
         super(json);
+        this.telephoneFixe = (String) json.get("telFixe");
+        this.telephonePort = (String) json.get("telPort");
         this.structureRattachement = new StructureRattachement((JSONObject) json.get("structureRattachement"));
     }
     
@@ -65,4 +73,37 @@ public class CoordinateurScientifique extends Personne {
     public void setStructureRattachement(StructureRattachement structureRattachement) {
         this.structureRattachement = structureRattachement;
     }
+    
+    /**
+     * telephoneFixe Getter
+     * @return Numéro de téléphone fixe
+     */
+    public String getTelephoneFixe() {
+        return telephoneFixe;
+    }
+    
+    /**
+     * telephoneFixe Setter
+     * @param telephoneFixe Numéro de téléphone fixe 
+     */
+    public void setTelephoneFixe(String telephoneFixe) {
+        this.telephoneFixe = telephoneFixe;
+    }
+    
+    /**
+     * telephonePort Getter
+     * @return Numéro de téléphone portable
+     */
+    public String getTelephonePort() {
+        return telephonePort;
+    }
+    
+    /**
+     * telephonePort Setter
+     * @param telephonePort Numéro de téléphone portable 
+     */
+    public void setTelephonePort(String telephonePort) {
+        this.telephonePort = telephonePort;
+    }
+    
 }

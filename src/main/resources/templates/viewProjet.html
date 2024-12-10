@@ -119,8 +119,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         </tr>
         
                         <tr>
-                            <th scope="col">Telephone</th>
-                            <td th:text="${projet.coordinateurScientifique.telephone}"></td>
+                            <th scope="col">Telephone Fixe</th>
+                            <td th:text="${projet.coordinateurScientifique.telephoneFixe}"></td>
+                        </tr>
+                        
+                        <tr>
+                            <th scope="col">Telephone Portable</th>
+                            <td th:text="${projet.coordinateurScientifique.telephonePort}"></td>
                         </tr>
                         
                         <tr>
@@ -352,11 +357,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <tr>
                                 <th scope="col">Mail</th>
                                 <td><a th:href="'mailto:' + ${expert.mail}" th:text="${expert.mail}"></a></td>
-                            </tr>
-
-                            <tr>
-                                <th scope="col">Numéro de Téléphone</th>
-                                <td th:text="${expert.telephone}"></td>
                             </tr>
 
                             <tr>

@@ -19,6 +19,8 @@ import org.json.simple.JSONObject;
 @Entity
 @Table(name = "partenaire")
 public class Partenaire extends Personne{
+    private String telephone;
+    
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_entite_rattachement", referencedColumnName = "id")
     private StructureRattachement structureRattachement;
@@ -42,7 +44,8 @@ public class Partenaire extends Personne{
      * @param telephone             Numero de telephone
      */
     public Partenaire(StructureRattachement structureRattachement, int idProjet, int id, String nom, String prenom, String mail, String telephone) {
-        super(id, nom, prenom, mail, telephone);
+        super(id, nom, prenom, mail);
+        this.telephone = telephone;
         this.structureRattachement = structureRattachement;
         this.idProjet = idProjet;
     }
@@ -53,6 +56,7 @@ public class Partenaire extends Personne{
      */
     public Partenaire(JSONObject json) {
         super(json);
+        this.telephone = (String) json.get("telephone");
         this.structureRattachement = new StructureRattachement((JSONObject) json.get("structureRattachement"));
     }
     
@@ -87,4 +91,20 @@ public class Partenaire extends Personne{
     public void setIdProjet(int idProjet) {
         this.idProjet = idProjet;
     }   
+    
+    /**
+     * telephone Getter
+     * @return Numéro de téléphone
+     */
+    public String getTelephone() {
+        return telephone;
+    }
+
+    /**
+     * telephone Setter
+     * @param telephone Numéro de téléphone 
+     */
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 }

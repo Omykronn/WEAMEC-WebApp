@@ -129,10 +129,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             </tr>
         
                             <tr>
-                                <th><label class="form-label" for="coordinateurScientifiqueTelephoneInput">Telephone</label></th>
-                                <td><input class="form-control" type="tel" th:field="*{coordinateurScientifique.telephone}" id="coordinateurScientifiqueTelephoneInput" required /></td>
+                                <th><label class="form-label" for="coordinateurScientifiqueTelephoneFixeInput">Telephone Fixe</label></th>
+                                <td><input class="form-control" type="tel" th:field="*{coordinateurScientifique.telephoneFixe}" id="coordinateurScientifiqueTelephoneFixeInput" required /></td>
                             </tr>
-        
+                                
+                            <tr>
+                                <th><label class="form-label" for="coordinateurScientifiqueTelephonePortInput">Telephone Portable</label></th>
+                                <td><input class="form-control" type="tel" th:field="*{coordinateurScientifique.telephonePort}" id="coordinateurScientifiqueTelephonePortInput" required /></td>
+                            </tr>
+                            
                             <tr>
                                 <th><label class="form-label" for="structureCoordinateurScientifiqueEtablissementInput">Nom de l'établissement</label></th>
                                 <td><input class="form-control" type="text" th:field="*{coordinateurScientifique.structureRattachement.etablissement}" id="structureCoordinateurScientifiqueEtablissementInput" required /></td>
@@ -420,11 +425,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <tr>
                                     <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'MailInput'">Mail</label></th>
                                     <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].mail}" th:id="'expert' + ${itemStat.index} + 'MailInput'" required /></td>
-                                </tr>
-        
-                                <tr>
-                                    <th><label class="form-label" th:for="'expert' + ${itemStat.index} + 'TelephoneInput'">Numéro de Téléphone</label></th>
-                                    <td><input class="form-control" type="text" th:field="*{listeExperts[__${itemStat.index}__].telephone}" th:id="'expert' + ${itemStat.index} + 'TelephoneInput'" required /></td>
                                 </tr>
         
                                 <tr>
