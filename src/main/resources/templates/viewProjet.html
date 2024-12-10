@@ -47,6 +47,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <a th:href="@{/file/{id}/summary(id=${projet.id})}"><button class="btn btn-secondary mt-3">Fiche Présentation</button></a>
                     <a th:href="@{/file/{id}/html(id=${projet.id})}"><button class="btn btn-secondary mt-3">Page HTML</button></a>
                 </div>
+                
+                <div class="col-sm-12 my-5" id="documents">
+                    <h2>Documents du projet</h2>
+                    
+                    <ul style="columns: 2;">
+                        <li><a th:href="@{/file/{id}/visuel(id=${projet.id})}">Visuel</a></li>
+                        <li><a th:href="@{/file/{id}/logo(id=${projet.id})}">Logo</a></li>
+                        <li><a th:href="@{/file/{id}/budget(id=${projet.id})}">Budget</a></li>
+                        <li><a th:href="@{/file/{id}/planning(id=${projet.id})}">Plan de travail</a></li>
+                        <li><a th:href="@{/file/{id}/logosPartenaires(id=${projet.id})}">Logos des partenaires</a></li>
+                        <li><a th:href="@{/file/{id}/avisMotives(id=${projet.id})}">Avis motivés</a></li>
+                        <li><a th:href="@{/file/{id}/lettresEngagement(id=${projet.id})}">Lettres d'engagement des tutelles</a></li>
+                        <li><a th:href="@{/file/{id}/lettresInterets(id=${projet.id})}">Lettres d'intêret des entreprises</a></li>
+                    </ul>
+                </div>
 
                 <div class="col-sm-12 my-5" id="general">
                     <h2>Elements Clefs du Projet</h2>
