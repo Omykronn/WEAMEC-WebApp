@@ -81,4 +81,17 @@ public class FileSystemService {
         
         return findFile(dir, extensions);
     }
+    
+    /**
+     * Retourne l'objet File associé au planning d'un projet
+     * @param idProjet  Identifiant d'un projet
+     * @return          Objet file du planning
+     * @throws IOException 
+     */
+    public File getPlanning(int idProjet) throws IOException {
+        String dir = storageDirectory + "/project" + String.format("%08d", idProjet) + "/gantt.";
+        String[] extensions = {"png", "jpg", "jpeg", "pdf"};
+        
+        return findFile(dir, extensions);
+    }
 }
