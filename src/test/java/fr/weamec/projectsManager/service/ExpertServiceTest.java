@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- *
+ * Classe de test pour ExpertService
  * @author simon
  */
 @SpringBootTest

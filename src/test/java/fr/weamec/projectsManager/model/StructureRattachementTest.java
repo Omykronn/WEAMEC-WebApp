@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
+ * Classe de test pour StructureRattachement
  * @author simon
  */
 public class StructureRattachementTest {
@@ -43,6 +43,8 @@ public class StructureRattachementTest {
 
     /**
      * Test of import from JSON.
+     * @throws java.io.IOException
+     * @throws org.json.simple.parser.ParseException
      */
     @Test
     public void testImportFromJson() throws IOException, ParseException {
