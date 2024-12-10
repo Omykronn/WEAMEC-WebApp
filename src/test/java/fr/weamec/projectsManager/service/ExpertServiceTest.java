@@ -8,9 +8,7 @@ import fr.weamec.projectsManager.model.Expert;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.AfterEach;
@@ -19,12 +17,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
  * @author simon
  */
-public class ExpertServiceTest {    
+@SpringBootTest
+public class ExpertServiceTest { 
+    @Autowired
+    private ExpertService expertService;
+    
     public ExpertServiceTest() {
     }
     
@@ -52,8 +56,6 @@ public class ExpertServiceTest {
     @Test
     public void testListFromJSONArray() throws IOException, ParseException {
         System.out.println("importFromJSON : Expert list");
-        
-        ExpertService expertService = new ExpertService();
         
         JSONParser parser = new JSONParser();
         JSONArray json = (JSONArray) parser.parse(new FileReader("src/test/resources/json/test_ListExpert.json"));
