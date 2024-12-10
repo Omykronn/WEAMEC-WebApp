@@ -43,6 +43,12 @@ public class FileSystemService {
         return file;
     }
     
+    /**
+     * Retourne l'objet File associé au visuel d'un projet
+     * @param idProjet  Identifiant d'un projet
+     * @return          Objet file du visuel
+     * @throws IOException 
+     */
     public File getVisuel(int idProjet) throws IOException {
         String dir = storageDirectory + "/project" + String.format("%08d", idProjet) + "/visuel.";
         String[] extensions = {"png", "jpg", "jpeg"};
