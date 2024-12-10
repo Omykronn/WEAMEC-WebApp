@@ -128,11 +128,11 @@ public class ProjetController {
      * @param model  Model fourni par Spring
      * @return       Nom de la page HTML à afficher
      */
-    @PostMapping("/projects/{id}")
+    @PostMapping("/projects/save")
     public String saveProject(@ModelAttribute Projet projet, Model model) {        
         projet = projetService.save(projet);
         
-        return "viewProjet";
+        return "redirect:/projects/" + projet.getId();
     }
     
     /**
