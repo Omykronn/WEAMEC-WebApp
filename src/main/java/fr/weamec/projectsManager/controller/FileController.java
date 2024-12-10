@@ -8,7 +8,9 @@ import fr.weamec.projectsManager.service.file.*;
 import fr.weamec.projectsManager.model.Projet;
 import fr.weamec.projectsManager.service.*;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -26,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author simon
  */
 @Controller
-public class FileController {
+public class FileController {    
     @Autowired
     HtmlBasedFileGenerationService htmlPdfGenerator;
     
@@ -36,12 +38,15 @@ public class FileController {
     @Autowired
     ProjetService projetService;
     
+    @Autowired
+    FileSystemService fileSystemService;
+    
     /**
      * Construite une requête de réponse pour le téléchargement d'un fichier
      * @param fileName  Nom du fichier à afficher
      * @param mimeType  Type MIME du fichier 
      * @param content   Contenu binaire du fichier
-     * @param response  Réponse HTML venant du servelet
+     * @param response  Réponse HTTP venant du servelet
      */
     private void prepareResponse(String fileName, String mimeType, byte[] content, HttpServletResponse response) {
         response.setContentType(mimeType);
@@ -56,7 +61,7 @@ public class FileController {
     
     /**
      * Fonction relative au téléchargement d'un dossier d'un projet en format PDF
-     * @param response  Réponse HTML venant du servelet
+     * @param response  Réponse HTTP venant du servelet
      * @param id        Identifiant du projet
      */
     @GetMapping("/file/{id}/casefile")
@@ -70,7 +75,7 @@ public class FileController {
     
     /**
      * Fonction relative au téléchargement de la présentation d'un projet en format PDF
-     * @param response  Réponse HTML venant du servelet
+     * @param response  Réponse HTTP venant du servelet
      * @param id        Identifiant du projet
      */
     @GetMapping("/file/{id}/summary")
@@ -83,8 +88,8 @@ public class FileController {
     }  
     
     /**
-     * Fonction relative au téléchargement de la page HTML d'un projet
-     * @param response  Réponse HTML venant du servelet
+     * Fonction relative au téléchargement de la page HTTP d'un projet
+     * @param response  Réponse HTTP venant du servelet
      * @param id        Identifiant du projet
      */
     @GetMapping("/file/{id}/html")
@@ -98,7 +103,7 @@ public class FileController {
     
     /**
      * Fonction relative au téléchargement de tous les fichiers sur un projet dans un fichier ZIP
-     * @param response  Réponse HTML venant du servelet
+     * @param response  Réponse HTTP venant du servelet
      * @param id        Identifiant du projet 
      */
     @GetMapping("/file/{id}/all")
@@ -113,7 +118,7 @@ public class FileController {
     /**
      * Fonction associée à l'affichage du formulaire pour la génération des rendus
      * @param model Model fourni par Spring
-     * @return      Nom de la page HTML à afficher
+     * @return      Nom de la page HTTP à afficher
      */
     @GetMapping("/file/generate")
     public String generateForm(Model model) {
@@ -149,7 +154,8 @@ public class FileController {
     
     /**
      * Fonction relative au téléchargement du fichier Excel récapitulatif
-     * @param response  Réponse HTML venant du servelet
+     * @param response  Réponse HTTP venant du servelet
+     * @throws java.io.IOException
      */
     @GetMapping("/file/excel")
     public void downloadHtmlPage(HttpServletResponse response) throws IOException {
@@ -157,4 +163,21 @@ public class FileController {
         
         prepareResponse("Projets W2 " + Year.now().getValue() + "- Infos.xlsx", "application/xlsx", content, response);
     } 
+    
+    /**
+     * Fonction relative au téléchargement du visuel d'un projet
+     * @param response      Réponse HTTP venant du servelet
+     * @param id            Identifiant du projet
+     * @throws IOException 
+     */
+    @GetMapping("/file/{id}/visuel")
+    public void downloadVisuel(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
+        File file = fileSystemService.getVisuel(id);
+        
+        String name = file.getName();
+        String mime = Files.probeContentType(file.toPath());
+        byte[] content = Files.readAllBytes(file.toPath());
+        
+        prepareResponse(name, mime, content, response);
+    }
 }
