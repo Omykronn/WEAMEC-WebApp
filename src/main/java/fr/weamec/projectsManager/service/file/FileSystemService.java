@@ -104,4 +104,14 @@ public class FileSystemService {
     public File getDossierAvis(int idProjet) throws IOException {        
         return new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/avisMotives");
     }
+    
+    /**
+     * Retourne l'objet File associé au dossier des lettres d'interet d'un projet
+     * @param idProjet  Identifiant d'un projet
+     * @return          Objet file du dossier
+     * @throws IOException 
+     */
+    public File getDossierLettresInteret(int idProjet) throws IOException {        
+        return new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/lettreInteret");
+    }
 }
