@@ -55,4 +55,17 @@ public class FileSystemService {
         
         return findFile(dir, extensions);
     }
+    
+    /**
+     * Retourne l'objet File associé au logo d'un projet
+     * @param idProjet  Identifiant d'un projet
+     * @return          Objet file du logo
+     * @throws IOException 
+     */
+    public File getLogo(int idProjet) throws IOException {
+        String dir = storageDirectory + "/project" + String.format("%08d", idProjet) + "/logo.";
+        String[] extensions = {"png", "jpg", "jpeg"};
+        
+        return findFile(dir, extensions);
+    }
 }
