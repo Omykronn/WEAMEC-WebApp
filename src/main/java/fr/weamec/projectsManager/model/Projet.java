@@ -112,6 +112,8 @@ public class Projet {
     
     private boolean brevet;
     
+    private String descriptionPartenariat;
+    
     @OneToMany(mappedBy = "idProjet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Partenaire> listePartenaires;
     
@@ -202,6 +204,7 @@ public class Projet {
      * @param trlDebut                  TRL au début
      * @param trlFin                    TRL à la fin
      * @param brevet                    Brevet vise
+     * @param descriptionPartenariat    Description du partenariat entre les acteurs du projet
      * @param prioriteWeamec            Priorite WEAMEC
      * @param objectifsWeamec           Objectifs WEAMEC
      * @param defisWeamec               Defis WEAMEC
@@ -210,7 +213,7 @@ public class Projet {
      * @param listePartenaires          Liste des partenaires du projet
      * @param listeExperts              Liste des experts du projet
      */
-    public Projet(int anneeSelection, Date debutTraitement, boolean traitementFini, Date finTraitement, CoordinateurScientifique coordinateurScientifique, String nomAcro, String nomComplet, Categorie categorie, Type type, String objectifSynth, String siteWeb, int duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
+    public Projet(int anneeSelection, Date debutTraitement, boolean traitementFini, Date finTraitement, CoordinateurScientifique coordinateurScientifique, String nomAcro, String nomComplet, Categorie categorie, Type type, String objectifSynth, String siteWeb, int duree, Date dateDebut, Date dateFin, String description, String objectif, String verrousScientif, String programmeExp, String moyensEssai, String demonstrateur, String ruptureScient, String impactTech, String impactEco, String impactEnv, String impactSoc, List<Technologie> technologies, int trlDebut, int trlFin, boolean brevet, String descriptionPartenariat, List<Priorite> prioriteWeamec, List<Objectif> objectifsWeamec, List<Defi> defisWeamec, List<Valeur> valeurs, List<Theme> themes, List<Partenaire> listePartenaires, List<Expert> listeExperts) {
         this.anneeSelection = anneeSelection;
         this.debutTraitement = debutTraitement;
         this.traitementFini = traitementFini;
@@ -240,6 +243,7 @@ public class Projet {
         this.trlDebut = trlDebut;
         this.trlFin = trlFin;
         this.brevet = brevet;
+        this.descriptionPartenariat = descriptionPartenariat;
         this.prioriteWeamec = prioriteWeamec;
         this.objectifsWeamec = objectifsWeamec;
         this.defisWeamec = defisWeamec;
@@ -728,7 +732,23 @@ public class Projet {
     public void setBrevet(boolean brevet) {
         this.brevet = brevet;
     }
+    
+    /**
+     * descriptionPartenariat Getter
+     * @return Description du partenariat avec les acteurs du projet
+     */
+    public String getDescriptionPartenariat() {
+        return descriptionPartenariat;
+    }
 
+    /**
+     * descriptionPartenariat Setter
+     * @param descriptionPartenariat Description du partenariat avec les acteurs du projet 
+     */
+    public void setDescriptionPartenariat(String descriptionPartenariat) {
+        this.descriptionPartenariat = descriptionPartenariat;
+    }
+    
     /**
      * prioriteWeamec Getter
      * @return Priorite WEAMEC

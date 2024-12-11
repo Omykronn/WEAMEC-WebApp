@@ -319,12 +319,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <tr>
                                 <th><label class="form-label" for="TrldebutInput">Niveau TRL de début</label></th>
                                 <td><input class="form-control" type="number" th:field="*{trlDebut}" id="TrldebutInput" min="0" max="9" required /></td>
-                            </td>
+                            </tr>
         
                             <tr>
                                 <th><label class="form-label" for="TrlfinInput">Niveau TRL de fin visé</label></th>
                                 <td><input class="form-control" type="number" th:field="*{trlFin}" id="TrlfinInput" min="0" max="9" required /></td>
-                            </td>
+                            </tr>
         
                             <tr>
                                 <td></td>
@@ -334,6 +334,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <label class="form-check-label" for="BrevetInput">Brevet visé ?</label>
                                     </div>
                                 </td>
+                            </tr>
+                            
+                            <tr>
+                                <th><label class="form-label" for="DescriptionPartenariatInput">Description du partenariat entre les acteurs du projet</label></th>
+                                <td><textarea class="form-control" th:field="*{descriptionPartenariat}" id="DescriptionPartenariatInput" cols="100" rows="5"></textarea></td>
                             </tr>
         
                             <tr>

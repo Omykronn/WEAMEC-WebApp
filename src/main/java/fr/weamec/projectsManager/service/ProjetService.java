@@ -138,6 +138,7 @@ public class ProjetService {
                                    ((Long) json.get("trlDebut")).intValue(),
                                    ((Long) json.get("trlFin")).intValue(),
                                    (boolean) json.get("brevet"),
+                                   (String) json.get("descriptionPartenariat"),
                                    prioriteService.listFromJSONArray((JSONArray) json.get("prioriteWeamec")),
                                    objectifService.listFromJSONArray((JSONArray) json.get("objectifsWeamec")),
                                    defiService.listFromJSONArray((JSONArray) json.get("defisWeamec")),
