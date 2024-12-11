@@ -7,11 +7,13 @@ package fr.weamec.projectsManager.service.file;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +51,12 @@ public class ZipFileService {
         return binOutput.toByteArray();
     }
     
+    /**
+     * Crée un fichier ZIP
+     * @param files     Liste des fichiers à ajouter
+     * @return 
+     * @throws java.io.IOException 
+     */
     public byte[] createZip(File[] files) throws IOException {
         ArrayList<byte[]> contents = new ArrayList<>();
         ArrayList<String> names = new ArrayList();
