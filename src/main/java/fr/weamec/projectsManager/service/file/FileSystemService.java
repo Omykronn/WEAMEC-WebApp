@@ -174,6 +174,24 @@ public class FileSystemService {
     }
     
     /**
+     * Genère le fichier ZIP contenant les lettres de tutelle
+     * @param idProjet  Identifiant du projet
+     * @return          ByteArray du fichier ZIP
+     * @throws IOException 
+     */
+    public byte[] getLettresTutelleZip(int idProjet) throws IOException {
+        ArrayList<byte[]> contents = new ArrayList<>();
+        ArrayList<String> names = new ArrayList();
+        
+        for (File file: getLettresTutelle(idProjet)) {
+            contents.add(Files.readAllBytes(file.toPath()));
+            names.add(file.getName());
+        }
+        
+        return zipGenerator.createZip(names, contents);
+    }
+    
+    /**
      * Retourne un Array de File associé aux logos des partenaires d'un projet
      * @param idProjet  Identifiant d'un projet
      * @return          Array des fichiers du dossier
