@@ -231,4 +231,15 @@ public class FileController {
         
         prepareResponse(name, mime, content, response);
     }
+    
+    /**
+     * Fonction relative au téléchargement du fichier ZIP contenant les logos des partenaires
+     * @param response      Réponse HTTP venant du servlet
+     * @param id            Identifiant du projet
+     * @throws IOException 
+     */
+    @GetMapping("/file/{id}/logosPartenaires")
+    public void downloadLogosPartenaires(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
+        prepareResponse("logos_partenaires.zip", "application/zip", fileSystemService.getLogosPartenaireZip(id), response);
+    }
 }
