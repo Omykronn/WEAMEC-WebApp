@@ -202,4 +202,22 @@ public class FileSystemService {
         
         return directory.listFiles();
     }
+    
+    /**
+     * Genère le fichier ZIP contenant les logos des partenaires
+     * @param idProjet  Identifiant du projet
+     * @return          ByteArray du fichier ZIP
+     * @throws IOException 
+     */
+    public byte[] getLogosPartenaireZip(int idProjet) throws IOException {
+        ArrayList<byte[]> contents = new ArrayList<>();
+        ArrayList<String> names = new ArrayList();
+        
+        for (File file: getLogosPartenaire(idProjet)) {
+            contents.add(Files.readAllBytes(file.toPath()));
+            names.add(file.getName());
+        }
+        
+        return zipGenerator.createZip(names, contents);
+    }
 }
