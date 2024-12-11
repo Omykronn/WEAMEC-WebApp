@@ -5,7 +5,10 @@
 package fr.weamec.projectsManager.service.file;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.zip.ZipEntry;
@@ -44,5 +47,17 @@ public class ZipFileGenerationService {
         catch (IOException e) {}
         
         return binOutput.toByteArray();
+    }
+    
+    public byte[] createZip(File[] files) throws IOException {
+        ArrayList<byte[]> contents = new ArrayList<>();
+        ArrayList<String> names = new ArrayList();
+        
+        for (File file: files) {
+            contents.add(Files.readAllBytes(file.toPath()));
+            names.add(file.getName());
+        }
+        
+        return createZip(names, contents);
     }
 }

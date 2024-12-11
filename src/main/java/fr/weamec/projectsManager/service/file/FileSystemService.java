@@ -120,15 +120,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public byte[] getAvisZip(int idProjet) throws IOException {
-        ArrayList<byte[]> contents = new ArrayList<>();
-        ArrayList<String> names = new ArrayList();
-        
-        for (File file: getAvis(idProjet)) {
-            contents.add(Files.readAllBytes(file.toPath()));
-            names.add(file.getName());
-        }
-        
-        return zipGenerator.createZip(names, contents);
+        return zipGenerator.createZip(getAvis(idProjet));
     }
     
     /**
@@ -150,15 +142,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public byte[] getLettresInteretZip(int idProjet) throws IOException {
-        ArrayList<byte[]> contents = new ArrayList<>();
-        ArrayList<String> names = new ArrayList();
-        
-        for (File file: getLettresInteret(idProjet)) {
-            contents.add(Files.readAllBytes(file.toPath()));
-            names.add(file.getName());
-        }
-        
-        return zipGenerator.createZip(names, contents);
+        return zipGenerator.createZip(getLettresInteret(idProjet));
     }
     
     /**
@@ -180,15 +164,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public byte[] getLettresTutelleZip(int idProjet) throws IOException {
-        ArrayList<byte[]> contents = new ArrayList<>();
-        ArrayList<String> names = new ArrayList();
-        
-        for (File file: getLettresTutelle(idProjet)) {
-            contents.add(Files.readAllBytes(file.toPath()));
-            names.add(file.getName());
-        }
-        
-        return zipGenerator.createZip(names, contents);
+        return zipGenerator.createZip(getLettresTutelle(idProjet));
     }
     
     /**
@@ -209,15 +185,7 @@ public class FileSystemService {
      * @return          ByteArray du fichier ZIP
      * @throws IOException 
      */
-    public byte[] getLogosPartenaireZip(int idProjet) throws IOException {
-        ArrayList<byte[]> contents = new ArrayList<>();
-        ArrayList<String> names = new ArrayList();
-        
-        for (File file: getLogosPartenaire(idProjet)) {
-            contents.add(Files.readAllBytes(file.toPath()));
-            names.add(file.getName());
-        }
-        
-        return zipGenerator.createZip(names, contents);
+    public byte[] getLogosPartenaireZip(int idProjet) throws IOException {        
+        return zipGenerator.createZip(getLogosPartenaire(idProjet));
     }
 }
