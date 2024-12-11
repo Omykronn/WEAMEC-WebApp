@@ -144,6 +144,24 @@ public class FileSystemService {
     }
     
     /**
+     * Genère le fichier ZIP contenant les lettres d'interet
+     * @param idProjet  Identifiant du projet
+     * @return          ByteArray du fichier ZIP
+     * @throws IOException 
+     */
+    public byte[] getLettresInteretZip(int idProjet) throws IOException {
+        ArrayList<byte[]> contents = new ArrayList<>();
+        ArrayList<String> names = new ArrayList();
+        
+        for (File file: getLettresInteret(idProjet)) {
+            contents.add(Files.readAllBytes(file.toPath()));
+            names.add(file.getName());
+        }
+        
+        return zipGenerator.createZip(names, contents);
+    }
+    
+    /**
      * Retourne un Array de File associé aux lettres de tutelle d'un projet
      * @param idProjet  Identifiant d'un projet
      * @return          Array des fichiers du dossier
