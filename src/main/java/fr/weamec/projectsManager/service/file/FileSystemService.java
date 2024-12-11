@@ -96,42 +96,50 @@ public class FileSystemService {
     }
     
     /**
-     * Retourne l'objet File associé au dossier des avis d'un projet
+     * Retourne un Array de File associé aux avis d'un projet
      * @param idProjet  Identifiant d'un projet
-     * @return          Objet file du dossier
+     * @return          Array des fichiers du dossier
      * @throws IOException 
      */
-    public File getDossierAvis(int idProjet) throws IOException {        
-        return new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/avisMotives");
+    private File[] getAvis(int idProjet) throws IOException {        
+        File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/avisMotives");
+        
+        return directory.listFiles();
     }
     
     /**
-     * Retourne l'objet File associé au dossier des lettres d'interet d'un projet
+     * Retourne un Array de File associé aux lettres d'interet d'un projet
      * @param idProjet  Identifiant d'un projet
-     * @return          Objet file du dossier
+     * @return          Array des fichiers du dossier
      * @throws IOException 
      */
-    public File getDossierLettresInteret(int idProjet) throws IOException {        
-        return new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/lettreInteret");
+    private File[] getLettresInteret(int idProjet) throws IOException {                
+        File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/lettreInteret");
+        
+        return directory.listFiles();
     }
     
     /**
-     * Retourne l'objet File associé au dossier des lettres de tutelle d'un projet
+     * Retourne un Array de File associé aux lettres de tutelle d'un projet
      * @param idProjet  Identifiant d'un projet
-     * @return          Objet file du dossier
+     * @return          Array des fichiers du dossier
      * @throws IOException 
      */
-    public File getDossierLettresTutelle(int idProjet) throws IOException {        
-        return new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/lettreTutelle");
+    private File[] getLettresTutelle(int idProjet) throws IOException {                
+        File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/lettreTutelle");
+        
+        return directory.listFiles();
     }
     
     /**
-     * Retourne l'objet File associé au dossier des logos des partenaires d'un projet
+     * Retourne un Array de File associé aux logos des partenaires d'un projet
      * @param idProjet  Identifiant d'un projet
-     * @return          Objet file du dossier
+     * @return          Array des fichiers du dossier
      * @throws IOException 
      */
-    public File getDossierLogosPartenaire(int idProjet) throws IOException {        
-        return new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/partenaire");
+    private File[] getLogosPartenaire(int idProjet) throws IOException {        
+        File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/partenaire");
+        
+        return directory.listFiles();
     }
 }
