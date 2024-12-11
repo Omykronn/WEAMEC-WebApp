@@ -7,6 +7,9 @@ package fr.weamec.projectsManager.service.file;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class FileSystemService {
     private final String storageDirectory = "/home/simon/Documents/INFOSI/00_PAPPL/projectStorage";
+    
+    @Autowired
+    private ZipFileGenerationService zipGenerator;
     
     /**
      * Test une liste d'extensions jusqu'à trouver un fichier correspondant
@@ -105,6 +111,24 @@ public class FileSystemService {
         File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/avisMotives");
         
         return directory.listFiles();
+    }
+    
+    /**
+     * Genère le fichier ZIP contenant les avis motives
+     * @param idProjet  Identifiant du projet
+     * @return          ByteArray du fichier ZIP
+     * @throws IOException 
+     */
+    public byte[] getAvisZip(int idProjet) throws IOException {
+        ArrayList<byte[]> contents = new ArrayList<>();
+        ArrayList<String> names = new ArrayList();
+        
+        for (File file: getAvis(idProjet)) {
+            contents.add(Files.readAllBytes(file.toPath()));
+            names.add(file.getName());
+        }
+        
+        return zipGenerator.createZip(names, contents);
     }
     
     /**
