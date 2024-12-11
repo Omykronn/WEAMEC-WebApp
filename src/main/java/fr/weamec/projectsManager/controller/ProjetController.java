@@ -196,7 +196,7 @@ public class ProjetController {
                 model.addAttribute("errorMessage", "La structure du fichier de correspond pas, merci d'utiliser celui issu du logiciel client.");
                 viewName = "importProjet";
             }            
-            catch (IOException e) {
+            catch (Exception e) {
                 model.addAttribute("errorMessage", "Une erreur est survenue, merci de réessayer.");
                 viewName = "importProjet";
             }
