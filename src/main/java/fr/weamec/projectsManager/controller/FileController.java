@@ -253,4 +253,15 @@ public class FileController {
     public void downloadAvisMotives(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
         prepareResponse("avis_motives.zip", "application/zip", fileSystemService.getAvisZip(id), response);
     }
+   
+    /**
+     * Fonction relative au téléchargement du fichier ZIP contenant les lettres des tutelles
+     * @param response      Réponse HTTP venant du servlet
+     * @param id            Identifiant du projet
+     * @throws IOException 
+     */
+    @GetMapping("/file/{id}/lettresTutelle")
+    public void downloadLettresEngagement(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
+        prepareResponse("lettres_tutelle.zip", "application/zip", fileSystemService.getLettresTutelleZip(id), response);
+    }
 }
