@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @author simon
  */
 @Service
-public class ZipFileGenerationService {
+public class ZipFileService {
     /**
      * Crée un fichier ZIP
      * @param fileNames Liste des noms des fichiers à ajouter

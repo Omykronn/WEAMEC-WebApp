@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 public class HtmlBasedFileGenerationService {
     @Autowired
-    ZipFileGenerationService zipper;
+    ZipFileService zipper;
     
     @Autowired
     CategorieService categorieService;

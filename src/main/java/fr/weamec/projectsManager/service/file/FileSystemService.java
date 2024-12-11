@@ -7,8 +7,6 @@ package fr.weamec.projectsManager.service.file;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class FileSystemService {
     private final String storageDirectory = "/home/simon/Documents/INFOSI/00_PAPPL/projectStorage";
     
     @Autowired
-    private ZipFileGenerationService zipGenerator;
+    private ZipFileService zipGenerator;
     
     /**
      * Test une liste d'extensions jusqu'à trouver un fichier correspondant
