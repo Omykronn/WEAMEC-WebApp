@@ -6,6 +6,7 @@ package fr.weamec.projectsManager.service.file;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -67,5 +68,50 @@ public class ZipFileService {
         }
         
         return createZip(names, contents);
+    }
+    
+    /**
+     * Décompresse un fichier ZIP depuis son flux vers un chemin d'accès
+     * @param dir   Chemin d'accès
+     * @param input Flux entrant du fichier ZIP
+     * @throws IOException 
+     */
+    public void saveZip(String dir, InputStream input) throws IOException {
+        ZipInputStream zipInput = new ZipInputStream(input);
+        ZipEntry entry = zipInput.getNextEntry();
+        
+        while (entry != null) {
+            saveEntry(dir + '/' + entry.getName(), zipInput, entry.isDirectory());
+            entry = zipInput.getNextEntry();
+        }
+    }
+    
+    /**
+     * Enregistre une entrée d'un fichier ZIP depuis un flux vers un chemin d'accès
+     * @param filePath      Chemin d'accès
+     * @param zipInput      Flux entrant du fichier ZIP
+     * @param isDirectory   Booléen si dossier
+     * @throws IOException 
+     */
+    private void saveEntry(String filePath, ZipInputStream zipInput, boolean isDirectory) throws IOException {
+        File file = new File(filePath);
+        FileOutputStream output;
+        byte[] buffer = new byte[1024];
+        int len;
+        
+        if (isDirectory) {
+            if (!file.mkdirs()) {
+                throw new IOException();
+            }
+        }
+        else {
+            output = new FileOutputStream(file);
+            
+            while ((len = zipInput.read(buffer)) > 0) {
+                output.write(buffer, 0, len);
+            }
+            
+            output.close();
+        }
     }
 }
