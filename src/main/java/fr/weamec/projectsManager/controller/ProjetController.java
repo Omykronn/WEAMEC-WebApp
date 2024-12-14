@@ -9,6 +9,7 @@ import fr.weamec.projectsManager.service.*;
 import fr.weamec.projectsManager.service.file.FileSystemService;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.util.Calendar;
@@ -145,10 +146,12 @@ public class ProjetController {
      * Fonction associée à la suppression d'un projet
      * @param id Identifiant du projet à supprimer
      * @return   Redirection vers la page principale
+     * @throws java.io.IOException
      */
     @GetMapping("/projects/{id}/drop")
-    public String dropProject(@PathVariable("id") int id) {
+    public String dropProject(@PathVariable("id") int id) throws IOException {
         projetService.deleteProjet(id);
+        FileUtils.deleteDirectory(fileSystemService.createProjectDir(id));
         
         return "redirect:/projects/";
     }
@@ -204,7 +207,7 @@ public class ProjetController {
                 Projet projet = projetService.importFromJSON(json);
                 
                 // Création du dossier du projet
-                File projetDir = fileSystemService.createProjectDir(projet);
+                File projetDir = fileSystemService.createProjectDir(projet.getId());
                 
                 // Sauvegarde des fichiers dans le bon dossier
                 fileSystemService.importZipFile(projetDir.getAbsolutePath(), file);

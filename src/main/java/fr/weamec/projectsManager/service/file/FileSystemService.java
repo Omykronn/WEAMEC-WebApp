@@ -8,7 +8,6 @@ import fr.weamec.projectsManager.model.Projet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.NotDirectoryException;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -220,18 +219,34 @@ public class FileSystemService {
     
     /**
      * Crée le dossier contenant les fichiers d'un projet
-     * @param projet    Projet 
+     * @param idProjet  Identifiant du projet
      * @return          Dossier du projet
      * @throws IOException 
      */
-    public File createProjectDir(Projet projet) throws IOException {
-        File projetDir = new File(FileSystemService.STORAGE_DIRECTORY + "/project" + String.format("%08d", projet.getId()));
+    public File createProjectDir(int idProjet) throws IOException {
+        File projetDir = new File(FileSystemService.STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet));
         
         if (projetDir.exists()) {
             FileUtils.deleteDirectory(projetDir);
         }
         
         projetDir.mkdirs();
+        return projetDir;
+    }
+    
+    /**
+     * Retourne un lien vers le dossier d'un projet
+     * @param idProjet  Identifiant du projet
+     * @return          Dossier d'un projet
+     * @throws FileNotFoundException 
+     */
+    public File getProjectDir(int idProjet) throws FileNotFoundException {
+        File projetDir = new File(FileSystemService.STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet));
+        
+        if (!projetDir.exists()) {
+            throw new FileNotFoundException();
+        }
+        
         return projetDir;
     }
 }
