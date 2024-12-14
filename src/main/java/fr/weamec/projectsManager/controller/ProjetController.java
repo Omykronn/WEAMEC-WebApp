@@ -6,11 +6,14 @@ package fr.weamec.projectsManager.controller;
 
 import fr.weamec.projectsManager.model.*;
 import fr.weamec.projectsManager.service.*;
-import java.io.IOException;
+import fr.weamec.projectsManager.service.file.FileSystemService;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.Optional;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -29,7 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author simon
  */
 @Controller
-public class ProjetController {
+public class ProjetController {    
     @Autowired
     ProjetService projetService;    
     
@@ -56,6 +59,9 @@ public class ProjetController {
     
     @Autowired
     TechnologieService technologieService;
+    
+    @Autowired
+    FileSystemService fileSystemService;
    
     /**
      * Fonction associée à l'affichage de la page dashboard
@@ -181,21 +187,37 @@ public class ProjetController {
      * @return      Redirection vers la page principale
      */
     @PostMapping("/projects/import")
-    public String importProjectFromJson(@RequestParam("file") MultipartFile file, Model model) {    
+    public String importProject(@RequestParam("file") MultipartFile file, Model model) {    
         String viewName;
         
-        if (file.getContentType().equals("application/json")) {
-            try {
+        if (file.getContentType().equals("application/zip")) {
+            try {                
+                // Création d'un dossier temporaire (suppression si déjà existant)
+                File tempDir = fileSystemService.createTempDir();
+                
+                // Sauvegarde temporaire des fichiers pour accèder aux informations dans le fichier JSON
+                fileSystemService.importZipFile(tempDir.getAbsolutePath(), file);
+                
+                // Lecture et import du projet grâce aux informations dans le fichier JSON
                 JSONParser parser = new JSONParser();
-                JSONObject json = (JSONObject) parser.parse(new InputStreamReader(file.getInputStream(), "UTF-8"));
-
-                projetService.importFromJSON(json);
+                JSONObject json = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream(tempDir.getAbsolutePath() + '/' + "projet.json"), "UTF-8"));
+                Projet projet = projetService.importFromJSON(json);
+                
+                // Création du dossier du projet
+                File projetDir = fileSystemService.createProjectDir(projet);
+                
+                // Sauvegarde des fichiers dans le bon dossier
+                fileSystemService.importZipFile(projetDir.getAbsolutePath(), file);
+                
+                // Suppression du dossier temporaire
+                FileUtils.deleteDirectory(tempDir);
+                
                 viewName = "redirect:/projects/";
             }
             catch (ParseException e) {
                 model.addAttribute("errorMessage", "La structure du fichier de correspond pas, merci d'utiliser celui issu du logiciel client.");
                 viewName = "importProjet";
-            }            
+            }   
             catch (Exception e) {
                 model.addAttribute("errorMessage", "Une erreur est survenue, merci de réessayer.");
                 viewName = "importProjet";

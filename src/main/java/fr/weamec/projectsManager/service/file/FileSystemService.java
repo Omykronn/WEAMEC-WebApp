@@ -4,11 +4,15 @@
  */
 package fr.weamec.projectsManager.service.file;
 
+import fr.weamec.projectsManager.model.Projet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.NotDirectoryException;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Service pour l'accès aux fichiers sur le serveur
@@ -16,10 +20,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FileSystemService {
-    private final String storageDirectory = "/home/simon/Documents/INFOSI/00_PAPPL/projectStorage";
+    public static final String STORAGE_DIRECTORY = "/home/simon/Documents/INFOSI/00_PAPPL/projectStorage";
+    public static final String TEMP_DIRECTORY = "/tmp";
     
     @Autowired
-    private ZipFileService zipGenerator;
+    private ZipFileService zipFileService;
     
     /**
      * Test une liste d'extensions jusqu'à trouver un fichier correspondant
@@ -54,7 +59,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public File getVisuel(int idProjet) throws IOException {
-        String dir = storageDirectory + "/project" + String.format("%08d", idProjet) + "/visuel.";
+        String dir = STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/visuel.";
         String[] extensions = {"png", "jpg", "jpeg"};
         
         return findFile(dir, extensions);
@@ -67,7 +72,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public File getLogo(int idProjet) throws IOException {
-        String dir = storageDirectory + "/project" + String.format("%08d", idProjet) + "/logo.";
+        String dir = STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/logo.";
         String[] extensions = {"png", "jpg", "jpeg"};
         
         return findFile(dir, extensions);
@@ -80,7 +85,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public File getBudget(int idProjet) throws IOException {
-        String dir = storageDirectory + "/project" + String.format("%08d", idProjet) + "/budget.";
+        String dir = STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/budget.";
         String[] extensions = {"xls", "xlsm", "xlsx"};
         
         return findFile(dir, extensions);
@@ -93,7 +98,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public File getPlanning(int idProjet) throws IOException {
-        String dir = storageDirectory + "/project" + String.format("%08d", idProjet) + "/gantt.";
+        String dir = STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/gantt.";
         String[] extensions = {"png", "jpg", "jpeg", "pdf"};
         
         return findFile(dir, extensions);
@@ -106,7 +111,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     private File[] getAvis(int idProjet) throws IOException {        
-        File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/avisMotives");
+        File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/avisMotives");
         
         return directory.listFiles();
     }
@@ -118,7 +123,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public byte[] getAvisZip(int idProjet) throws IOException {
-        return zipGenerator.createZip(getAvis(idProjet));
+        return zipFileService.createZip(getAvis(idProjet));
     }
     
     /**
@@ -128,7 +133,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     private File[] getLettresInteret(int idProjet) throws IOException {                
-        File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/lettreInteret");
+        File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/lettreInteret");
         
         return directory.listFiles();
     }
@@ -140,7 +145,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public byte[] getLettresInteretZip(int idProjet) throws IOException {
-        return zipGenerator.createZip(getLettresInteret(idProjet));
+        return zipFileService.createZip(getLettresInteret(idProjet));
     }
     
     /**
@@ -150,7 +155,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     private File[] getLettresTutelle(int idProjet) throws IOException {                
-        File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/lettreTutelle");
+        File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/lettreTutelle");
         
         return directory.listFiles();
     }
@@ -162,7 +167,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     public byte[] getLettresTutelleZip(int idProjet) throws IOException {
-        return zipGenerator.createZip(getLettresTutelle(idProjet));
+        return zipFileService.createZip(getLettresTutelle(idProjet));
     }
     
     /**
@@ -172,7 +177,7 @@ public class FileSystemService {
      * @throws IOException 
      */
     private File[] getLogosPartenaire(int idProjet) throws IOException {        
-        File directory = new File(storageDirectory + "/project" + String.format("%08d", idProjet) + "/partenaire");
+        File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/partenaire");
         
         return directory.listFiles();
     }
@@ -184,6 +189,49 @@ public class FileSystemService {
      * @throws IOException 
      */
     public byte[] getLogosPartenaireZip(int idProjet) throws IOException {        
-        return zipGenerator.createZip(getLogosPartenaire(idProjet));
+        return zipFileService.createZip(getLogosPartenaire(idProjet));
+    }
+    
+    /**
+     * Importe un fichier ZIP dans le dossier temporaire
+     * @param dir   Dossier de destination
+     * @param file  Fichier ZIP
+     * @throws IOException 
+     */
+    public void importZipFile(String dir, MultipartFile file) throws IOException {
+        zipFileService.saveZip(dir, file.getInputStream());
+    }
+    
+    /**
+     * Crée le dossier temporaire pour l'import d'un projet
+     * @return Dossier temporaire
+     * @throws java.io.IOException
+     */
+    public File createTempDir() throws IOException {
+        File tempDir = new File(FileSystemService.TEMP_DIRECTORY + "/weamec");
+        
+        if (tempDir.exists()) {
+            FileUtils.deleteDirectory(tempDir);
+        }
+        
+        tempDir.mkdirs();
+        return tempDir;
+    }
+    
+    /**
+     * Crée le dossier contenant les fichiers d'un projet
+     * @param projet    Projet 
+     * @return          Dossier du projet
+     * @throws IOException 
+     */
+    public File createProjectDir(Projet projet) throws IOException {
+        File projetDir = new File(FileSystemService.STORAGE_DIRECTORY + "/project" + String.format("%08d", projet.getId()));
+        
+        if (projetDir.exists()) {
+            FileUtils.deleteDirectory(projetDir);
+        }
+        
+        projetDir.mkdirs();
+        return projetDir;
     }
 }
