@@ -109,7 +109,7 @@ public class FileSystemService {
      * @return          Array des fichiers du dossier
      * @throws IOException 
      */
-    private File[] getAvis(int idProjet) throws IOException {        
+    public File[] getAvis(int idProjet) throws IOException {        
         File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/avisMotives");
         
         return directory.listFiles();
@@ -131,7 +131,7 @@ public class FileSystemService {
      * @return          Array des fichiers du dossier
      * @throws IOException 
      */
-    private File[] getLettresInteret(int idProjet) throws IOException {                
+    public File[] getLettresInteret(int idProjet) throws IOException {                
         File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/lettreInteret");
         
         return directory.listFiles();
@@ -153,7 +153,7 @@ public class FileSystemService {
      * @return          Array des fichiers du dossier
      * @throws IOException 
      */
-    private File[] getLettresTutelle(int idProjet) throws IOException {                
+    public File[] getLettresTutelle(int idProjet) throws IOException {                
         File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/lettreTutelle");
         
         return directory.listFiles();

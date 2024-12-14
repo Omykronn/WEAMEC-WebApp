@@ -5,14 +5,23 @@
 package fr.weamec.projectsManager.service.file;
 
 import fr.weamec.projectsManager.model.Projet;
+import fr.weamec.projectsManager.service.file.FileSystemService;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.utils.PdfMerger;
 import fr.weamec.projectsManager.service.*;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +33,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class HtmlBasedFileGenerationService {
     @Autowired
     ZipFileService zipper;
+    
+    @Autowired
+    FileSystemService fileSystemService;
     
     @Autowired
     CategorieService categorieService;
@@ -81,11 +93,27 @@ public class HtmlBasedFileGenerationService {
     }
     
     /**
-     * Génère le ByteArray d'un dossier PDF d'un projet
+     * Fusionne une collection de documents PDF
+     * @param documents Collection de documents PDF
+     * @param output    Flux sortant
+     */
+    private void mergePdfDocuments(Iterable<PdfDocument> documents, OutputStream output) {
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(output));
+        PdfMerger merger = new PdfMerger(pdfDoc);
+        
+        for (PdfDocument currentDoc: documents) {
+            merger.merge(currentDoc, 1, currentDoc.getNumberOfPages());
+        }
+        
+        pdfDoc.close();
+    }
+    
+    /**
+     * Génère le ByteArray de la partie principale d'un dossier PDF d'un projet
      * @param projet Projet dont le dossier doit être généré
      * @return ByteArray du fichier PDF
      */
-    public byte[] generateCaseFile(Projet projet) {
+    private byte[] generateMainPartCaseFile(Projet projet) {        
         Context context = new Context();
         context.setVariable("projet", projet);
         
@@ -102,6 +130,46 @@ public class HtmlBasedFileGenerationService {
         
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         HtmlConverter.convertToPdf(generateHtml("caseFile_template", context), output);
+        
+        return output.toByteArray();
+    }
+    
+    /**
+     * Génère le ByteArray d'un dossier PDF d'un projet
+     * @param projet Projet dont le dossier doit être généré
+     * @return ByteArray du fichier PDF
+     */
+    public byte[] generateCaseFile(Projet projet) {
+        ArrayList<PdfDocument> documents = new ArrayList<>();
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        
+        try {
+            documents.add(new PdfDocument(new PdfReader(new ByteArrayInputStream(generateMainPartCaseFile(projet)))));
+            
+            // Ajout des avis motivés
+            documents.add(new PdfDocument(new PdfReader("src/main/resources/weamec/resources/separator_annexe2.pdf")));
+            
+            for (File avis: fileSystemService.getAvis(projet.getId())) {
+                documents.add(new PdfDocument(new PdfReader(avis)));
+            }
+            
+            // Ajout des lettres d'interet
+            documents.add(new PdfDocument(new PdfReader("src/main/resources/weamec/resources/separator_annexe3.pdf")));
+            
+            for (File lettreTutelle: fileSystemService.getLettresTutelle(projet.getId())) {
+                documents.add(new PdfDocument(new PdfReader(lettreTutelle)));
+            }
+            
+            // Ajout des lettres de tutelle
+            documents.add(new PdfDocument(new PdfReader("src/main/resources/weamec/resources/separator_annexe4.pdf")));
+            
+            for (File lettreInteret: fileSystemService.getLettresInteret(projet.getId())) {
+                documents.add(new PdfDocument(new PdfReader(lettreInteret)));
+            }
+        }
+        catch (IOException e) {}
+        
+        mergePdfDocuments(documents, output);
         
         return output.toByteArray();
     }
