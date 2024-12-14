@@ -207,7 +207,7 @@ public class FileSystemService {
      * @throws java.io.IOException
      */
     public File createTempDir() throws IOException {
-        File tempDir = new File(FileSystemService.TEMP_DIRECTORY + "/weamec");
+        File tempDir = new File(FileSystemService.TEMP_DIRECTORY + "/weamec" + System.currentTimeMillis());
         
         if (tempDir.exists()) {
             FileUtils.deleteDirectory(tempDir);
