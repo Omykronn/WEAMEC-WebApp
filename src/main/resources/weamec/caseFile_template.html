@@ -229,6 +229,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <h2><span>BUDGET</span></h2>
 
             <p>Annexe budgétaire</p>
+            
+            <img th:each="imagePath: ${listeBudgetImagePaths}" th:src="${imagePath}" alt="Tableur Excel du Budget" class="full-width"/>
         </section>
 
         <section>

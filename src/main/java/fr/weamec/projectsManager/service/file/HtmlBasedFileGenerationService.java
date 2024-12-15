@@ -115,6 +115,7 @@ public class HtmlBasedFileGenerationService {
         
         try {
             context.setVariable("listePlanningImagePaths", imageService.getPlanningImagePaths(projet.getId()));
+            context.setVariable("listeBudgetImagePaths", imageService.getBudgetImagePaths(projet.getId()));
         } catch (IOException ex) {
             Logger.getLogger(HtmlBasedFileGenerationService.class.getName()).log(Level.SEVERE, null, ex);
         }

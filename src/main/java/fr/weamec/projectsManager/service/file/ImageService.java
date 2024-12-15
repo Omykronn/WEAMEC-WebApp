@@ -4,6 +4,8 @@
  */
 package fr.weamec.projectsManager.service.file;
 
+import com.aspose.cells.SheetRender;
+import com.aspose.cells.Workbook;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,9 +37,18 @@ public class ImageService {
         PDDocument planning = Loader.loadPDF(source);
         int count = 1;
         
-        for (BufferedImage image: PdfFileTools.convertPdfToPng(planning)) {
+        for (BufferedImage image: PdfFileTools.convertPdfToImageBuffer(planning)) {
             ImageIO.write(image, "PNG", new File(dirPath + "/page_" + count + ".png"));
             count++;
+        }
+    }
+    
+    private void generateImagesFromExcel(String dirPath, File source) throws Exception {
+        Workbook workbook = new Workbook(source.getAbsolutePath());
+        int count = 1;
+        
+        for (SheetRender render: ExcelFileTools.convertExcelToSheetRender(workbook)) {
+            render.toImage(0, dirPath + "/sheet_" + count + ".png");
         }
     }
     
@@ -47,7 +58,13 @@ public class ImageService {
      * @param destinationPath   Chemin d'accès vers le dossier de destination
      * @throws IOException 
      */
-    public void generateProjectImages(int idProjet, String destinationPath) throws IOException {
+    public void generateProjectImages(int idProjet, String destinationPath) throws IOException, Exception {
+        // Budget
+        File budgetDir = new File(destinationPath + "/budget_img");
+        budgetDir.mkdir();
+        
+        generateImagesFromExcel(budgetDir.getAbsolutePath(), fileSystemService.getBudget(idProjet));
+        
         // Planning
         if (fileSystemService.getPlanning(idProjet).getName().equals("gantt.pdf")) {
             File planningDir = new File(destinationPath + "/planning_img");
@@ -79,6 +96,28 @@ public class ImageService {
         else {
             // Sinon, on suppose que planning.xxx est une image
             paths.add(fileSystemService.getPlanning(idProjet).getAbsolutePath());
+        }
+        
+        return paths;
+    }
+    
+    /**
+     * Retourne une liste des chemins d'accès vers les images du budget d'un projet
+     * @param idProjet  Identifiant du projet
+     * @return          Liste des chemins d'accès
+     * @throws java.io.FileNotFoundException
+     */
+    public List<String> getBudgetImagePaths(int idProjet) throws FileNotFoundException {
+        ArrayList<String> paths = new ArrayList<>();
+        
+        File projectDir = fileSystemService.getProjectDir(idProjet);
+        File budgetDir = new File(projectDir.getAbsolutePath() + "/budget_img");
+        
+        if (budgetDir.exists()) {
+            // S'il existe des images converties, on les utilise
+            for (File page: budgetDir.listFiles()) {
+                paths.add(page.getAbsolutePath());
+            }
         }
         
         return paths;

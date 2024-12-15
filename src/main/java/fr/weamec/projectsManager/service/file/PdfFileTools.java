@@ -16,7 +16,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
 /**
- * Service pour la génération de fichiers PDF
+ * Classe outils pour la génération de fichiers PDF
  * @author simon
  */
 public class PdfFileTools {
@@ -37,12 +37,12 @@ public class PdfFileTools {
     }
     
     /**
-     * Convertit les pages d'un document PDF en images
+     * Convertit les pages d'un document PDF en ImageBuffer sous forme de liste
      * @param document  Document à convertir
-     * @return          Images des pages du document
+     * @return          Liste des ImageBuffer des pages du document
      * @throws IOException 
      */
-    public static List<BufferedImage> convertPdfToPng(PDDocument document) throws IOException {
+    public static List<BufferedImage> convertPdfToImageBuffer(PDDocument document) throws IOException {
         PDFRenderer renderer = new PDFRenderer(document);
         ArrayList<BufferedImage> images = new ArrayList<>();
         
