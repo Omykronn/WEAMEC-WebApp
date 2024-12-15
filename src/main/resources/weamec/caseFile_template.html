@@ -22,7 +22,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             
             <h3>EDITION 2025</h3>
 
-            <img src="src/main/resources/weamec/resources/CREATIF-38.jpg" alt="Structure dans un bassin d'essai" id="cover-image">
+            <img src="src/main/resources/weamec/resources/CREATIF-38.jpg" alt="Structure dans un bassin d'essai" id="cover-image" class="full-width">
 
             <h2 th:text="${projet.nomAcro}">NOM DU PROJET</h2>
 
@@ -221,6 +221,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <h2><span>PLAN DE TRAVAIL</span></h2>
 
             <p>Diagramme de Gant</p>
+            
+            <img th:each="imagePath: ${listePlanningImagePaths}" th:src="${imagePath}" alt="Diagramme de Gantt" class="full-width"/>
         </section>
 
         <section>

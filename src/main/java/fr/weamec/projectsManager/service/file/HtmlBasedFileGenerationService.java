@@ -5,7 +5,6 @@
 package fr.weamec.projectsManager.service.file;
 
 import fr.weamec.projectsManager.model.Projet;
-import fr.weamec.projectsManager.service.file.FileSystemService;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -20,6 +19,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -33,6 +34,9 @@ public class HtmlBasedFileGenerationService {
     
     @Autowired
     FileSystemService fileSystemService;
+    
+    @Autowired
+    ImageService imageService;
     
     @Autowired
     CategorieService categorieService;
@@ -94,8 +98,8 @@ public class HtmlBasedFileGenerationService {
      * @param projet Projet dont le dossier doit être généré
      * @return ByteArray du fichier PDF
      */
-    private byte[] generateMainPartCaseFile(Projet projet) {        
-        Context context = new Context();
+    private byte[] generateMainPartCaseFile(Projet projet) {    
+        Context context = new Context();        
         context.setVariable("projet", projet);
         
         context.setVariable("listeCategories", categorieService.getCategories());
@@ -108,6 +112,12 @@ public class HtmlBasedFileGenerationService {
         context.setVariable("listePriorites", prioriteService.getPriorites());
         context.setVariable("listeObjetifs", objectifService.getObjectifs());
         context.setVariable("listeDefis", defiService.getDefis());
+        
+        try {
+            context.setVariable("listePlanningImagePaths", imageService.getPlanningImagePaths(projet.getId()));
+        } catch (IOException ex) {
+            Logger.getLogger(HtmlBasedFileGenerationService.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         HtmlConverter.convertToPdf(generateHtml("caseFile_template", context), output);

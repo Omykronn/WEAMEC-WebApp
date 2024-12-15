@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
@@ -41,7 +42,7 @@ public class PdfFileTools {
      * @return          Images des pages du document
      * @throws IOException 
      */
-    public static ArrayList<BufferedImage> convertPdfToPng(PDDocument document) throws IOException {
+    public static List<BufferedImage> convertPdfToPng(PDDocument document) throws IOException {
         PDFRenderer renderer = new PDFRenderer(document);
         ArrayList<BufferedImage> images = new ArrayList<>();
         

@@ -7,6 +7,7 @@ package fr.weamec.projectsManager.controller;
 import fr.weamec.projectsManager.model.*;
 import fr.weamec.projectsManager.service.*;
 import fr.weamec.projectsManager.service.file.FileSystemService;
+import fr.weamec.projectsManager.service.file.ImageService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -63,6 +64,9 @@ public class ProjetController {
     
     @Autowired
     FileSystemService fileSystemService;
+    
+    @Autowired
+    ImageService imageService;
    
     /**
      * Fonction associée à l'affichage de la page dashboard
@@ -78,6 +82,7 @@ public class ProjetController {
     
     /**
      * Fonction associée à l'affichage de la page d'un projet
+     * @param id    Identifiant du projet
      * @param model Model fourni par Spring
      * @return      Nom de la page HTML à afficher
      */
@@ -99,6 +104,7 @@ public class ProjetController {
     
     /**
      * Fonction associée à l'affichage du formulaire de modidification d'un projet
+     * @param id    Identifiant du projet
      * @param model Model fourni par Spring
      * @return      Nom de la page HTML à afficher
      */
@@ -211,6 +217,9 @@ public class ProjetController {
                 
                 // Sauvegarde des fichiers dans le bon dossier
                 fileSystemService.importZipFile(projetDir.getAbsolutePath(), file);
+                
+                // Generation des images du projet
+                imageService.generateProjectImages(projet.getId(), projetDir.getAbsolutePath());
                 
                 // Suppression du dossier temporaire
                 FileUtils.deleteDirectory(tempDir);
