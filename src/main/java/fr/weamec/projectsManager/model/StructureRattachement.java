@@ -81,8 +81,8 @@ public class StructureRattachement {
         this.laboratoire = (String) json.get("laboratoire");
         this.equipe = (String) json.get("equipe");
         this.adresse = (String) json.get("adresse");
-        this.ville = (String) json.get("ville");
-        this.codePostal = ((Long) json.get("codePostal")).intValue();
+        this.ville = (String) json.get("ville");        
+        this.codePostal = Integer.parseInt((String) json.get("codePostal"));
         this.nomRef = (String) json.get("nomRef");
         this.telephoneRef = (String) json.get("telephoneRef");
         this.mailRef = (String) json.get("mailRef");

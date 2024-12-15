@@ -10,7 +10,7 @@
             "equipe": "WEAMEC",
             "adresse": "1 Rue de la Noë",
             "ville": "Nantes",
-            "codePostal": 44000,
+            "codePostal": "44000",
             "nomRef": "Dominique FOLLUT",
             "mailRef": "contact@weamec.fr",
             "telephoneRef": "+33 4 78 04 23 38"
@@ -27,7 +27,7 @@
             "equipe": "WEAMEC",
             "adresse": "1 Rue de la Noë",
             "ville": "Nantes",
-            "codePostal": 44000,
+            "codePostal": "44000",
             "nomRef": "Dominique FOLLUT",
             "mailRef": "contact@weamec.fr",
             "telephoneRef": "+33 4 78 04 23 38"
