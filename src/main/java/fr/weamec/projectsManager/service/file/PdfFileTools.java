@@ -7,7 +7,12 @@ package fr.weamec.projectsManager.service.file;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.utils.PdfMerger;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 
 /**
  * Service pour la génération de fichiers PDF
@@ -28,5 +33,22 @@ public class PdfFileTools {
         }
         
         pdfDoc.close();
+    }
+    
+    /**
+     * Convertit les pages d'un document PDF en images
+     * @param document  Document à convertir
+     * @return          Images des pages du document
+     * @throws IOException 
+     */
+    public static ArrayList<BufferedImage> convertPdfToPng(PDDocument document) throws IOException {
+        PDFRenderer renderer = new PDFRenderer(document);
+        ArrayList<BufferedImage> images = new ArrayList<>();
+        
+        for (int i = 0; i < document.getNumberOfPages(); i++) {
+            images.add(renderer.renderImage(i));
+        }
+        
+        return images;
     }
 }

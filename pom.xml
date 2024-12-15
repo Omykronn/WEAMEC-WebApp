@@ -30,47 +30,73 @@
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+                <!-- Thymeleaf pour Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+                
+                <!-- Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+                
+                <!-- Java JPA -->
                 <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+                
+                <!-- Authentification et Autorisations des utilisateurs -->
                 <dependency>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-starter-security</artifactId>
                 </dependency>
+                
+                <!-- PostrgreSQL -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+                
+                <!-- Spring Boot Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+                
+                <!-- Lecture des fichiers JSON -->
                 <dependency>
                         <groupId>com.googlecode.json-simple</groupId>
                         <artifactId>json-simple</artifactId>
                         <version>1.1.1</version>
                 </dependency>
+                
+                <!-- Injection de données dans une page HTML -->
                 <dependency>
                         <groupId>org.thymeleaf</groupId>
                         <artifactId>thymeleaf</artifactId>
                         <version>3.1.2.RELEASE</version>
                 </dependency>
+                
+                <!-- Génération de fichiers PDF -->
                 <dependency>
                         <groupId>com.itextpdf</groupId>
                         <artifactId>html2pdf</artifactId>
                         <version>6.0.0</version>
                 </dependency>
+                
+                <!-- Conversion de fichiers PDF en image -->
+                <dependency>
+                        <groupId>org.apache.pdfbox</groupId>
+                        <artifactId>pdfbox</artifactId>
+                        <version>3.0.3</version>
+                </dependency>
+                
+                <!-- Génération de fichiers xlsx -->
                 <dependency>
                         <groupId>org.apache.poi</groupId>
                         <artifactId>poi-ooxml</artifactId>
