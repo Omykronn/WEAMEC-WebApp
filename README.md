@@ -7,9 +7,9 @@ Développement d'un client web pour l'administration de projets par l'organisme 
 - [x] Affichage de tous les projets
 - [x] Affichage des informations d'un projet
 - [x] Modification des informations d'un projet
-- [ ] Accès aux documents relatifs à un projet
-    - [ ] Import
-    - [ ] Téléchargement
+- [x] Accès aux documents relatifs à un projet
+    - [x] Import
+    - [x] Téléchargement
 - [x] Suppression d'un projet
 - [x] Génération des rendus relatifs à un projet
     - [x] Dossier
@@ -22,7 +22,7 @@ Développement d'un client web pour l'administration de projets par l'organisme 
     - [ ] Page HTML
 - [x] Import d'un projet 
     - [x] Depuis un fichier JSON
-    - [ ] Depuis un fichier ZIP
+    - [x] Depuis un fichier ZIP
     - [ ] Depuis un fichier chiffré
 - [x] Authentification des utilisateurs
 - [x] Administration des utilistateurs
