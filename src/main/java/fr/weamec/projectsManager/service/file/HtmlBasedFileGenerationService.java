@@ -14,14 +14,11 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.utils.PdfMerger;
 import fr.weamec.projectsManager.service.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -88,24 +85,8 @@ public class HtmlBasedFileGenerationService {
      * @param context   Context Thymeleaf stockant les valeurs à utiliser
      * @return Code HTML
      */
-    private String generateHtml(String template, Context context) {
+    public String generateHtml(String template, Context context) {
         return templateEngine.process(template, context);
-    }
-    
-    /**
-     * Fusionne une collection de documents PDF
-     * @param documents Collection de documents PDF
-     * @param output    Flux sortant
-     */
-    private void mergePdfDocuments(Iterable<PdfDocument> documents, OutputStream output) {
-        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(output));
-        PdfMerger merger = new PdfMerger(pdfDoc);
-        
-        for (PdfDocument currentDoc: documents) {
-            merger.merge(currentDoc, 1, currentDoc.getNumberOfPages());
-        }
-        
-        pdfDoc.close();
     }
     
     /**
@@ -169,7 +150,7 @@ public class HtmlBasedFileGenerationService {
         }
         catch (IOException e) {}
         
-        mergePdfDocuments(documents, output);
+        PdfFileTools.mergePdfDocuments(documents, output);
         
         return output.toByteArray();
     }
