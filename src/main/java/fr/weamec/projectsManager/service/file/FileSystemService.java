@@ -4,6 +4,7 @@
  */
 package fr.weamec.projectsManager.service.file;
 
+import fr.weamec.projectsManager.configuration.StorageConfig;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,16 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
  * @author simon
  */
 @Service
-public class FileSystemService {
-    /**
-     * Chemin d'accès vers le stockage des fichiers des projets
-     */
-    public static final String STORAGE_DIRECTORY = "/home/simon/Documents/INFOSI/00_PAPPL/projectStorage";
-    
-    /**
-     * Chemin d'accès vers le stockage temporaire
-     */
-    public static final String TEMP_DIRECTORY = "/tmp";
+public class FileSystemService {    
+    @Autowired
+    StorageConfig storageConfig;
     
     @Autowired
     private ZipFileService zipFileService;
@@ -64,7 +58,7 @@ public class FileSystemService {
      * @throws IOException Aucun fichier avec les extensions proposées n'a été trouvé
      */
     public File getVisuel(int idProjet) throws IOException {
-        String dir = STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/visuel.";
+        String dir = storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet) + "/visuel.";
         String[] extensions = {"png", "jpg", "jpeg"};
         
         return findFile(dir, extensions);
@@ -77,7 +71,7 @@ public class FileSystemService {
      * @throws IOException Aucun fichier avec les extensions proposées n'a été trouvé
      */
     public File getLogo(int idProjet) throws IOException {
-        String dir = STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/logo.";
+        String dir = storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet) + "/logo.";
         String[] extensions = {"png", "jpg", "jpeg"};
         
         return findFile(dir, extensions);
@@ -90,7 +84,7 @@ public class FileSystemService {
      * @throws IOException Aucun fichier avec les extensions proposées n'a été trouvé
      */
     public File getBudget(int idProjet) throws IOException {
-        String dir = STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/budget.";
+        String dir = storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet) + "/budget.";
         String[] extensions = {"xls", "xlsm", "xlsx"};
         
         return findFile(dir, extensions);
@@ -103,7 +97,7 @@ public class FileSystemService {
      * @throws IOException Aucun fichier avec les extensions proposées n'a été trouvé
      */
     public File getPlanning(int idProjet) throws IOException {
-        String dir = STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/gantt.";
+        String dir = storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet) + "/gantt.";
         String[] extensions = {"png", "jpg", "jpeg", "pdf"};
         
         return findFile(dir, extensions);
@@ -116,7 +110,7 @@ public class FileSystemService {
      * @throws IOException Erreur de lecture du dossier
      */
     public File[] getAvis(int idProjet) throws IOException {        
-        File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/avisMotives");
+        File directory = new File(storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet) + "/avisMotives");
         
         return directory.listFiles();
     }
@@ -138,7 +132,7 @@ public class FileSystemService {
      * @throws IOException Erreur de lecture du dossier
      */
     public File[] getLettresInteret(int idProjet) throws IOException {                
-        File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/lettreInteret");
+        File directory = new File(storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet) + "/lettreInteret");
         
         return directory.listFiles();
     }
@@ -160,7 +154,7 @@ public class FileSystemService {
      * @throws IOException Erreur de lecture du dossier
      */
     public File[] getLettresTutelle(int idProjet) throws IOException {                
-        File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/lettreTutelle");
+        File directory = new File(storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet) + "/lettreTutelle");
         
         return directory.listFiles();
     }
@@ -182,7 +176,7 @@ public class FileSystemService {
      * @throws IOException Erreur de lecture du dossier
      */
     private File[] getLogosPartenaire(int idProjet) throws IOException {        
-        File directory = new File(STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet) + "/partenaire");
+        File directory = new File(storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet) + "/partenaire");
         
         return directory.listFiles();
     }
@@ -213,7 +207,7 @@ public class FileSystemService {
      * @throws java.io.IOException Erreur lors de la compression
      */
     public File createTempDir() throws IOException {
-        File tempDir = new File(FileSystemService.TEMP_DIRECTORY + "/weamec" + System.currentTimeMillis());
+        File tempDir = new File(storageConfig.getTempDirectory() + "/weamec" + System.currentTimeMillis());
         
         if (tempDir.exists()) {
             FileUtils.deleteDirectory(tempDir);
@@ -230,7 +224,7 @@ public class FileSystemService {
      * @throws IOException Erreur lors de la decompression
      */
     public File createProjectDir(int idProjet) throws IOException {
-        File projetDir = new File(FileSystemService.STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet));
+        File projetDir = new File(storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet));
         
         if (projetDir.exists()) {
             FileUtils.deleteDirectory(projetDir);
@@ -247,7 +241,7 @@ public class FileSystemService {
      * @throws FileNotFoundException Le dossier du projet n'est pas trouvé
      */
     public File getProjectDir(int idProjet) throws FileNotFoundException {
-        File projetDir = new File(FileSystemService.STORAGE_DIRECTORY + "/project" + String.format("%08d", idProjet));
+        File projetDir = new File(storageConfig.getDirectory() + "/project" + String.format("%08d", idProjet));
         
         if (!projetDir.exists()) {
             throw new FileNotFoundException();

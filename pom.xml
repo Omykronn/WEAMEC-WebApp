@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>fr.weamec</groupId>
 	<artifactId>projectsManager</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>projectsManager</name>
 	<description>Projects Manager</description>
 	<url/>
@@ -76,6 +76,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+                
+                <!-- Gestion des paramètres de configuration -->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-configuration-processor</artifactId>
+                    <optional>true</optional>
+                </dependency>
                 
                 <!-- Lecture des fichiers JSON -->
                 <dependency>
