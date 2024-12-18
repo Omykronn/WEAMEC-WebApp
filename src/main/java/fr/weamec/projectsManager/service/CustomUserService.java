@@ -23,6 +23,11 @@ public class CustomUserService {
     private CustomUserRepository customUserRepo;
     
     /**
+     * Constructeur par défaut
+     */
+    public CustomUserService() {}
+    
+    /**
      * Renvoie le customUser dont l'identifiant est spécifié (s'il existe)
      * @param id Identifiant du customUser
      * @return   CustomUser correspondant à l'identifiant

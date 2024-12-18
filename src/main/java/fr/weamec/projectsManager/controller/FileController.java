@@ -131,7 +131,7 @@ public class FileController {
     
     /**
      * Fonction associée au téléchargement d'un fichier ZIP contenant tous les rendus d'un même type des projets renseignés dans un formulaire
-     * @param response  
+     * @param response Requête de réponse
      * @param formData Données issues d'un formulaire
      */
     @PostMapping("/file/generate")
@@ -155,7 +155,7 @@ public class FileController {
     /**
      * Fonction relative au téléchargement du fichier Excel récapitulatif
      * @param response  Réponse HTTP venant du servelet
-     * @throws java.io.IOException
+     * @throws java.io.IOException Erreur lors de la création du fichier Excel
      */
     @GetMapping("/file/excel")
     public void downloadHtmlPage(HttpServletResponse response) throws IOException {
@@ -168,7 +168,7 @@ public class FileController {
      * Fonction relative au téléchargement du visuel d'un projet
      * @param response      Réponse HTTP venant du servelet
      * @param id            Identifiant du projet
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'accès au fichier
      */
     @GetMapping("/file/{id}/visuel")
     public void downloadVisuel(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
@@ -185,7 +185,7 @@ public class FileController {
      * Fonction relative au téléchargement du logo d'un projet
      * @param response      Réponse HTTP venant du servelet
      * @param id            Identifiant du projet
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'accès au fichier
      */
     @GetMapping("/file/{id}/logo")
     public void downloadLogo(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
@@ -202,7 +202,7 @@ public class FileController {
      * Fonction relative au téléchargement du planning d'un projet
      * @param response      Réponse HTTP venant du servelet
      * @param id            Identifiant du projet
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'accès au fichier
      */
     @GetMapping("/file/{id}/planning")
     public void downloadPlanning(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
@@ -219,7 +219,7 @@ public class FileController {
      * Fonction relative au téléchargement du budget d'un projet
      * @param response      Réponse HTTP venant du servelet
      * @param id            Identifiant du projet
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'accès au fichier
      */
     @GetMapping("/file/{id}/budget")
     public void downloadBudget(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
@@ -236,7 +236,7 @@ public class FileController {
      * Fonction relative au téléchargement du fichier ZIP contenant les logos des partenaires
      * @param response      Réponse HTTP venant du servlet
      * @param id            Identifiant du projet
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'accès au fichier
      */
     @GetMapping("/file/{id}/logosPartenaires")
     public void downloadLogosPartenaires(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
@@ -247,7 +247,7 @@ public class FileController {
      * Fonction relative au téléchargement du fichier ZIP contenant les avis motives
      * @param response      Réponse HTTP venant du servlet
      * @param id            Identifiant du projet
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'accès au fichier
      */
     @GetMapping("/file/{id}/avisMotives")
     public void downloadAvisMotives(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
@@ -258,7 +258,7 @@ public class FileController {
      * Fonction relative au téléchargement du fichier ZIP contenant les lettres des tutelles
      * @param response      Réponse HTTP venant du servlet
      * @param id            Identifiant du projet
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'accès au fichier
      */
     @GetMapping("/file/{id}/lettresTutelle")
     public void downloadLettresEngagement(HttpServletResponse response, @PathVariable("id") int id) throws IOException {
@@ -269,7 +269,7 @@ public class FileController {
      * Fonction relative au téléchargement du fichier ZIP contenant les lettres d'interet
      * @param response      Réponse HTTP venant du servlet
      * @param id            Identifiant du projet
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'accès au fichier
      */
     @GetMapping("/file/{id}/lettresInteret")
     public void downloadLettresInteret(HttpServletResponse response, @PathVariable("id") int id) throws IOException {

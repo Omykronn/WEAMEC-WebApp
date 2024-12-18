@@ -15,5 +15,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
+    /**
+     * Trouve un utilisateur par son nom
+     * @param username Nom de l'utilisateur
+     * @return Utilisateur associé au nom fourni
+     */
     public User findByUsername(String username);
 }

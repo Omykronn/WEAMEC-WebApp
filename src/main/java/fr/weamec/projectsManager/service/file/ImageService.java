@@ -31,7 +31,7 @@ public class ImageService {
      * Génère les images depuis un fichier PDF dans un dossier
      * @param dirPath       Chemin d'accès vers le dossier de sauvegarde
      * @param source        Fichier PDF source
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'écriture de l'image
      */
     private void generateImagesFromPdf(String dirPath, File source) throws IOException {
         PDDocument planning = Loader.loadPDF(source);
@@ -43,6 +43,13 @@ public class ImageService {
         }
     }
     
+    /**
+     * Génère les images depuis un fichier Excel dans un dossier
+     * @param dirPath       Chemin d'
+     * @param dirPath       Chemin d'accès vers le dossier de sauvegarde
+     * @param source        Fichier PDF source
+     * @throws IOException  Erreur lors de l'écriture de l'image
+     */
     private void generateImagesFromExcel(String dirPath, File source) throws Exception {
         Workbook workbook = new Workbook(source.getAbsolutePath());
         int count = 1;
@@ -56,7 +63,7 @@ public class ImageService {
      * Génère les images nécessaire à un dossier dans un dossier temporaire
      * @param idProjet          Identifiant du projet
      * @param destinationPath   Chemin d'accès vers le dossier de destination
-     * @throws IOException 
+     * @throws IOException      Erreur lors de la génération des images
      */
     public void generateProjectImages(int idProjet, String destinationPath) throws IOException, Exception {
         // Budget
@@ -78,8 +85,8 @@ public class ImageService {
      * Retourne une liste des chemins d'accès vers les images du planning d'un projet
      * @param idProjet  Identifiant du projet
      * @return          Liste des chemins d'accès
-     * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws FileNotFoundException Le dossier du projet n'a pas été trouvé
+     * @throws IOException           Erreur lors de l'accès au fichier
      */
     public List<String> getPlanningImagePaths(int idProjet) throws FileNotFoundException, IOException {
         ArrayList<String> paths = new ArrayList<>();
@@ -105,7 +112,7 @@ public class ImageService {
      * Retourne une liste des chemins d'accès vers les images du budget d'un projet
      * @param idProjet  Identifiant du projet
      * @return          Liste des chemins d'accès
-     * @throws java.io.FileNotFoundException
+     * @throws java.io.FileNotFoundException Le dossier du projet n'a pas été trouvé
      */
     public List<String> getBudgetImagePaths(int idProjet) throws FileNotFoundException {
         ArrayList<String> paths = new ArrayList<>();

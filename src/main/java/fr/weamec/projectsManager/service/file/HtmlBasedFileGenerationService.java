@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Service pour la génération des fichiers HTML & PDF
+ * Service pour la génération des fichiers HTML et PDF
  * @author simon
  */
 @Service

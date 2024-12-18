@@ -15,7 +15,16 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CustomUserRepository extends CrudRepository<CustomUser, Integer> {
+    /**
+     * Obtient un CustomUser à partir de son nom d'utilisateur depuis la base de données
+     * @param username  Nom de l'utilisateur
+     * @return          CustomUser associé à username
+     */
     public CustomUser findByUsername(String username);
     
+    /**
+     * Obtient tous les CustomUser de la base de données, triés par ordre décroissant d'identifiant
+     * @return  Liste de CustomUser triée par ordre décroissant d'identifiant
+     */
     public Iterable<CustomUser> findAllByOrderByIdAsc();
 }

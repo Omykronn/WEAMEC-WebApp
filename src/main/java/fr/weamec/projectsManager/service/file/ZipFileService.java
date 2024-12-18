@@ -6,6 +6,7 @@ package fr.weamec.projectsManager.service.file;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,8 +56,8 @@ public class ZipFileService {
     /**
      * Crée un fichier ZIP
      * @param files     Liste des fichiers à ajouter
-     * @return 
-     * @throws java.io.IOException 
+     * @return          ByteArray du fichier ZIP
+     * @throws java.io.IOException Erreur lors de l'accès au fichier
      */
     public byte[] createZip(File[] files) throws IOException {
         ArrayList<byte[]> contents = new ArrayList<>();
@@ -74,7 +75,7 @@ public class ZipFileService {
      * Décompresse un fichier ZIP depuis son flux vers un chemin d'accès
      * @param dir   Chemin d'accès
      * @param input Flux entrant du fichier ZIP
-     * @throws IOException 
+     * @throws IOException Erreur lors de l'ajout d'une entrée
      */
     public void saveZip(String dir, InputStream input) throws IOException {
         ZipInputStream zipInput = new ZipInputStream(input);
@@ -91,9 +92,9 @@ public class ZipFileService {
      * @param filePath      Chemin d'accès
      * @param zipInput      Flux entrant du fichier ZIP
      * @param isDirectory   Booléen si dossier
-     * @throws IOException 
+     * @throws IOException  Erreur lors de l'ajout d'une entrée
      */
-    private void saveEntry(String filePath, ZipInputStream zipInput, boolean isDirectory) throws IOException {
+    private void saveEntry(String filePath, ZipInputStream zipInput, boolean isDirectory) throws IOException  {
         File file = new File(filePath);
         FileOutputStream output;
         byte[] buffer = new byte[1024];

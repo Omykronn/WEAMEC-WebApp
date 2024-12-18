@@ -19,7 +19,7 @@ import org.apache.pdfbox.rendering.PDFRenderer;
  * Classe outils pour la génération de fichiers PDF
  * @author simon
  */
-public class PdfFileTools {
+public class PdfFileTools {    
     /**
      * Fusionne une collection de documents PDF
      * @param documents Collection de documents PDF
@@ -40,7 +40,7 @@ public class PdfFileTools {
      * Convertit les pages d'un document PDF en ImageBuffer sous forme de liste
      * @param document  Document à convertir
      * @return          Liste des ImageBuffer des pages du document
-     * @throws IOException 
+     * @throws IOException Erreur lors de l'accès aux données du document
      */
     public static List<BufferedImage> convertPdfToImageBuffer(PDDocument document) throws IOException {
         PDFRenderer renderer = new PDFRenderer(document);

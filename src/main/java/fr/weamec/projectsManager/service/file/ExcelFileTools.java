@@ -17,11 +17,12 @@ import java.util.List;
  * @author simon
  */
 public class ExcelFileTools {
+    
     /**
      * Convertit les feuilles d'un document Excel en SheetRender sous forme de liste
      * @param workbook  Document à convertir
      * @return          Liste des SheetRender des feuilles du document
-     * @throws Exception 
+     * @throws Exception Erreur lors du chargement d'un SheetRender
      */
     public static List<SheetRender> convertExcelToSheetRender(Workbook workbook) throws Exception {
         ArrayList<SheetRender> renders = new ArrayList<>();

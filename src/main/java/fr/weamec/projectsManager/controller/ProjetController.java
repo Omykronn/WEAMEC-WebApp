@@ -152,7 +152,7 @@ public class ProjetController {
      * Fonction associée à la suppression d'un projet
      * @param id Identifiant du projet à supprimer
      * @return   Redirection vers la page principale
-     * @throws java.io.IOException
+     * @throws java.io.IOException Erreur lors de la suppression du dossier
      */
     @GetMapping("/projects/{id}/drop")
     public String dropProject(@PathVariable("id") int id) throws IOException {

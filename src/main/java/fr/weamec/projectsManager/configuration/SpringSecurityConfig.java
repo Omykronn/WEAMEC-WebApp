@@ -27,6 +27,12 @@ public class SpringSecurityConfig {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
     
+    /**
+     * Crée une chaîne de filtres HTTP
+     * @param http  Instance de HttpSecurity
+     * @return      Chaîne de filtres
+     * @throws Exception Erreur lors de la création de la chaîne
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             return http.authorizeHttpRequests(auth -> {
@@ -38,6 +44,13 @@ public class SpringSecurityConfig {
             }).formLogin(Customizer.withDefaults()).build();
     }
     
+    /**
+     * Construction d'un gestionnaire des authentifications
+     * @param http  HttpSecurity
+     * @param bCryptPasswordEncoder Outils de chiffrement BCrypt
+     * @return  Gestionnaire des authentification
+     * @throws Exception Erreur lors de la construction
+     */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
             AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
@@ -46,10 +59,17 @@ public class SpringSecurityConfig {
     }
     
     @Bean
+    /**
+     * Instanciation d'un outils de chiffrement BCrypt
+     */
     public BCryptPasswordEncoder passwordEncoder() {
             return new BCryptPasswordEncoder();
     }
     
+    /**
+     * Définition de la hiearchie des rôles
+     * @return Hiéarchie des rôles
+     */
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();

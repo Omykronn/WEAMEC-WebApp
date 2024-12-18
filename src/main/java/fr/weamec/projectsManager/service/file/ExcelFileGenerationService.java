@@ -32,8 +32,6 @@ public class ExcelFileGenerationService {
         XSSFWorkbook mockWorkbook = new XSSFWorkbook();
         CreationHelper creationHelper = mockWorkbook.getCreationHelper();
         
-        
-        
         classLoader = Thread.currentThread().getContextClassLoader();
     }
     
@@ -41,6 +39,7 @@ public class ExcelFileGenerationService {
      * Génère le ByteArray d'un fichier excel d'une liste de projets
      * @param projets Liste de projets
      * @return ByteArray du fichier Excel
+     * @throws java.io.IOException Erreur lors du chargement du fichier en tant que XSSFWorkbook
      */
     public byte[] generateExcel(Iterable<Projet> projets) throws IOException {
         InputStream template = classLoader.getResourceAsStream("weamec/excel_template.xlsx");
