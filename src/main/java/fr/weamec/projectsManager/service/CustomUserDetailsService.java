@@ -1,4 +1,4 @@
-package fr.weamec.projectsManager.configuration;
+package fr.weamec.projectsManager.service;
 
 import fr.weamec.projectsManager.model.CustomUser;
 import java.util.ArrayList;
