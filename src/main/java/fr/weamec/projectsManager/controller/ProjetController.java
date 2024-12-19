@@ -163,24 +163,6 @@ public class ProjetController {
     }
     
     /**
-     * Fonction associée à la clôturation d'un dossier
-     * @param id Identifiant du projet à clôturer
-     * @return   Redirection vers la page principale
-     */
-    @GetMapping("/projects/{id}/close")
-    public String closeProject(@PathVariable("id") int id) {
-        Optional<Projet> projet = projetService.getProjet(id);
-        Calendar calendar = Calendar.getInstance();
-        
-        if (projet.isPresent()) {
-            projet.get().setFinTraitement(new Date(calendar.getTime().getTime()));
-            projetService.save(projet.get());
-        }
-        
-        return "redirect:/projects/";
-    }
-    
-    /**
      * Fonction associée à l'affichage de la page d'import
      * @return Nom de la page HTML à afficher
      */
