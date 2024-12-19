@@ -108,7 +108,7 @@ public class ExcelFileGenerationService {
         row.createCell(93).setCellValue(projet.getTrlFin());
         row.createCell(94).setCellValue(projet.getBrevet());
         
-        if (projet.getFinTraitement() != null) {
+        if (projet.getTraitementFini()) {
             row.createCell(122).setCellValue("X");
         }
         
