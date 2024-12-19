@@ -158,7 +158,7 @@ public class FileController {
      * @throws java.io.IOException Erreur lors de la création du fichier Excel
      */
     @GetMapping("/file/excel")
-    public void downloadHtmlPage(HttpServletResponse response) throws IOException {
+    public void downloadExcel(HttpServletResponse response) throws IOException {
         byte[] content = excelGenerator.generateExcel(projetService.getProjets());
         
         prepareResponse("Projets W2 " + Year.now().getValue() + "- Infos.xlsx", "application/xlsx", content, response);
