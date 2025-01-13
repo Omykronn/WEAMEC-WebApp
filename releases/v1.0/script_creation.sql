@@ -41,7 +41,7 @@ CREATE TABLE StructureRattachement (
                 code_postal INTEGER NOT NULL,
                 nom_ref VARCHAR(64) NOT NULL,
                 telephone_ref VARCHAR(32) NOT NULL,
-                mail_ref VARCHAR(64) NOT NULL,
+                mail_ref VARCHAR(128) NOT NULL,
                 CONSTRAINT structurerattachement_pk PRIMARY KEY (id)
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE CoordinateurScientifique (
                 id SERIAL NOT NULL,
                 nom VARCHAR(32) NOT NULL,
                 prenom VARCHAR(32) NOT NULL,
-                mail VARCHAR(64) NOT NULL,
+                mail VARCHAR(128) NOT NULL,
                 telephone_fixe VARCHAR(32) NOT NULL,
                 telephone_port VARCHAR(32) NOT NULL,
                 id_structure INTEGER NOT NULL,
