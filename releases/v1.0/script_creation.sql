@@ -109,7 +109,7 @@ CREATE TABLE Projet (
                 duree INTEGER NOT NULL,
                 date_debut DATE NOT NULL,
                 date_fin DATE NOT NULL,
-                description VARCHAR(1300) NOT NULL,
+                description VARCHAR(10000) NOT NULL,
                 objectif VARCHAR(256) NOT NULL,
                 verrous_scientif VARCHAR(256) NOT NULL,
                 programme_exp VARCHAR(256) NOT NULL,
